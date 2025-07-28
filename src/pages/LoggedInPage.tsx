@@ -19,7 +19,7 @@ export default function LoggedInPage() {
   return (
     <div className="logged-in-page">
       <header className="header">
-        <button className="icon-button" onClick={() => navigate(-1)}>
+        <button className="icon-button" onClick={() => navigate('/')}>
           ×
         </button>
         <h1 className="title">My Avatars</h1>
