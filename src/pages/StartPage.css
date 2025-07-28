@@ -1,0 +1,36 @@
+.start-page {
+  width: 430px;
+  max-width: 430px;
+  min-height: 932px;
+  margin: 0 auto;
+  background: #ececec;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Outfit', sans-serif;
+}
+
+.title {
+  margin-top: 80px;
+  margin-bottom: auto;
+  font-size: 24px;
+  color: #000;
+}
+
+.start-button {
+  position: absolute;
+  width: 143.31px;
+  height: 50px;
+  top: 441px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: auto;
+  margin-bottom: 80px;
+  background: #000;
+  color: #fff;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
