@@ -22,3 +22,6 @@ Icon
 # macOS folder attributes
 .com.apple.timemachine.donotpresent
 .com.apple.metadata:*
+
+# Node modules
+node_modules/
