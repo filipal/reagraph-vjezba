@@ -19,7 +19,7 @@ export default function LoginPage() {
       <button
         type="button"
         className="create-button"
-        onClick={() => navigate('/logged-in')}
+        onClick={() => navigate('/avatar-info')}
       >
         Create Your Digital Twin
       </button>

@@ -1,0 +1,116 @@
+.avatar-info-page {
+  position: relative;
+  width: 430px;
+  max-width: 430px;
+  min-height: 932px;
+  margin: 0 auto;
+  background: #ececec;
+  font-family: 'Outfit', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.close-button {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #000;
+}
+
+.title {
+  margin-top: 80px;
+  margin-bottom: auto;
+  font-size: 24px;
+  color: #000;
+}
+
+.picker {
+  width: 100%;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.picker-label {
+  margin-bottom: 8px;
+  font-size: 18px;
+  color: #000;
+}
+
+.picker-control {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.arrow-button {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.picker-values {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 120px;
+  justify-content: center;
+}
+
+.picker-value {
+  color: #666;
+  font-size: 18px;
+}
+
+.picker-value.selected {
+  font-size: 24px;
+  color: #000;
+}
+
+.actions {
+  margin-top: auto;
+  width: 100%;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.actions button {
+  height: 50px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+}
+
+.scan-button {
+  background: linear-gradient(to right, #2b214d, #13536c);
+  color: #fff;
+}
+
+.quick-button {
+  border: 2px solid #000;
+  background: #fff;
+  color: #000;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  line-height: 1;
+  padding: 4px;
+  cursor: pointer;
+  color: #000;
+  left: 426px;
+}
