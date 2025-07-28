@@ -22,7 +22,7 @@ export default function LoggedInPage() {
         <button className="icon-button" onClick={() => navigate('/')}>
           ×
         </button>
-        <h1 className="title">My Avatars</h1>
+        <h1 className="title-logged">My Avatars</h1>
         <span className="count">{avatars.length}/5</span>
       </header>
 
