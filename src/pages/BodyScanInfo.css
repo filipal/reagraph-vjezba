@@ -2,9 +2,9 @@
 
 .body-scan-info-page {
   position: relative;
-  width: 430px;
-  max-width: 430px;
-  min-height: 932px;
+  width: var(--page-width);
+  max-width: var(--page-width);
+  min-height: var(--page-height);
   margin: 0 auto;
   background: #ececec;
   font-family: 'Outfit', sans-serif;
@@ -81,7 +81,3 @@
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
 }
-/* .quickmode-footer {
-  padding: 0 24px 32px 24px;
-  width: 100%;
-} */

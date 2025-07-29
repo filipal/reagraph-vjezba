@@ -1,7 +1,7 @@
 .start-page {
-  width: 430px;
-  max-width: 430px;
-  min-height: 932px;
+  width: var(--page-width);
+  max-width: var(--page-width);
+  min-height: var(--page-height);
   margin: 0 auto;
   background: #ececec;
   display: flex;

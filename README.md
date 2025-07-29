@@ -30,3 +30,10 @@ npm run lint
 ```
 
 Running this command checks the project with ESLint.
+
+### Page dimensions
+
+The CSS variables `--page-width` and `--page-height` in `src/index.css` define
+the main page dimensions. They default to `430px` and `932px` which match the
+iPhone&nbsp;15&nbsp;Pro&nbsp;Max viewport. Adjust these values if you want to target other
+breakpoints.

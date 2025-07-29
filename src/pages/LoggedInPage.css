@@ -6,8 +6,8 @@
   margin: 0 auto;
 }
 .logged-in-page {
-  width: 430px;
-  min-height: 932px;
+  width: var(--page-width);
+  min-height: var(--page-height);
   margin: 0 auto;
   background: rgb(236, 236, 236);
   display: flex;

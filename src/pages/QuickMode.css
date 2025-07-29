@@ -1,7 +1,7 @@
 .quickmode-page {
   position: relative;
-  width: 430px;
-  min-height: 932px;
+  width: var(--page-width);
+  min-height: var(--page-height);
   margin: 0 auto;
   background: #ececec;
   font-family: 'Outfit', sans-serif;
@@ -128,13 +128,6 @@
   margin-left: 4px;
 }
 
-/* .quickmode-footer {
-  display: flex;
-  gap: 16px;
-  padding: 0 24px 32px 24px;
-  width: 100%;
-  box-sizing: border-box;
-} */
 .button-back {
   flex: 1;
   height: 48px;
