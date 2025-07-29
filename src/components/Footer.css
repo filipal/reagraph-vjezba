@@ -1,0 +1,14 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 24px 32px 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.footer-actions {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}

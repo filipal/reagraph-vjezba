@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Header from '../components/Header'
+import Footer from '../components/Footer'
 import BodyShape1 from '../assets/BodyShape_1.svg?react'
 import BodyShape2 from '../assets/BodyShape_2.svg?react'
 import BodyShape3 from '../assets/BodyShape_3.svg?react'
@@ -194,23 +195,25 @@ export default function QuickMode() {
       </div>
 
       {/* Bottom Buttons */}
-      <div className="quickmode-footer">
-        <button className="button-back" onClick={() => navigate('/avatar-info')}>
-          Back
-        </button>
-        <button
-          className="button-generate"
-          onClick={() => navigate('/unreal-measurements')}
-          disabled={
-            !selectedBodyShape ||
-            bustCircumference === '' ||
-            waistCircumference === '' ||
-            lowHipCircumference === ''
-          }
-        >
-          Generate Avatar
-        </button>
-      </div>
+      <Footer>
+        <div className="footer-actions">
+          <button className="button-back" onClick={() => navigate('/avatar-info')}>
+            Back
+          </button>
+          <button
+            className="button-create"
+            onClick={() => navigate('/unreal-measurements')}
+            disabled={
+              !selectedBodyShape ||
+              bustCircumference === '' ||
+              waistCircumference === '' ||
+              lowHipCircumference === ''
+            }
+          >
+            Generate Avatar
+          </button>
+        </div>
+      </Footer>
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Header from '../components/Header'
+import Footer from '../components/Footer'
 import deleteIcon from '../assets/Delete Avatar.svg'
 import './LoggedInPage.css'
 
@@ -56,41 +57,40 @@ export default function LoggedInPage() {
           </li>
         ))}
       </ul>
-      <div className="footer">
+      <Footer>
         {showDeleteConfirm ? (
-          <>
-            <div className="delete-confirm">
-              Are you sure?
-            </div>
-            <div className="footer-actions">
+          <div className="delete-confirm">Are you sure?</div>
+        ) : (
+          <button
+            className={`button-load${selectedAvatarId === loadedAvatarId ? ' disabled' : ''}`}
+            onClick={handleLoad}
+            disabled={selectedAvatarId === loadedAvatarId}
+          >
+            Load Avatar
+          </button>
+        )}
+        <div className="footer-actions">
+          {showDeleteConfirm ? (
+            <>
               <button className="button-back" onClick={() => setShowDeleteConfirm(null)}>
                 Cancel
               </button>
               <button className="button-create" onClick={confirmDelete}>
                 Delete Avatar
               </button>
-            </div>
-          </>
-        ) : (
-          <>
-            <button
-              className={`button-load${selectedAvatarId === loadedAvatarId ? ' disabled' : ''}`}
-              onClick={handleLoad}
-              disabled={selectedAvatarId === loadedAvatarId}
-            >
-              Load Avatar
-            </button>
-            <div className="footer-actions">
+            </>
+          ) : (
+            <>
               <button className="button-back" onClick={() => navigate('/login')}>
                 Back
               </button>
               <button className="button-create" onClick={() => navigate('/avatar-info')}>
                 Create New Avatar
               </button>
-            </div>
-          </>
-        )}
-      </div>
+            </>
+          )}
+        </div>
+      </Footer>
     </div>
   )
 }

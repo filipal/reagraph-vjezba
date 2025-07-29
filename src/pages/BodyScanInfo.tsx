@@ -2,6 +2,7 @@
 import { useNavigate } from 'react-router-dom'
 import BodyScanIllustration from '../assets/BodyScanIllustration.png'
 import Header from '../components/Header'
+import Footer from '../components/Footer'
 import './BodyScanInfo.css'
 
 
@@ -31,10 +32,12 @@ export default function BodyScanInfo() {
         <div className="scan-illustration">
           <img src={BodyScanIllustration} alt="Body Scan Illustration" />
         </div>
-        <div className="quickmode-footer">
-          <button className="button-back-bs" onClick={() => navigate('/avatar-info')}>Back</button>
-          <button className="start-button-bs" onClick={() => navigate('/front-body-scan')}>Start Scanning</button>
-        </div>
+        <Footer>
+          <div className="footer-actions">
+            <button className="button-back" onClick={() => navigate('/avatar-info')}>Back</button>
+            <button className="button-create" onClick={() => navigate('/front-body-scan')}>Start Scanning</button>
+          </div>
+        </Footer>
       </div>
     </div>
   )

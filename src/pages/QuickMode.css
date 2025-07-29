@@ -128,13 +128,13 @@
   margin-left: 4px;
 }
 
-.quickmode-footer {
+/* .quickmode-footer {
   display: flex;
   gap: 16px;
   padding: 0 24px 32px 24px;
   width: 100%;
   box-sizing: border-box;
-}
+} */
 .button-back {
   flex: 1;
   height: 48px;
