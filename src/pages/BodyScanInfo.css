@@ -1,0 +1,124 @@
+/* Isolated styles for BodyScanInfo page */
+
+.body-scan-info-page {
+  position: relative;
+  width: 430px;
+  max-width: 430px;
+  min-height: 932px;
+  margin: 0 auto;
+  background: #ececec;
+  font-family: 'Outfit', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.body-scan-info-page .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid #000;
+  width: 100%;
+}
+
+.body-scan-info-page .icon-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.body-scan-info-page .exit-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.body-scan-info-page .header-title {
+  flex: 1;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #222;
+  margin: 0;
+}
+
+.body-scan-info-page .header-spacer {
+  width: 28px;
+  height: 28px;
+}
+
+.body-scan-content {
+  padding: 32px 24px 0 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.body-scan-info-page .tips-list {
+  width: 100%;
+  max-width: 382px;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.body-scan-info-page .tip-box {
+  width: 100%;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 16px 20px;
+  font-size: 1rem;
+  color: #222;
+  font-weight: 500;
+  line-height: 1.4;
+  border: 1px solid #e3e6ee;
+}
+
+.body-scan-info-page .scan-illustration {
+  margin: 32px 0 24px 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.body-scan-info-page .scan-illustration img {
+  max-width: 220px;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.start-button-bs {
+  flex: 1;
+  height: 48px;
+  background: linear-gradient(to right, #2b214d, #13536c);
+  color: #fff;
+  font-size: 18px;
+  font-family: 'Outfit', sans-serif;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.button-back-bs {
+  flex: 1;
+  height: 48px;
+  background: #fff;
+  border: 2px solid #000;
+  color: #000;
+  font-size: 18px;
+  font-family: 'Outfit', sans-serif;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.quickmode-footer {
+  padding: 0 24px 32px 24px;
+  width: 100%;
+}

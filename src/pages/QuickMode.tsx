@@ -117,6 +117,7 @@ export default function QuickMode() {
                 <shape.Icon
                   fill={selectedBodyShape === shape.id ? '#000' : '#fff'}
                   style={{ display: 'block', width: 56, height: 56 }}
+                  color={selectedBodyShape === shape.id ? '#000' : '#fff'}
                 />
               </button>
             ))}
@@ -206,6 +207,12 @@ export default function QuickMode() {
         <button
           className="button-generate"
           onClick={() => navigate('/unreal-measurements')}
+          disabled={
+            !selectedBodyShape ||
+            bustCircumference === '' ||
+            waistCircumference === '' ||
+            lowHipCircumference === ''
+          }
         >
           Generate Avatar
         </button>
