@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage'
 import LoggedInPage from './pages/LoggedInPage.tsx'
 import AvatarInfoPage from './pages/AvatarInfoPage'
 import UseOfData from './pages/UseOfData'
+import QuickMode from './pages/QuickMode'
 import './App.css'
 
 
@@ -15,6 +16,8 @@ export default function App() {
       <Route path="/avatar-info" element={<AvatarInfoPage />} />
       <Route path="/logged-in" element={<LoggedInPage />} />
       <Route path="/use-of-data" element={<UseOfData />} />
+      <Route path="/quickmode" element={<QuickMode />} />
+
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   )

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import exitIcon from '../assets/exit.svg'
 import deleteIcon from '../assets/Delete Avatar.svg'
@@ -12,11 +13,24 @@ interface Avatar {
 export default function LoggedInPage() {
   const navigate = useNavigate()
 
-  const avatars: Avatar[] = [
-    { id: 1, name: 'Avatar Name 1', isSelected: true },
+  const [avatars, setAvatars] = useState<Avatar[]>([
+    { id: 1, name: 'Avatar Name 1' },
     { id: 2, name: 'Avatar Name 2' },
     { id: 3, name: 'Avatar Name 3' },
-  ]
+  ])
+  const [selectedAvatarId, setSelectedAvatarId] = useState<number>(1)
+  const [loadedAvatarId, setLoadedAvatarId] = useState<number>(1)
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState<null | number>(null)
+
+  const handleSelect = (id: number) => setSelectedAvatarId(id)
+  const handleLoad = () => setLoadedAvatarId(selectedAvatarId)
+  const handleDelete = (id: number) => setShowDeleteConfirm(id)
+  const confirmDelete = () => {
+    setAvatars(avatars.filter(a => a.id !== showDeleteConfirm))
+    if (selectedAvatarId === showDeleteConfirm) setSelectedAvatarId(avatars[0]?.id || 0)
+    if (loadedAvatarId === showDeleteConfirm) setLoadedAvatarId(avatars[0]?.id || 0)
+    setShowDeleteConfirm(null)
+  }
 
   return (
     <div className="logged-in-page">
@@ -31,25 +45,53 @@ export default function LoggedInPage() {
       <ul className="avatar-list">
         {avatars.map((avatar) => (
           <li key={avatar.id} className="avatar-item">
-            <div className={`avatar-name${avatar.isSelected ? ' selected' : ''}`}>{avatar.name}</div>
-            <button className="icon-button" aria-label="remove avatar">
+            <button
+              className={`avatar-name${selectedAvatarId === avatar.id ? ' selected' : ''}`}
+              onClick={() => handleSelect(avatar.id)}
+              type="button"
+            >
+              {avatar.name}
+            </button>
+            <button className="icon-button" aria-label="remove avatar" onClick={() => handleDelete(avatar.id)}>
               <img src={deleteIcon} alt="Delete Avatar" width={14} height={14} />
             </button>
           </li>
         ))}
       </ul>
       <div className="footer">
-        <button className="button-load" onClick={() => alert('Load Avatar')}>
-          Load Avatar
-        </button>
-        <div className="footer-actions">
-          <button className="button-back" onClick={() => navigate(-1)}>
-            Back
-          </button>
-          <button className="button-create" onClick={() => alert('Create Avatar')}>
-            Create New Avatar
-          </button>
-        </div>
+        {showDeleteConfirm ? (
+          <>
+            <div className="delete-confirm">
+              Are you sure?
+            </div>
+            <div className="footer-actions">
+              <button className="button-back" onClick={() => setShowDeleteConfirm(null)}>
+                Cancel
+              </button>
+              <button className="button-create" onClick={confirmDelete}>
+                Delete Avatar
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            <button
+              className={`button-load${selectedAvatarId === loadedAvatarId ? ' disabled' : ''}`}
+              onClick={handleLoad}
+              disabled={selectedAvatarId === loadedAvatarId}
+            >
+              Load Avatar
+            </button>
+            <div className="footer-actions">
+              <button className="button-back" onClick={() => navigate('/login')}>
+                Back
+              </button>
+              <button className="button-create" onClick={() => navigate('/avatar-info')}>
+                Create New Avatar
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   )

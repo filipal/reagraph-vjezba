@@ -102,7 +102,7 @@ export default function AvatarInfoPage() {
         Highly accurate. Scan your body & face<br />
         with a phone in 3 minutes.
       </div>
-      <button className="quick-button" onClick={() => navigate('/logged-in')}>
+      <button className="quick-button" onClick={() => navigate('/quickmode')}>
         <img src={quickIcon} alt="" className="button-icon" />
         Quick Mode
       </button>
