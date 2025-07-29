@@ -1,6 +1,7 @@
 import type { FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
-import logo from '../assets/Fitspace-logo-gradient-nobkg.png'
+import logo from '../assets/Fitspace-logo-gradient-nobkg.svg'
+import exitIcon from '../assets/exit.svg'
 import './LoginPage.css'
 
 export default function LoginPage() {
@@ -13,7 +14,9 @@ export default function LoginPage() {
 
   return (
     <div className="login-page">
-      <button className="back-button" onClick={() => navigate('/')}>×</button>
+      <button className="back-button" onClick={() => navigate('/')}> 
+        <img src={exitIcon} alt="Exit" className="exit-icon" width={20} height={20} />
+      </button>
       <img src={logo} alt="Fitspace" className="logo" />
       <div className="login-bg" />
       <button

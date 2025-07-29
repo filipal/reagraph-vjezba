@@ -1,3 +1,10 @@
+.exit-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+  object-fit: contain;
+  margin: 0 auto;
+}
 .login-page {
   position: relative;
   width: 430px;
@@ -21,11 +28,13 @@
 }
 
 .logo {
-position: absolute;
-width: 155.97px;
-height: 82px;
-left: 137.02px;
-top: 50px;
+  position: absolute;
+  width: 155.97px;
+  height: 82px;
+  left: 137.02px;
+  top: 50px;
+  box-sizing: border-box;
+  padding: 0;
 }
 
 .login-bg {

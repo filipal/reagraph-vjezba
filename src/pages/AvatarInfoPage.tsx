@@ -5,6 +5,7 @@ import rightArrow from '../assets/arrow right.svg'
 import cameraIcon from '../assets/camera.png'
 import quickIcon from '../assets/quick.png'
 import infoIcon from '../assets/infoButton.svg'
+import exitIcon from '../assets/exit.svg'
 import './AvatarInfoPage.css'
 
 const ages = ['18-24', '25-30', '31-40', '41-50', '51+']
@@ -56,7 +57,9 @@ export default function AvatarInfoPage() {
   return (
     <div className="avatar-info-page">
       <header className="header">
-        <button className="icon-button" onClick={() => navigate('/')}>×</button>
+      <button className="back-button" onClick={() => navigate('/')}> 
+        <img src={exitIcon} alt="Exit" className="exit-icon" width={20} height={20} />
+      </button>
         <h1 className="title">Create your Avatar</h1>
         <button className="info-button" onClick={() => navigate('/use-of-data')}>
           <img src={infoIcon} alt="Info" />

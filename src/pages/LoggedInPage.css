@@ -1,3 +1,10 @@
+.icon-button img {
+  width: 14px;
+  height: 14px;
+  display: block;
+  object-fit: contain;
+  margin: 0 auto;
+}
 .logged-in-page {
   width: 430px;
   min-height: 932px;
@@ -43,6 +50,8 @@
   cursor: pointer;
   color: #000;
   left: 426px;
+  outline: none;
+  transition: none
 }
 
 .avatar-list {

@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import exitIcon from '../assets/exit.svg'
 import './UseOfData.css'
 
 export default function UseOfData() {
@@ -6,7 +7,9 @@ export default function UseOfData() {
   return (
     <div className="use-of-data-page">
       <header className="header">
-        <button className="icon-button" onClick={() => navigate('/')}>×</button>
+        <button className="back-button" onClick={() => navigate('/')}> 
+            <img src={exitIcon} alt="Exit" className="exit-icon" width={20} height={20} />
+        </button>
         <h1 className="header-title">Use of Personal Data</h1>
         <span />
       </header>

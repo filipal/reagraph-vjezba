@@ -1,4 +1,6 @@
 import { useNavigate } from 'react-router-dom'
+import exitIcon from '../assets/exit.svg'
+import deleteIcon from '../assets/Delete Avatar.svg'
 import './LoggedInPage.css'
 
 interface Avatar {
@@ -19,8 +21,8 @@ export default function LoggedInPage() {
   return (
     <div className="logged-in-page">
       <header className="header">
-        <button className="icon-button" onClick={() => navigate('/')}>
-          ×
+        <button className="back-button" onClick={() => navigate('/')}> 
+          <img src={exitIcon} alt="Exit" className="exit-icon" width={20} height={20} />
         </button>
         <h1 className="title-logged">My Avatars</h1>
         <span className="count">{avatars.length}/5</span>
@@ -31,7 +33,7 @@ export default function LoggedInPage() {
           <li key={avatar.id} className="avatar-item">
             <div className={`avatar-name${avatar.isSelected ? ' selected' : ''}`}>{avatar.name}</div>
             <button className="icon-button" aria-label="remove avatar">
-              ×
+              <img src={deleteIcon} alt="Delete Avatar" width={14} height={14} />
             </button>
           </li>
         ))}
