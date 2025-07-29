@@ -1,18 +1,12 @@
 import { useNavigate } from 'react-router-dom'
-import exitIcon from '../assets/exit.svg'
+import Header from '../components/Header'
 import './UseOfData.css'
 
 export default function UseOfData() {
   const navigate = useNavigate()
   return (
     <div className="use-of-data-page">
-      <header className="header">
-        <button className="back-button" onClick={() => navigate('/')}> 
-            <img src={exitIcon} alt="Exit" className="exit-icon" width={20} height={20} />
-        </button>
-        <h1 className="header-title">Use of Personal Data</h1>
-        <span />
-      </header>
+      <Header title="Use of Personal Data" onExit={() => navigate('/')} />
       <div className="content">
         <p>
           To provide you with the most accurate and personalized virtual try-on experience, our solution creates a realistic 3D avatar based on your body profile. This avatar helps simulate how clothing will look and fit on your unique physique. To achieve this, we use a combination of manual input and advanced machine learning techniques based on the following personal data:

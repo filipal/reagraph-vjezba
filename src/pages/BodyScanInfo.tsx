@@ -1,7 +1,7 @@
 
 import { useNavigate } from 'react-router-dom'
-import BodyScanIllustration from '../assets/BodyScanIllustration.svg'
-import exitIcon from '../assets/exit.svg'
+import BodyScanIllustration from '../assets/BodyScanIllustration.png'
+import Header from '../components/Header'
 import './BodyScanInfo.css'
 
 
@@ -18,13 +18,7 @@ export default function BodyScanInfo() {
   return (
     <div className="body-scan-info-page">
       {/* Header */}
-      <header className="header">
-        <button className="icon-button" onClick={() => navigate('/')}> 
-          <img src={exitIcon} alt="Exit" className="exit-icon" width={28} height={28} />
-        </button>
-        <h1 className="header-title">Body Scanning Tips</h1>
-        <div className="header-spacer"></div>
-      </header>
+      <Header title="Body Scanning Tips" onExit={() => navigate('/')} />
 
       <div className="body-scan-content">
         <div className="tips-list">

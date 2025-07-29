@@ -14,26 +14,6 @@
   flex-direction: column;
 }
 
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px;
-  border-bottom: 1px solid #000;
-}
-
-.title-logged {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  font-family: "Outfit", sans-serif;
-  font-size: 23px;
-  font-weight: 400;
-  line-height: 29px;
-  color: #000;
-  margin-top: 20px;
-}
-
 .count {
   font-family: "Outfit", sans-serif;
   font-size: 23px;
@@ -129,17 +109,6 @@
   display: flex;
   gap: 16px;
 }
-
-.exit-button {
-  position: absolute;
-  width: 26.88px;
-  height: 3.39px;
-  left: 18.3px;
-  top: 20.7px;
-  transform: rotate(-135.00deg);
-  border-radius: 3px;
-  background: rgb(255, 255, 255);
-}   
 
 .button-back {
   flex: 0 0 100px;

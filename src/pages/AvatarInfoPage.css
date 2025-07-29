@@ -11,26 +11,6 @@
   align-items: center;
 }
 
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px;
-  border-bottom: 1px solid #000;
-  width: 100%;
-}
-
-.title {
-  flex: 1;
-  text-align: center;
-  font-size: 23px;
-  font-weight: 400;
-  line-height: 29px;
-  color: #000;
-  font-family: 'Outfit', sans-serif;
-  margin: 0;
-}
-
 .picker {
   width: 100%;
   max-width: 360px;
@@ -112,33 +92,6 @@
   border: 2px solid #000;
   background: linear-gradient(to right, #2b214d, #13536c);
   color: #fff;
-}
-
-.icon-button {
-  background: none;
-  border: none;
-  font-size: 24px;
-  line-height: 1;
-  padding: 4px;
-  cursor: pointer;
-  color: #000;
-  left: 426px;
-}
-
-.info-button {
-  background: none;
-  border: none;
-  padding: 0;
-  margin-left: 8px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  font-size: 22px;
-}
-.info-button img {
-  width: 28px;
-  height: 28px;
-  display: block;
 }
 
 .avatar-name-input {

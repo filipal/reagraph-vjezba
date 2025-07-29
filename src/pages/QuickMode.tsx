@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import exitIcon from '../assets/exit.svg'
-import infoIcon from '../assets/InfoButton.svg'
+import Header from '../components/Header'
 import BodyShape1 from '../assets/BodyShape_1.svg?react'
 import BodyShape2 from '../assets/BodyShape_2.svg?react'
 import BodyShape3 from '../assets/BodyShape_3.svg?react'
@@ -90,16 +89,11 @@ export default function QuickMode() {
   return (
     <div className="quickmode-page">
       {/* Header */}
-      <header className="header">
-        <button className="icon-button" onClick={() => navigate(-1)}>
-          <img src={exitIcon} alt="Exit" className="exit-icon" width={20} height={20} />
-        </button>
-        <h1 className="header-title">Body Shape & Fitness</h1>
-        <button className="info-button" onClick={() => navigate('/use-of-data')}>
-          <img src={infoIcon} alt="Info" />
-        </button>
-      </header>
-
+      <Header
+        title="Body Shape & Fitness"
+        onExit={() => navigate(-1)}
+        onInfo={() => navigate('/use-of-data')}
+      />    
       <div className="quickmode-content">
         {/* Body Shape */}
         <div className="section">

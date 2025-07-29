@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import exitIcon from '../assets/exit.svg'
+import Header from '../components/Header'
 import deleteIcon from '../assets/Delete Avatar.svg'
 import './LoggedInPage.css'
 
@@ -34,13 +34,11 @@ export default function LoggedInPage() {
 
   return (
     <div className="logged-in-page">
-      <header className="header">
-        <button className="back-button" onClick={() => navigate('/')}> 
-          <img src={exitIcon} alt="Exit" className="exit-icon" width={20} height={20} />
-        </button>
-        <h1 className="title-logged">My Avatars</h1>
-        <span className="count">{avatars.length}/5</span>
-      </header>
+      <Header
+        title="My Avatars"
+        onExit={() => navigate('/')}
+        rightContent={<span className="count">{avatars.length}/5</span>}
+      />
 
       <ul className="avatar-list">
         {avatars.map((avatar) => (
