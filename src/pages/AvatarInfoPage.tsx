@@ -4,7 +4,7 @@ import leftArrow from '../assets/arrow left.svg'
 import rightArrow from '../assets/arrow right.svg'
 import cameraIcon from '../assets/camera.png'
 import quickIcon from '../assets/quick.png'
-import infoIcon from '../assets/infoButton.svg'
+import infoIcon from '../assets/InfoButton.svg'
 import exitIcon from '../assets/exit.svg'
 import './AvatarInfoPage.css'
 

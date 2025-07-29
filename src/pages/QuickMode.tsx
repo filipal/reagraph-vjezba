@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import exitIcon from '../assets/exit.svg'
-import infoIcon from '../assets/infoButton.svg'
+import infoIcon from '../assets/InfoButton.svg'
 import BodyShape1 from '../assets/BodyShape_1.svg?react'
 import BodyShape2 from '../assets/BodyShape_2.svg?react'
 import BodyShape3 from '../assets/BodyShape_3.svg?react'
