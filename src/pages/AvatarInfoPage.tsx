@@ -90,7 +90,6 @@ export default function AvatarInfoPage() {
       {renderPicker('Your Weight:', weight, weights)}
       <div className="how-text">How would you like to create your avatar?</div>
         <button className="scan-button" onClick={() => {
-        console.log('Navigating to /body-scan-info')
         navigate('/body-scan-info')
         }}>
         <img src={cameraIcon} alt="" className="button-icon" />

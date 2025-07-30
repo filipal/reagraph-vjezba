@@ -1,3 +1,9 @@
+.front-body-scan-page .header-title {
+  color: #fff !important;
+}
+.front-body-scan-page .exit-button img {
+  filter: brightness(0) invert(1);
+}
 .app-header {
   display: flex;
   align-items: center;
