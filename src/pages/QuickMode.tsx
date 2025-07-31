@@ -1,4 +1,4 @@
-import { useState, type CSSProperties } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -103,7 +103,7 @@ export default function QuickMode() {
             {bodyShapes.map((shape) => (
               <button
                 key={shape.id}
-                className={styles.bodyshapeBtn}
+                className={`${styles.buttonReset} ${styles.bodyshapeBtn}`}
                 onClick={() => setSelectedBodyShape(shape.id)}
                 aria-label={shape.label}
                 type="button"
@@ -132,8 +132,13 @@ export default function QuickMode() {
             <img
               src={athleticCircle}
               alt=""
-              className={styles.athleticCircle}
-              style={{ '--athletic-level': athleticLevel } as CSSProperties}
+              className={`${styles.athleticCircle} ${
+                athleticLevel === 0
+                  ? styles.level0
+                  : athleticLevel === 1
+                    ? styles.level1
+                    : styles.level2
+              }`}
               draggable={false}
             />
           </div>
@@ -195,11 +200,14 @@ export default function QuickMode() {
       {/* Bottom Buttons */}
       <Footer>
         <div className={styles.footerActions}>
-          <button className={styles.buttonBack} onClick={() => navigate('/avatar-info')}>
+          <button
+            className={`${styles.buttonReset} ${styles.buttonBack}`}
+            onClick={() => navigate('/avatar-info')}
+          >
             Back
           </button>
           <button
-            className={styles.buttonCreate}
+            className={`${styles.buttonReset} ${styles.buttonCreate}`}
             onClick={() => navigate('/unreal-measurements')}
             disabled={
               !selectedBodyShape ||

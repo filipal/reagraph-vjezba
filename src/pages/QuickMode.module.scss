@@ -10,6 +10,15 @@
   align-items: stretch;
 }
 
+.button-reset {
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
 .quickmode-content {
   padding: 32px 24px 0 24px;
   flex: 1;
@@ -92,6 +101,15 @@
   z-index: 2;
   left: calc(var(--athletic-level, 1) * 50% - 16px);
 }
+.level-0 {
+  --athletic-level: 0;
+}
+.level-1 {
+  --athletic-level: 1;
+}
+.level-2 {
+  --athletic-level: 2;
+}
 .athletic-icons {
   display: flex;
   justify-content: space-between;
@@ -148,7 +166,7 @@
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
 }
-.button-generate {
+.button-create {
   flex: 1;
   height: 48px;
   background: linear-gradient(to right, #2b214d, #13536c);
