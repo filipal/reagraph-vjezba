@@ -15,14 +15,19 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
   const [scanPhase, setScanPhase] = useState<ScanPhase>('initial')
   const [countdown, setCountdown] = useState(5)
   const audioRef = useRef<HTMLAudioElement>(null)
+  const initialSoundEnabled = useRef(soundEnabled)
 
-  // Pokreni audio na mount
+  // Pokreni audio prilikom mounta komponente samo jednom. Ovaj efekt ne
+  // ovisi o promjenama `soundEnabled`, nego koristi početnu vrijednost
+  // spremljenu u referenci kako bi izbjegao zastarjele vrijednosti.
   useEffect(() => {
-    if (soundEnabled && audioRef.current) {
+    if (audioRef.current) {
       audioRef.current.currentTime = 0
-      audioRef.current.play()
+      if (initialSoundEnabled.current) {
+        audioRef.current.play()
+      }
     }
-  }, [soundEnabled])
+  }, [])
 
   // Pauziraj/pokreni audio kad se promijeni soundEnabled
   useEffect(() => {
