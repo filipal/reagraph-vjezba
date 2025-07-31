@@ -5,6 +5,12 @@
   padding: 0 24px 32px 24px;
   width: 100%;
   box-sizing: border-box;
+
+  @include respond(tablet) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
 
 .footer-actions {

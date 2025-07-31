@@ -3,3 +3,10 @@ $background-color: #ececec;
 $text-color: #000;
 $border-radius: 4px;
 $font-size-base: 16px;
+
+$breakpoints: (
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+);

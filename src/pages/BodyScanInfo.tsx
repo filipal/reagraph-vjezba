@@ -1,8 +1,8 @@
 
 import { useNavigate } from 'react-router-dom'
 import BodyScanIllustration from '../assets/BodyScanIllustration.png'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
+import Header from '../components/Header/Header'
+import Footer from '../components/Footer/Footer'
 import styles from './BodyScanInfo.module.scss'
 
 

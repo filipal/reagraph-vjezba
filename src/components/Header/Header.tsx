@@ -1,5 +1,5 @@
-import exitIcon from '../assets/exit.svg'
-import infoIcon from '../assets/InfoButton.svg'
+import exitIcon from '../../assets/exit.svg'
+import infoIcon from '../../assets/InfoButton.svg'
 import styles from './Header.module.scss'
 
 export interface HeaderProps {

@@ -4,7 +4,7 @@ import leftArrow from '../assets/arrow left.svg'
 import rightArrow from '../assets/arrow right.svg'
 import cameraIcon from '../assets/camera.png'
 import quickIcon from '../assets/quick.png'
-import Header from '../components/Header'
+import Header from '../components/Header/Header'
 import styles from './AvatarInfoPage.module.scss'
 
 const ages = ['18-24', '25-30', '31-40', '41-50', '51+']

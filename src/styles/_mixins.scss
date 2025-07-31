@@ -1,5 +1,12 @@
-$primary-color: #2b214d;
-$background-color: #ececec;
-$text-color: #000;
-$border-radius: 4px;
-$font-size-base: 16px;
+@use 'sass:map';
+@use './variables' as *;
+
+
+@mixin respond($breakpoint) {
+  $size: map.get($breakpoints, $breakpoint);
+  @if $size {
+    @media (min-width: $size) {
+      @content;
+    }
+  }
+}

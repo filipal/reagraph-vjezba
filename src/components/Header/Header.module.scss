@@ -71,4 +71,12 @@
   overflow: hidden;
   text-overflow: ellipsis;
   padding: 0 8px;
+
+  @include respond(tablet) {
+    font-size: 26px;
+  }
+
+  @include respond(desktop) {
+    font-size: 28px;
+  }
 }
