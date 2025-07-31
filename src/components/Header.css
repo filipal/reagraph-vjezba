@@ -34,10 +34,11 @@
 .exit-button {
   margin-left: 8px;
   margin-right: 0;
-  /* Fix for icon: force no rotation, no transform */
   transform: none !important;
   outline: none;
   box-shadow: none;
+}
+
 .exit-button:focus,
 .exit-button:active {
   outline: none !important;
@@ -50,8 +51,6 @@
   color: #222;
   font-family: 'Outfit', sans-serif;
   font-weight: 500;
-}
-
 }
 
 .info-button {
