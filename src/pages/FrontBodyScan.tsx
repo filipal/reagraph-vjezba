@@ -5,7 +5,7 @@ import Footer from '../components/Footer'
 import VoiceInfoOn from '../assets/VoiceInfoOn.svg'
 import VoiceInfoOff from '../assets/VoiceInfoOff.svg'
 import scanInstructions from '../assets/scan-instructions.mp3'
-import './FrontBodyScan.css'
+import styles from './FrontBodyScan.module.scss'
 
 type ScanPhase = 'initial' | 'countdown' | 'completed'
 
@@ -22,7 +22,7 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
       audioRef.current.currentTime = 0
       audioRef.current.play()
     }
-  }, [])
+  }, [soundEnabled])
 
   // Pauziraj/pokreni audio kad se promijeni soundEnabled
   useEffect(() => {
@@ -52,24 +52,24 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
   }
 
   return (
-    <div className="front-body-scan-page">
+    <div className={styles.frontBodyScanPage}>
       <Header
         title="Front Body Scan"
         onExit={onClose || (() => navigate(-1))}
         rightContent={
-          <button className="voice-button" onClick={() => setSoundEnabled(v => !v)} type="button">
+          <button className={styles.voiceButton} onClick={() => setSoundEnabled(v => !v)} type="button">
             <img src={soundEnabled ? VoiceInfoOn : VoiceInfoOff} alt="Voice Info" />
           </button>
         }
       />
 
       {/* Main scan area */}
-      <div className="scan-area">
+      <div className={styles.scanArea}>
         {scanPhase === 'countdown' && countdown > 0 && (
-          <div className="countdown-number">{countdown}</div>
+          <div className={styles.countdownNumber}>{countdown}</div>
         )}
         {scanPhase === 'completed' && (
-          <div className="scan-done-msg"><span>Front Scan Done!</span></div>
+          <div className={styles.scanDoneMsg}><span>Front Scan Done!</span></div>
         )}
       </div>
 
@@ -77,12 +77,12 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
       <audio ref={audioRef} src={scanInstructions} />
 
       <Footer>
-        <div className="footer-actions">
+        <div className={styles.footerActions}>
           {scanPhase === 'initial' && (
-            <button className="scan-button" onClick={startScan}>SCAN</button>
+            <button className={styles.scanButton} onClick={startScan}>SCAN</button>
           )}
           {scanPhase === 'completed' && (
-            <button className="continue-button" onClick={onContinueToSideScan}>
+            <button className={styles.continueButton} onClick={onContinueToSideScan}>
               Continue to the Side Scan
             </button>
           )}

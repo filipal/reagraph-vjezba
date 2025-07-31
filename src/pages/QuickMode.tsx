@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, type CSSProperties } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -12,7 +12,7 @@ import athleticCircle from '../assets/AthleticCircle.svg'
 import athleticThin from '../assets/AthleticThin.svg'
 import athleticNormal from '../assets/AthleticNormal.svg'
 import athleticMuscular from '../assets/AthleticMuscular.svg'
-import './QuickMode.css'
+import styles from './QuickMode.module.scss'
 
 const bodyShapes = [
   { id: 1, Icon: BodyShape1, label: 'Shape 1' },
@@ -88,30 +88,29 @@ export default function QuickMode() {
   }
 
   return (
-    <div className="quickmode-page">
+      <div className={styles.quickmodePage}>
       {/* Header */}
       <Header
         title="Body Shape & Fitness"
         onExit={() => navigate(-1)}
         onInfo={() => navigate('/use-of-data')}
       />    
-      <div className="quickmode-content">
+      <div className={styles.quickmodeContent}>
         {/* Body Shape */}
-        <div className="section">
-          <div className="section-label">What’s your body shape?</div>
-          <div className="bodyshape-row">
+        <div className={styles.section}>
+          <div className={styles.sectionLabel}>What’s your body shape?</div>
+          <div className={styles.bodyshapeRow}>
             {bodyShapes.map((shape) => (
               <button
                 key={shape.id}
-                className="bodyshape-btn"
+                className={styles.bodyshapeBtn}
                 onClick={() => setSelectedBodyShape(shape.id)}
                 aria-label={shape.label}
                 type="button"
-                style={{ background: 'none', border: 'none', padding: 0 }}
               >
                 <shape.Icon
                   fill={selectedBodyShape === shape.id ? '#000' : '#fff'}
-                  style={{ display: 'block', width: 56, height: 56 }}
+                  className={styles.bodyshapeIcon}
                   color={selectedBodyShape === shape.id ? '#000' : '#fff'}
                 />
               </button>
@@ -120,26 +119,25 @@ export default function QuickMode() {
         </div>
 
         {/* Athletic Level */}
-        <div className="section">
-          <div className="section-label">How athletic are you?</div>
-        <div className="athletic-slider-wrap">
+        <div className={styles.section}>
+          <div className={styles.sectionLabel}>How athletic are you?</div>
+        <div className={styles.athleticSliderWrap}>
           <div
             id="athletic-slider-track"
-            className="athletic-slider-track"
+            className={styles.athleticSliderTrack}
             onMouseDown={handleSliderMouseDown}
             onTouchStart={handleSliderTouchStart}
-            style={{ touchAction: 'none' }}
           >
-            <img src={athleticTrack} alt="" className="athletic-track" />
+            <img src={athleticTrack} alt="" className={styles.athleticTrack} />
             <img
               src={athleticCircle}
               alt=""
-              className="athletic-circle"
-              style={{ left: `calc(${athleticLevel * 50}% - 16px)` }}
+              className={styles.athleticCircle}
+              style={{ '--athletic-level': athleticLevel } as CSSProperties}
               draggable={false}
             />
           </div>
-          <div className="athletic-icons">
+          <div className={styles.athleticIcons}>
             <img src={athleticThin} alt="Thin" />
             <img src={athleticNormal} alt="Normal" />
             <img src={athleticMuscular} alt="Muscular" />
@@ -148,60 +146,60 @@ export default function QuickMode() {
         </div>
 
         {/* Measurements */}
-        <div className="section">
-          <div className="measure-row">
-            <div className="measure-label">Bust Circumference</div>
+        <div className={styles.section}>
+          <div className={styles.measureRow}>
+            <div className={styles.measureLabel}>Bust Circumference</div>
             <select
               value={bustCircumference}
               onChange={e => setBustCircumference(e.target.value)}
-              className="measure-select"
+              className={styles.measureSelect}
             >
               <option value="">...</option>
               {measurementOptions.map((option) => (
                 <option key={option} value={option}>{option}</option>
               ))}
             </select>
-            <span className="measure-unit">cm</span>
+            <span className={styles.measureUnit}>cm</span>
           </div>
-          <div className="measure-row">
-            <div className="measure-label">Waist Circumference</div>
+          <div className={styles.measureRow}>
+            <div className={styles.measureLabel}>Waist Circumference</div>
             <select
               value={waistCircumference}
               onChange={e => setWaistCircumference(e.target.value)}
-              className="measure-select"
+              className={styles.measureSelect}
             >
               <option value="">...</option>
               {measurementOptions.map((option) => (
                 <option key={option} value={option}>{option}</option>
               ))}
             </select>
-            <span className="measure-unit">cm</span>
+            <span className={styles.measureUnit}>cm</span>
           </div>
-          <div className="measure-row">
-            <div className="measure-label">Low Hip Circumference</div>
+          <div className={styles.measureRow}>
+            <div className={styles.measureLabel}>Low Hip Circumference</div>
             <select
               value={lowHipCircumference}
               onChange={e => setLowHipCircumference(e.target.value)}
-              className="measure-select"
+              className={styles.measureSelect}
             >
               <option value="">...</option>
               {measurementOptions.map((option) => (
                 <option key={option} value={option}>{option}</option>
               ))}
             </select>
-            <span className="measure-unit">cm</span>
+            <span className={styles.measureUnit}>cm</span>
           </div>
         </div>
       </div>
 
       {/* Bottom Buttons */}
       <Footer>
-        <div className="footer-actions">
-          <button className="button-back" onClick={() => navigate('/avatar-info')}>
+        <div className={styles.footerActions}>
+          <button className={styles.buttonBack} onClick={() => navigate('/avatar-info')}>
             Back
           </button>
           <button
-            className="button-create"
+            className={styles.buttonCreate}
             onClick={() => navigate('/unreal-measurements')}
             disabled={
               !selectedBodyShape ||

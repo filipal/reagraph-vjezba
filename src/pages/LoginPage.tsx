@@ -2,7 +2,7 @@ import type { FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import logo from '../assets/Fitspace-logo-gradient-nobkg.svg'
 import exitIcon from '../assets/exit.svg'
-import './LoginPage.css'
+import styles from './LoginPage.module.scss'
 
 export default function LoginPage() {
   const navigate = useNavigate()
@@ -13,33 +13,33 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="login-page">
-      <button className="back-button" onClick={() => navigate('/')}> 
-        <img src={exitIcon} alt="Exit" className="exit-icon" width={20} height={20} />
+    <div className={styles.loginPage}>
+      <button className={styles.backButton} onClick={() => navigate('/')}>
+        <img src={exitIcon} alt="Exit" className={styles.exitIcon} width={20} height={20} />
       </button>
-      <img src={logo} alt="Fitspace" className="logo" />
-      <div className="login-bg" />
+      <img src={logo} alt="Fitspace" className={styles.logo} />
+      <div className={styles.loginBg} />
       <button
         type="button"
-        className="create-button"
+        className={styles.createButton}
         onClick={() => navigate('/avatar-info')}
       >
         Create Your Digital Twin
       </button>
-      <div className="login-form-section">
-        <span className="intro-text">
+      <div className={styles.loginFormSection}>
+        <span className={styles.introText}>
           If you already have a Fitspace avatar, log in to load it:
         </span>
-        <form className="login-form" onSubmit={handleSubmit}>
-          <label className="input-group">
-            <span className="input-label">E-mail Address</span>
+        <form className={styles.loginForm} onSubmit={handleSubmit}>
+          <label className={styles.inputGroup}>
+            <span className={styles.inputLabel}>E-mail Address</span>
             <input type="email" required />
           </label>
-          <label className="input-group">
-            <span className="input-label">Password</span>
+          <label className={styles.inputGroup}>
+            <span className={styles.inputLabel}>Password</span>
             <input type="password" required />
           </label>
-          <button type="submit" className="login-button">
+          <button type="submit" className={styles.loginButton}>
             Log In
           </button>
         </form>

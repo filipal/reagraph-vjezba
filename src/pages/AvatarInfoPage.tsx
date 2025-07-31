@@ -5,7 +5,7 @@ import rightArrow from '../assets/arrow right.svg'
 import cameraIcon from '../assets/camera.png'
 import quickIcon from '../assets/quick.png'
 import Header from '../components/Header'
-import './AvatarInfoPage.css'
+import styles from './AvatarInfoPage.module.scss'
 
 const ages = ['18-24', '25-30', '31-40', '41-50', '51+']
 const heights = ['150', '160', '170', '180', '190']
@@ -31,22 +31,22 @@ export default function AvatarInfoPage() {
     state: ReturnType<typeof usePicker>,
     values: string[],
   ) => (
-    <div className="picker">
-      <span className="picker-label">{label}</span>
-      <div className="picker-control">
-        <button className="arrow-button" onClick={state.prev}>
+    <div className={styles.picker}>
+      <span className={styles.pickerLabel}>{label}</span>
+      <div className={styles.pickerControl}>
+        <button className={styles.arrowButton} onClick={state.prev}>
           <img src={leftArrow} alt="previous" />
         </button>
-        <div className="picker-values">
+        <div className={styles.pickerValues}>
           {values[state.index - 1] && (
-            <span className="picker-value side">{values[state.index - 1]}</span>
+            <span className={`${styles.pickerValue} ${styles.side}`}>{values[state.index - 1]}</span>
           )}
-          <span className="picker-value selected">{values[state.index]}</span>
+          <span className={`${styles.pickerValue} ${styles.selected}`}>{values[state.index]}</span>
           {values[state.index + 1] && (
-            <span className="picker-value side">{values[state.index + 1]}</span>
+            <span className={`${styles.pickerValue} ${styles.side}`}>{values[state.index + 1]}</span>
           )}
         </div>
-        <button className="arrow-button" onClick={state.next}>
+        <button className={styles.arrowButton} onClick={state.next}>
           <img src={rightArrow} alt="next" />
         </button>
       </div>
@@ -54,30 +54,30 @@ export default function AvatarInfoPage() {
   )
 
   return (
-    <div className="avatar-info-page">
+    <div className={styles.avatarInfoPage}>
       <Header
         title="Create your Avatar"
         onExit={() => navigate('/')}
         onInfo={() => navigate('/use-of-data')}
       />
-      <div className="form-section">
+      <div className={styles.formSection}>
         <input
-          className="avatar-name-input"
+          className={styles.avatarNameInput}
           type="text"
           placeholder="Avatar’s Name"
           value={name}
           onChange={e => setName(e.target.value)}
         />
-        <div className="gender-choice">
+        <div className={styles.genderChoice}>
           <button
-            className={`gender-button${gender === 'male' ? ' selected' : ''}`}
+            className={`${styles.genderButton}${gender === 'male' ? ' ' + styles.selected : ''}`}
             onClick={() => setGender('male')}
             type="button"
           >
             Male
           </button>
           <button
-            className={`gender-button${gender === 'female' ? ' selected' : ''}`}
+            className={`${styles.genderButton}${gender === 'female' ? ' ' + styles.selected : ''}`}
             onClick={() => setGender('female')}
             type="button"
           >
@@ -88,26 +88,26 @@ export default function AvatarInfoPage() {
       {renderPicker('Your Age Range:', age, ages)}
       {renderPicker('Your Height:', height, heights)}
       {renderPicker('Your Weight:', weight, weights)}
-      <div className="how-text">How would you like to create your avatar?</div>
-        <button className="scan-button" onClick={() => {
+      <div className={styles.howText}>How would you like to create your avatar?</div>
+        <button className={styles.scanButton} onClick={() => {
         navigate('/body-scan-info')
         }}>
-        <img src={cameraIcon} alt="" className="button-icon" />
+        <img src={cameraIcon} alt="" className={styles.buttonIcon} />
         Scan Body
       </button>
-      <div className="scan-desc">
+      <div className={styles.scanDesc}>
         Highly accurate. Scan your body & face<br />
         with a phone in 3 minutes.
       </div>
-      <button className="quick-button" onClick={() => navigate('/quickmode')}>
-        <img src={quickIcon} alt="" className="button-icon" />
+      <button className={styles.quickButton} onClick={() => navigate('/quickmode')}>
+        <img src={quickIcon} alt="" className={styles.buttonIcon} />
         Quick Mode
       </button>
-      <div className="quick-desc">
+      <div className={styles.quickDesc}>
         Fastest, but may not be as accurate.<br />
         Enter main body measurements and choose your body type.
       </div>
-      <button className="back-button-avatarinfo" onClick={() => navigate(-1)}>
+      <button className={styles.backButtonAvatarinfo} onClick={() => navigate(-1)}>
         Back
       </button>
     </div>

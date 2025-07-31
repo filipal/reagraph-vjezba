@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router-dom'
-import './StartPage.css'
+import styles from './StartPage.module.scss'
 
 export default function StartPage() {
   const navigate = useNavigate()
   return (
-    <div className="start-page">
-      <h1 className="title">PANDOMOTO WEB</h1>
-      <button className="start-button" onClick={() => navigate('/login')}>
+    <div className={styles.startPage}>
+      <h1 className={styles.title}>PANDOMOTO WEB</h1>
+      <button className={styles.startButton} onClick={() => navigate('/login')}>
         Try On in 3D
       </button>
     </div>

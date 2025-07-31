@@ -11,7 +11,6 @@ export default defineConfig({
     },
   },
   css: {
-    // (opcionalno) uredniji nazivi klasa u dev-u, hash u productionu
     modules: {
       localsConvention: 'camelCaseOnly',
       generateScopedName:
@@ -21,11 +20,9 @@ export default defineConfig({
     },
     preprocessorOptions: {
       scss: {
-        // auto-ubrizgaj shared varijable i mixine u SVE .scss/.module.scss datoteke
-        additionalData: `
-          @use "@/styles/variables" as *;
-          @use "@/styles/mixins" as *;
-        `,
+        additionalData:
+          '@import "./src/styles/variables";' +
+          '@import "./src/styles/mixins";'
       },
     },
   },

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import BodyScanIllustration from '../assets/BodyScanIllustration.png'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import './BodyScanInfo.css'
+import styles from './BodyScanInfo.module.scss'
 
 
 export default function BodyScanInfo() {
@@ -17,25 +17,25 @@ export default function BodyScanInfo() {
   ]
 
   return (
-    <div className="body-scan-info-page">
+    <div className={styles.bodyScanInfoPage}>
       {/* Header */}
       <Header title="Body Scanning Tips" onExit={() => navigate('/')} />
 
-      <div className="body-scan-content">
-        <div className="tips-list">
+      <div className={styles.bodyScanContent}>
+        <div className={styles.tipsList}>
           {tips.map((tip, idx) => (
-            <div className="tip-box" key={idx}>
+            <div className={styles.tipBox} key={idx}>
               {tip}
             </div>
           ))}
         </div>
-        <div className="scan-illustration">
+        <div className={styles.scanIllustration}>
           <img src={BodyScanIllustration} alt="Body Scan Illustration" />
         </div>
         <Footer>
-          <div className="footer-actions">
-            <button className="button-back" onClick={() => navigate('/avatar-info')}>Back</button>
-            <button className="button-create" onClick={() => navigate('/front-body-scan')}>Start Scanning</button>
+          <div className={styles.footerActions}>
+            <button className={styles.buttonBack} onClick={() => navigate('/avatar-info')}>Back</button>
+            <button className={styles.buttonCreate} onClick={() => navigate('/front-body-scan')}>Start Scanning</button>
           </div>
         </Footer>
       </div>

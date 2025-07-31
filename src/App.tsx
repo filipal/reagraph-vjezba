@@ -8,7 +8,7 @@ import QuickMode from './pages/QuickMode'
 import BodyScanInfo from './pages/BodyScanInfo.tsx'
 import FrontBodyScan from './pages/FrontBodyScan.tsx'
 import UnrealMeasurements from './pages/UnrealMeasurements.tsx'
-import './App.css'
+import './App.module.scss'
 
 
 export default function App() {
