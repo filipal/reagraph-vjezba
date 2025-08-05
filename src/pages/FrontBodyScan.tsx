@@ -81,18 +81,14 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
       {/* Voice instructions (audio only, neovisno o countdownu) */}
       <audio ref={audioRef} src={scanInstructions} />
 
-      <Footer>
-        <div className={styles.footerActions}>
-          {scanPhase === 'initial' && (
-            <button className={styles.scanButton} onClick={startScan}>SCAN</button>
-          )}
-          {scanPhase === 'completed' && (
-            <button className={styles.continueButton} onClick={onContinueToSideScan}>
-              Continue to the Side Scan
-            </button>
-          )}
-        </div>
-      </Footer>
+      <Footer
+        backText="Back"
+        actionText={scanPhase === 'initial' ? 'SCAN' : 'Continue to the Side Scan'}
+        onBack={onClose || (() => navigate(-1))}
+        onAction={scanPhase === 'initial' ? startScan : onContinueToSideScan || (() => {})}
+        actionDisabled={scanPhase === 'countdown'}
+        actionType="primary"
+      />
     </div>
   )
 }

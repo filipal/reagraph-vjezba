@@ -15,11 +15,11 @@ import athleticMuscular from '../assets/AthleticMuscular.svg'
 import styles from './QuickMode.module.scss'
 
 const bodyShapes = [
-  { id: 1, Icon: BodyShape1, label: 'Shape 1' },
-  { id: 2, Icon: BodyShape2, label: 'Shape 2' },
-  { id: 3, Icon: BodyShape3, label: 'Shape 3' },
-  { id: 4, Icon: BodyShape4, label: 'Shape 4' },
-  { id: 5, Icon: BodyShape5, label: 'Shape 5' },
+  { id: 1, Icon: BodyShape1, label: 'Shape 1', width: 33, height: 55 },
+  { id: 2, Icon: BodyShape2, label: 'Shape 2', width: 42, height: 55 },
+  { id: 3, Icon: BodyShape3, label: 'Shape 3', width: 30, height: 55 },
+  { id: 4, Icon: BodyShape4, label: 'Shape 4', width: 55, height: 55 },
+  { id: 5, Icon: BodyShape5, label: 'Shape 5', width: 38, height: 55 },
 ]
 
 const measurementOptions = Array.from({ length: 100 }, (_, i) => (60 + i).toString())
@@ -92,7 +92,7 @@ export default function QuickMode() {
       {/* Header */}
       <Header
         title="Body Shape & Fitness"
-        onExit={() => navigate(-1)}
+        onExit={() => navigate('/')}
         onInfo={() => navigate('/use-of-data')}
       />    
       <div className={styles.quickmodeContent}>
@@ -109,6 +109,8 @@ export default function QuickMode() {
                 type="button"
               >
                 <shape.Icon
+                  width={shape.width}
+                  height={shape.height}
                   fill={selectedBodyShape === shape.id ? '#000' : '#fff'}
                   className={styles.bodyshapeIcon}
                   color={selectedBodyShape === shape.id ? '#000' : '#fff'}
@@ -151,7 +153,7 @@ export default function QuickMode() {
         </div>
 
         {/* Measurements */}
-        <div className={styles.section}>
+        <div className={styles.sectionMeasurements}>
           <div className={styles.measureRow}>
             <div className={styles.measureLabel}>Bust Circumference</div>
             <select
@@ -198,28 +200,19 @@ export default function QuickMode() {
       </div>
 
       {/* Bottom Buttons */}
-      <Footer>
-        <div className={styles.footerActions}>
-          <button
-            className={`${styles.buttonReset} ${styles.buttonBack}`}
-            onClick={() => navigate('/avatar-info')}
-          >
-            Back
-          </button>
-          <button
-            className={`${styles.buttonReset} ${styles.buttonCreate}`}
-            onClick={() => navigate('/unreal-measurements')}
-            disabled={
-              !selectedBodyShape ||
-              bustCircumference === '' ||
-              waistCircumference === '' ||
-              lowHipCircumference === ''
-            }
-          >
-            Generate Avatar
-          </button>
-        </div>
-      </Footer>
+      <Footer
+        backText="Back"
+        actionText="Generate Avatar"
+        onBack={() => navigate('/avatar-info')}
+        onAction={() => navigate('/unreal-measurements')}
+        actionDisabled={
+          !selectedBodyShape ||
+          bustCircumference === '' ||
+          waistCircumference === '' ||
+          lowHipCircumference === ''
+        }
+        actionType="primary"
+      />
     </div>
   )
 }

@@ -57,40 +57,22 @@ export default function LoggedInPage() {
           </li>
         ))}
       </ul>
-      <Footer>
-        {showDeleteConfirm ? (
-          <div className={styles.deleteConfirm}>Are you sure?</div>
-        ) : (
-          <button
-            className={`${styles.buttonLoad}${selectedAvatarId === loadedAvatarId ? ' ' + styles.disabled : ''}`}
-            onClick={handleLoad}
-            disabled={selectedAvatarId === loadedAvatarId}
-          >
-            Load Avatar
-          </button>
-        )}
-        <div className={styles.footerActions}>
-          {showDeleteConfirm ? (
-            <>
-              <button className={styles.buttonBack} onClick={() => setShowDeleteConfirm(null)}>
-                Cancel
-              </button>
-              <button className={styles.buttonCreate} onClick={confirmDelete}>
-                Delete Avatar
-              </button>
-            </>
-          ) : (
-            <>
-              <button className={styles.buttonBack} onClick={() => navigate('/login')}>
-                Back
-              </button>
-              <button className={styles.buttonCreate} onClick={() => navigate('/avatar-info')}>
-                Create New Avatar
-              </button>
-            </>
-          )}
-        </div>
-      </Footer>
+
+      <Footer
+        topButtonText="Load Avatar"
+        onTopButton={handleLoad}
+        topButtonDisabled={selectedAvatarId === loadedAvatarId}
+        topButtonType="primary"
+        backText={showDeleteConfirm ? "Cancel" : "Back"}
+        actionText={showDeleteConfirm ? "Delete Avatar" : "Create New Avatar"}
+        onBack={() => showDeleteConfirm ? setShowDeleteConfirm(null) : navigate('/login')}
+        onAction={() => showDeleteConfirm ? confirmDelete() : navigate('/avatar-info')}
+        actionDisabled={false}
+        actionType="black"
+      />
+      {showDeleteConfirm && (
+        <div className={styles.deleteConfirmRow}>Are you sure?</div>
+      )}
     </div>
   )
 }

@@ -1,46 +1,57 @@
 .front-body-scan-page .header-title {
   color: #fff !important;
 }
-.front-body-scan-page .exit-button img {
+.front-body-scan-page .exitButton img {
   filter: brightness(0) invert(1);
 }
-.app-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 430px;
+.appHeader {
+  width: min(100vw, var(--page-max-width));
+  height: 101px;
   margin: 0 auto;
-  padding: 24px 0 6px 0;
   border-bottom: 1px solid #000;
+  padding-inline: 30px;
+  padding-top: 60px;
+  display: grid;
+  grid-template-columns: auto 1fr auto; /* [exit] [title] [right] */
+  align-items: start;
   box-sizing: border-box;
 }
 
-.exit-button,
-.info-button {
+.exitButton,
+.infoButton {
   background: none;
-  border: none;
+  border: 0;
   padding: 0;
-  margin-left: 8px;
-  margin-right: 0;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 40px;
-  outline: none;
 }
 
-.exit-button {
-  margin-left: 8px;
-  margin-right: 0;
-  transform: none !important;
-  outline: none;
-  box-shadow: none;
+.exitButton { grid-column: 1; justify-self: start; }
+.rightBox   { grid-column: 3; justify-self: end; display: inline-flex; gap: 12px; }
+
+.exitButton img,
+.infoButton img { width: 20px; height: 20px; display: block; }
+
+/* .infoButton {
+  position: absolute;
+  top: 61px;
+  left: 375px;
 }
 
-.exit-button:focus,
-.exit-button:active {
+.exitButton {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 61px;
+  left: 30px;
+  transform: rotate(0deg);
+  opacity: 1;
+} */
+
+.exitButton:focus,
+.exitButton:active {
   outline: none !important;
   box-shadow: none !important;
   border: none !important;
@@ -53,30 +64,42 @@
   font-weight: 500;
 }
 
-.info-button {
-  margin-right: 10px;
-  margin-left: auto;
-}
-
-.header-title {
-  flex: 1;
-  text-align: center;
-  font-size: 23px;
-  font-weight: 400;
-  line-height: 29px;
-  color: #000;
+.headerTitle {
+  grid-column: 2;
+  justify-self: center;
   font-family: 'Outfit', sans-serif;
-  margin: 0;
-  min-width: 0;
+  font-weight: 400;
+  font-size: 23px;
+  line-height: 1;
+  color: #000;
+  text-align: center;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding: 0 8px;
+}
 
-  @include respond(tablet) {
-    font-size: 26px;
+/* ——————————————————————————— */
+/* DESKTOP (≥ 1440px): header 1440 x 70                              */
+/* ——————————————————————————— */
+
+@media (min-width: 1440px) {
+  .appHeader {
+    width: 1440px;
+    height: 70px;
+    padding-inline: 24px;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    padding-top: 0;
   }
+}
 
-  @include respond(desktop) {
-    font-size: 28px;
+@media (min-width: 1280px) {
+  .appHeader {
+    width: 1440px;
+    height: 70px;
+    padding-inline: 24px;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    padding-top: 0;
   }
 }

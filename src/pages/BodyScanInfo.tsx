@@ -9,12 +9,13 @@ import styles from './BodyScanInfo.module.scss'
 export default function BodyScanInfo() {
   const navigate = useNavigate()
   const tips = [
-    'Wear tight clothing to show body lines',
+    'Wear tight clothing\nto show body lines',
     'Stay in a well-lit room',
-    'Turn on phone sound to hear the voice guide',
-    'Place the phone upright at hip height, e.g. on a table against an object',
-    'Step away from the phone within 2-3 metres',
+    'Turn on phone sound to hear the\nvoice guide',
+    'Place the phone upright at hip\nheight, e.g. on a table against an\nobject',
+    'Step away from the phone\nwithin 2-3 metres',
   ]
+  const tipHeights = [75, 51, 75, 97, 75];
 
   return (
     <div className={styles.bodyScanInfoPage}>
@@ -24,7 +25,11 @@ export default function BodyScanInfo() {
       <div className={styles.bodyScanContent}>
         <div className={styles.tipsList}>
           {tips.map((tip, idx) => (
-            <div className={styles.tipBox} key={idx}>
+            <div
+              className={styles.tipBox}
+              key={idx}
+              style={{ height: tipHeights[idx], whiteSpace: 'pre-line' }}
+            >
               {tip}
             </div>
           ))}
@@ -32,12 +37,13 @@ export default function BodyScanInfo() {
         <div className={styles.scanIllustration}>
           <img src={BodyScanIllustration} alt="Body Scan Illustration" />
         </div>
-        <Footer>
-          <div className={styles.footerActions}>
-            <button className={styles.buttonBack} onClick={() => navigate('/avatar-info')}>Back</button>
-            <button className={styles.buttonCreate} onClick={() => navigate('/front-body-scan')}>Start Scanning</button>
-          </div>
-        </Footer>
+        <Footer
+          backText="Back"
+          actionText="Start Scanning"
+          onBack={() => navigate('/avatar-info')}
+          onAction={() => navigate('/front-body-scan')}
+          actionType="primary"
+        />
       </div>
     </div>
   )

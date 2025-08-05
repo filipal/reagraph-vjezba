@@ -5,8 +5,6 @@
 @mixin respond($breakpoint) {
   $size: map.get($breakpoints, $breakpoint);
   @if $size {
-    @media (min-width: $size) {
-      @content;
-    }
+    @media (min-width: $size) { @content; }
   }
 }

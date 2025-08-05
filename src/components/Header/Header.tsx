@@ -1,3 +1,4 @@
+import cn from 'classnames'
 import exitIcon from '../../assets/exit.svg'
 import infoIcon from '../../assets/InfoButton.svg'
 import styles from './Header.module.scss'
@@ -11,17 +12,19 @@ export interface HeaderProps {
 
 export default function Header({ title, onExit, onInfo, rightContent }: HeaderProps) {
   return (
-    <header className={styles.appHeader}>
-      <button className={styles.exitButton} onClick={onExit} type="button">
-        <img src={exitIcon} alt="Exit" width={20} height={20} />
+    <header className={cn(styles.appHeader)}>
+      <button className={cn(styles.exitButton)} onClick={onExit} type="button">
+        <img src={exitIcon} alt="Exit" />
       </button>
-      <h1 className={styles.headerTitle}>{title}</h1>
-      {rightContent}
-      {onInfo && (
-        <button className={styles.infoButton} onClick={onInfo} type="button">
-          <img src={infoIcon} alt="Info" width={20} height={20} />
-        </button>
-      )}
+      <div className={cn(styles.headerTitle)}>{title}</div>
+       <div className={cn(styles.rightBox)}>
+        {rightContent}
+        {onInfo && (
+          <button className={cn(styles.infoButton)} onClick={onInfo} type="button">
+            <img src={infoIcon} alt="Info" />
+          </button>
+        )}
+      </div>
     </header>
   )
 }

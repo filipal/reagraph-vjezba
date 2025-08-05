@@ -8,6 +8,7 @@ import QuickMode from './pages/QuickMode'
 import BodyScanInfo from './pages/BodyScanInfo.tsx'
 import FrontBodyScan from './pages/FrontBodyScan.tsx'
 import UnrealMeasurements from './pages/UnrealMeasurements.tsx'
+import ScanQRBodyscan from './pages/ScanQRBodyscan.tsx'
 import './App.module.scss'
 
 
@@ -23,6 +24,7 @@ export default function App() {
       <Route path="/quickmode" element={<QuickMode />} />
       <Route path="/front-body-scan" element={<FrontBodyScan />} />
       <Route path="/unreal-measurements" element={<UnrealMeasurements />} />
+      <Route path="/scan-qr-bodyscan" element={<ScanQRBodyscan />} />
 
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
