@@ -23,7 +23,7 @@ export default function LoggedInPage() {
   const [loadedAvatarId, setLoadedAvatarId] = useState<number>(1)
   const [showDeleteConfirm, setShowDeleteConfirm] = useState<null | number>(null)
   const [confirmPos, setConfirmPos] = useState<{top: number, left: number, width: number} | null>(null)
-  const loadButtonRef = useRef<HTMLButtonElement>(null)
+  const loadButtonRef = useRef<HTMLButtonElement | null>(null)
 
   const handleSelect = (id: number) => setSelectedAvatarId(id)
   const handleLoad = () => setLoadedAvatarId(selectedAvatarId)

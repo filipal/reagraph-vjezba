@@ -12,7 +12,7 @@ export interface FooterProps {
   onTopButton?: () => void;
   topButtonDisabled?: boolean;
   topButtonType?: 'primary' | 'black';
-  loadButtonRef?: React.RefObject<HTMLButtonElement>;
+  loadButtonRef?: React.RefObject<HTMLButtonElement | null>;
 }
 
 export default function Footer({
