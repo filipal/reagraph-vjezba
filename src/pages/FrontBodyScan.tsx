@@ -5,6 +5,7 @@ import Footer from '../components/Footer/Footer'
 import VoiceInfoOn from '../assets/VoiceInfoOn.svg'
 import VoiceInfoOff from '../assets/VoiceInfoOff.svg'
 import scanInstructions from '../assets/scan-instructions.mp3'
+import FrontGuide from '../assets/FrontGuide.png'
 import styles from './FrontBodyScan.module.scss'
 
 type ScanPhase = 'initial' | 'countdown' | 'completed'
@@ -91,6 +92,11 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
 
       {/* Main scan area */}
       <div className={styles.scanArea}>
+        {scanPhase !== 'initial' && (
+          <div className={styles.overlay}>
+            <img src={FrontGuide} alt="Front guide" className={styles.frontGuide} />
+          </div>
+        )}
         {scanPhase === 'countdown' && countdown > 0 && (
           <div className={styles.countdownNumber}>{countdown}</div>
         )}
