@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
@@ -22,12 +22,13 @@ export default function LoggedInPage() {
   const [selectedAvatarId, setSelectedAvatarId] = useState<number>(1)
   const [loadedAvatarId, setLoadedAvatarId] = useState<number>(1)
   const [showDeleteConfirm, setShowDeleteConfirm] = useState<null | number>(null)
-  const [confirmPos, setConfirmPos] = useState<{top: number, left: number, width: number} | null>(null)
+  const [confirmPos, setConfirmPos] = useState<{ top: number; height: number } | null>(null)
   const loadButtonRef = useRef<HTMLButtonElement | null>(null)
 
   const handleSelect = (id: number) => setSelectedAvatarId(id)
   const handleLoad = () => setLoadedAvatarId(selectedAvatarId)
   const handleDelete = (id: number) => setShowDeleteConfirm(id)
+
   const confirmDelete = () => {
     setAvatars(avatars.filter(a => a.id !== showDeleteConfirm))
     if (selectedAvatarId === showDeleteConfirm) setSelectedAvatarId(avatars[0]?.id || 0)
@@ -36,18 +37,29 @@ export default function LoggedInPage() {
     setConfirmPos(null)
   }
 
-  useEffect(() => {
-    if (showDeleteConfirm && loadButtonRef.current) {
+  const positionConfirm = useCallback(() => {
+    if (loadButtonRef.current) {
       const rect = loadButtonRef.current.getBoundingClientRect()
       setConfirmPos({
-        top: rect.top - 56, // 56px iznad gumba
-        left: rect.left,
-        width: rect.width
+        top: rect.top,
+        height: rect.height
       })
+    }
+  }, [])
+
+  useEffect(() => {
+    if (showDeleteConfirm) {
+      positionConfirm()
+      window.addEventListener('resize', positionConfirm)
+      window.addEventListener('scroll', positionConfirm)
+      return () => {
+        window.removeEventListener('resize', positionConfirm)
+        window.removeEventListener('scroll', positionConfirm)
+      }
     } else {
       setConfirmPos(null)
     }
-  }, [showDeleteConfirm])
+  }, [showDeleteConfirm, positionConfirm])
 
   return (
     <div className={styles.loggedInPage}>
@@ -67,8 +79,12 @@ export default function LoggedInPage() {
             >
               {avatar.name}
             </button>
-            <button className={styles.iconButton} aria-label="remove avatar" onClick={() => handleDelete(avatar.id)}>
-              <img src={deleteIcon} alt="Delete Avatar" width={14} height={14} />
+            <button
+              className={styles.iconButton}
+              aria-label="remove avatar"
+              onClick={() => handleDelete(avatar.id)}
+            >
+              <img src={deleteIcon} alt="Delete Avatar" />
             </button>
           </li>
         ))}
@@ -79,34 +95,42 @@ export default function LoggedInPage() {
         onTopButton={handleLoad}
         topButtonDisabled={selectedAvatarId === loadedAvatarId}
         topButtonType="primary"
-        backText={showDeleteConfirm ? "Cancel" : "Back"}
-        actionText={showDeleteConfirm ? "Delete Avatar" : "Create New Avatar"}
-        onBack={() => showDeleteConfirm ? setShowDeleteConfirm(null) : navigate('/login')}
+        backText={showDeleteConfirm ? 'Cancel' : 'Back'}
+        actionText={showDeleteConfirm ? 'Delete Avatar' : 'Create New Avatar'}
+        onBack={() => {
+          if (showDeleteConfirm) {
+            setShowDeleteConfirm(null)
+            setConfirmPos(null)
+          } else {
+            navigate('/login')
+          }
+        }}
         onAction={() => showDeleteConfirm ? confirmDelete() : navigate('/avatar-info')}
         actionDisabled={false}
         actionType="black"
         loadButtonRef={loadButtonRef}
       />
+
       {showDeleteConfirm && confirmPos && (
         <div
           className={styles.deleteConfirmOverlay}
           style={{
             position: 'fixed',
             top: confirmPos.top,
-            left: confirmPos.left,
-            width: confirmPos.width,
+            left: 0,
+            width: '100vw',
+            height: confirmPos.height,
             zIndex: 100,
             display: 'flex',
             justifyContent: 'center',
             pointerEvents: 'none'
           }}
         >
-          <div className={styles.deleteConfirmRow} style={{pointerEvents: 'auto', width: '100%'}}>Are you sure?</div>
+          <div className={styles.deleteConfirmRow} style={{ pointerEvents: 'auto', width: '100%' }}>
+            Are you sure?
+          </div>
         </div>
       )}
-{/*       {showDeleteConfirm && (
-        <div className={styles.deleteConfirmRow}>Are you sure?</div>
-      )} */}
     </div>
   )
 }
