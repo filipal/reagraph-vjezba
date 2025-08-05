@@ -15,6 +15,7 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
   const [soundEnabled, setSoundEnabled] = useState(true)
   const [scanPhase, setScanPhase] = useState<ScanPhase>('initial')
   const [countdown, setCountdown] = useState(5)
+  const [cameraError, setCameraError] = useState<string | null>(null)
   const audioRef = useRef<HTMLAudioElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const streamRef = useRef<MediaStream | null>(null)
@@ -55,9 +56,19 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
   }, [scanPhase, countdown])
 
   const startScan = async () => {
+    setCameraError(null)
     try {
+      const devices = await navigator.mediaDevices.enumerateDevices()
+      const frontCamera = devices.find(
+        d => d.kind === 'videoinput' && d.label.toLowerCase().includes('front')
+      )
+
+      const videoConstraints: MediaTrackConstraints = frontCamera
+        ? { deviceId: { exact: frontCamera.deviceId } }
+        : { facingMode: 'user' }
+
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: 'user' },
+        video: videoConstraints,
       })
       streamRef.current = stream
       if (videoRef.current) {
@@ -68,6 +79,8 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
       setCountdown(5)
     } catch (err) {
       console.error('Error starting video stream:', err)
+      setCameraError('Unable to access camera. Please check permissions and try again.')
+      setScanPhase('initial')
     }
   }
 
@@ -102,6 +115,12 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
         )}
         {scanPhase === 'completed' && (
           <div className={styles.scanDoneMsg}><span>Front Scan Done!</span></div>
+        )}
+        {cameraError && (
+          <div className={styles.cameraError}>
+            <p>{cameraError}</p>
+            <button type="button" onClick={startScan}>Retry</button>
+          </div>
         )}
       </div>
 
