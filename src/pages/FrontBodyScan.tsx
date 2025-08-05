@@ -15,6 +15,8 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
   const [scanPhase, setScanPhase] = useState<ScanPhase>('initial')
   const [countdown, setCountdown] = useState(5)
   const audioRef = useRef<HTMLAudioElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const streamRef = useRef<MediaStream | null>(null)
   const initialSoundEnabled = useRef(soundEnabled)
 
   // Pokreni audio prilikom mounta komponente samo jednom. Ovaj efekt ne
@@ -51,13 +53,32 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
     return () => clearTimeout(timer)
   }, [scanPhase, countdown])
 
-  const startScan = () => {
-    setScanPhase('countdown')
-    setCountdown(5)
+  const startScan = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: 'user' },
+      })
+      streamRef.current = stream
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream
+        await videoRef.current.play().catch(() => {})
+      }
+      setScanPhase('countdown')
+      setCountdown(5)
+    } catch (err) {
+      console.error('Error starting video stream:', err)
+    }
   }
+
+  useEffect(() => {
+    return () => {
+      streamRef.current?.getTracks().forEach(track => track.stop())
+    }
+  }, [])
 
   return (
     <div className={styles.frontBodyScanPage}>
+      <video ref={videoRef} className={styles.video} autoPlay playsInline />
       <Header
         title="Front Body Scan"
         onExit={onClose || (() => navigate(-1))}
