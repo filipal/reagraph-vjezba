@@ -98,6 +98,7 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
     <div className={styles.frontBodyScanPage}>
       <video ref={videoRef} className={styles.video} autoPlay playsInline />
       <Header
+        className={styles.scanHeader}
         title="Front Body Scan"
         onExit={onClose || (() => navigate(-1))}
         rightContent={
@@ -132,6 +133,7 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
       <audio ref={audioRef} src={scanInstructions} />
 
       <Footer
+        className={styles.scanFooter}
         backText="Back"
         actionText={scanPhase === 'initial' ? 'SCAN' : 'Continue to the Side Scan'}
         onBack={onClose || (() => navigate(-1))}

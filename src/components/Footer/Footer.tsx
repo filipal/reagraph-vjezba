@@ -1,4 +1,4 @@
-
+import cn from 'classnames'
 import styles from './Footer.module.scss'
 
 export interface FooterProps {
@@ -13,6 +13,7 @@ export interface FooterProps {
   topButtonDisabled?: boolean;
   topButtonType?: 'primary' | 'black';
   loadButtonRef?: React.RefObject<HTMLButtonElement | null>;
+  className?: string;
 }
 
 export default function Footer({
@@ -27,9 +28,10 @@ export default function Footer({
   topButtonDisabled = false,
   topButtonType = 'primary',
   loadButtonRef,
+  className,
 }: FooterProps) {
   return (
-    <div className={styles.footer}>
+    <div className={cn(styles.footer, className)}>
       {topButtonText ? (
         <>
           <button

@@ -8,11 +8,12 @@ export interface HeaderProps {
   onExit: () => void
   onInfo?: () => void
   rightContent?: React.ReactNode
+  className?: string
 }
 
-export default function Header({ title, onExit, onInfo, rightContent }: HeaderProps) {
+export default function Header({ title, onExit, onInfo, rightContent, className }: HeaderProps) {
   return (
-    <header className={cn(styles.appHeader)}>
+    <header className={cn(styles.appHeader, className)}>
       <button className={cn(styles.exitButton)} onClick={onExit} type="button">
         <img src={exitIcon} alt="Exit" />
       </button>
