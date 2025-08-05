@@ -8,7 +8,7 @@ import scanInstructions from '../assets/scan-instructions.mp3'
 import FrontGuide from '../assets/FrontGuide.png'
 import styles from './FrontBodyScan.module.scss'
 
-type ScanPhase = 'initial' | 'countdown' | 'completed'
+type ScanPhase = 'initial' | 'scanning' | 'countdown' | 'completed'
 
 export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClose?: () => void, onContinueToSideScan?: () => void }) {
   const navigate = useNavigate()
@@ -59,6 +59,7 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
 
   const startScan = async () => {
     setCameraError(null)
+    setScanPhase('scanning')
     try {
       const devices = await navigator.mediaDevices.enumerateDevices()
       const frontCamera = devices.find(
@@ -77,8 +78,8 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
         videoRef.current.srcObject = stream
         await videoRef.current.play().catch(() => {})
       }
-      setScanPhase('countdown')
       setCountdown(5)
+      setScanPhase('countdown')
     } catch (err) {
       console.error('Error starting video stream:', err)
       setCameraError('Unable to access camera. Please check permissions and try again.')
@@ -135,7 +136,7 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
         actionText={scanPhase === 'initial' ? 'SCAN' : 'Continue to the Side Scan'}
         onBack={onClose || (() => navigate(-1))}
         onAction={scanPhase === 'initial' ? startScan : onContinueToSideScan || (() => {})}
-        actionDisabled={scanPhase === 'countdown'}
+        actionDisabled={scanPhase === 'countdown' || scanPhase === 'scanning'}
         actionType="primary"
       />
     </div>
