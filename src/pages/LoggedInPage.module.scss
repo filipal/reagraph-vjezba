@@ -6,7 +6,17 @@
   align-items: center;
   justify-content: center;
 }
-.deleteConfirmRow {
+.deleteConfirmOverlay {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 80px; // prilagodi visinu prema footeru
+  display: flex;
+  justify-content: center;
+  z-index: 100;
+  pointer-events: none;
+}
+/* .deleteConfirmRow {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -23,6 +33,15 @@
   z-index: 100;
   pointer-events: auto;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+} */
+.deleteConfirmRow {
+  background: #fff;
+  border: 2px solid #000;
+  padding: 12px 32px;
+  font-size: 20px;
+  font-weight: 500;
+  pointer-events: auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
 }
 .iconButton img {
   width: 14px;
@@ -187,10 +206,10 @@
     width: 100%;
     width: 459px;
   }
-
+/*   .deleteConfirmRow {
+    top: 869px;
+  } */
 }
-
-
 
 
 @media (min-width: 1280px) {
@@ -205,4 +224,7 @@
   .loggedInPage {
     width: 1440px;
   }
+/*   .deleteConfirmRow {
+    bottom: 105px;
+  } */
 }

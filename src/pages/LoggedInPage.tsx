@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
@@ -22,6 +22,8 @@ export default function LoggedInPage() {
   const [selectedAvatarId, setSelectedAvatarId] = useState<number>(1)
   const [loadedAvatarId, setLoadedAvatarId] = useState<number>(1)
   const [showDeleteConfirm, setShowDeleteConfirm] = useState<null | number>(null)
+  const [confirmPos, setConfirmPos] = useState<{top: number, left: number, width: number} | null>(null)
+  const loadButtonRef = useRef<HTMLButtonElement>(null)
 
   const handleSelect = (id: number) => setSelectedAvatarId(id)
   const handleLoad = () => setLoadedAvatarId(selectedAvatarId)
@@ -31,7 +33,21 @@ export default function LoggedInPage() {
     if (selectedAvatarId === showDeleteConfirm) setSelectedAvatarId(avatars[0]?.id || 0)
     if (loadedAvatarId === showDeleteConfirm) setLoadedAvatarId(avatars[0]?.id || 0)
     setShowDeleteConfirm(null)
+    setConfirmPos(null)
   }
+
+  useEffect(() => {
+    if (showDeleteConfirm && loadButtonRef.current) {
+      const rect = loadButtonRef.current.getBoundingClientRect()
+      setConfirmPos({
+        top: rect.top - 56, // 56px iznad gumba
+        left: rect.left,
+        width: rect.width
+      })
+    } else {
+      setConfirmPos(null)
+    }
+  }, [showDeleteConfirm])
 
   return (
     <div className={styles.loggedInPage}>
@@ -69,10 +85,28 @@ export default function LoggedInPage() {
         onAction={() => showDeleteConfirm ? confirmDelete() : navigate('/avatar-info')}
         actionDisabled={false}
         actionType="black"
+        loadButtonRef={loadButtonRef}
       />
-      {showDeleteConfirm && (
-        <div className={styles.deleteConfirmRow}>Are you sure?</div>
+      {showDeleteConfirm && confirmPos && (
+        <div
+          className={styles.deleteConfirmOverlay}
+          style={{
+            position: 'fixed',
+            top: confirmPos.top,
+            left: confirmPos.left,
+            width: confirmPos.width,
+            zIndex: 100,
+            display: 'flex',
+            justifyContent: 'center',
+            pointerEvents: 'none'
+          }}
+        >
+          <div className={styles.deleteConfirmRow} style={{pointerEvents: 'auto', width: '100%'}}>Are you sure?</div>
+        </div>
       )}
+{/*       {showDeleteConfirm && (
+        <div className={styles.deleteConfirmRow}>Are you sure?</div>
+      )} */}
     </div>
   )
 }

@@ -1,17 +1,18 @@
+
 import styles from './Footer.module.scss'
 
-
 export interface FooterProps {
-  backText?: string
-  actionText: string
-  onBack: () => void
-  onAction: () => void
-  actionDisabled?: boolean
-  actionType?: 'primary' | 'black'
-  topButtonText?: string
-  onTopButton?: () => void
-  topButtonDisabled?: boolean
-  topButtonType?: 'primary' | 'black'
+  backText?: string;
+  actionText: string;
+  onBack: () => void;
+  onAction: () => void;
+  actionDisabled?: boolean;
+  actionType?: 'primary' | 'black';
+  topButtonText?: string;
+  onTopButton?: () => void;
+  topButtonDisabled?: boolean;
+  topButtonType?: 'primary' | 'black';
+  loadButtonRef?: React.RefObject<HTMLButtonElement>;
 }
 
 export default function Footer({
@@ -25,12 +26,14 @@ export default function Footer({
   onTopButton,
   topButtonDisabled = false,
   topButtonType = 'primary',
+  loadButtonRef,
 }: FooterProps) {
   return (
     <div className={styles.footer}>
       {topButtonText ? (
         <>
           <button
+            ref={loadButtonRef}
             className={
               topButtonType === 'black'
                 ? styles.buttonBlack
