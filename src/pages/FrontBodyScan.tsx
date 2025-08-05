@@ -25,12 +25,14 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
   // ovisi o promjenama `soundEnabled`, nego koristi početnu vrijednost
   // spremljenu u referenci kako bi izbjegao zastarjele vrijednosti.
   useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.currentTime = 0
+    const audio = audioRef.current
+    if (audio) {
+      audio.currentTime = 0
       if (initialSoundEnabled.current) {
-        audioRef.current.play()
+        audio.play()
       }
     }
+    return () => audio?.pause()
   }, [])
 
   // Pauziraj/pokreni audio kad se promijeni soundEnabled
@@ -86,7 +88,8 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
 
   useEffect(() => {
     return () => {
-      streamRef.current?.getTracks().forEach(track => track.stop())
+      const tracks = streamRef.current?.getTracks()
+      tracks?.forEach(track => track.stop())
     }
   }, [])
 
