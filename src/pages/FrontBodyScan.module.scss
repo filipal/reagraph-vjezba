@@ -9,7 +9,6 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-bottom: 155px;
   overflow: hidden;
   --header-height: 101px;
   --footer-height: 200px;
@@ -61,7 +60,7 @@
 
 .scanFooter {
   position: absolute;
-  bottom: 0;
+  bottom: 45px;
   left: 50%;
   transform: translateX(-50%);
   width: 100vw;
@@ -109,7 +108,6 @@
     width: 100%;
     height: 100%;
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6);
     border-radius: 8px;
     z-index: 0;
   }
@@ -147,7 +145,6 @@
   font-size: min(40vw, 40vh);
   color: #fff;
   font-weight: 700;
-  text-shadow: 0 2px 16px #000, 0 0 32px #000;
   z-index: 3;
   line-height: 1;
   letter-spacing: 0;
@@ -160,7 +157,6 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
-  max-width: 90vw;
   height: 92px;
   background: rgba(0,0,0,0.5);
   display: flex;
@@ -183,7 +179,6 @@
   text-align: center;
   line-height: 44px;
   margin: 0 auto;
-  text-shadow: 0 2px 8px #000;
   white-space: pre-line;
 }
 
