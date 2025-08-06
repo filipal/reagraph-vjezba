@@ -98,7 +98,7 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
   return (
     <div className={styles.frontBodyScanPage}>
       {scanPhase === 'initial' && (
-        <img src={WomanFront} alt="Woman front" className={styles.backgroundImage} />
+        <img src={WomanFront} alt="Woman front" className={styles.womanFront} />
       )}
       <video ref={videoRef} className={styles.video} autoPlay playsInline />
       <Header
