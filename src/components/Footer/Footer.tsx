@@ -4,7 +4,7 @@ import styles from './Footer.module.scss'
 export interface FooterProps {
   backText?: string;
   actionText: string;
-  onBack: () => void;
+  onBack?: () => void;
   onAction: () => void;
   actionDisabled?: boolean;
   actionType?: 'primary' | 'black';
@@ -46,39 +46,63 @@ export default function Footer({
           >
             {topButtonText}
           </button>
-          <div className={styles.footerActionsRow}>
-            <button className={styles.buttonBack} onClick={onBack}>
-              {backText}
-            </button>
+          {onBack ? (
+            <div className={styles.footerActionsRow}>
+              <button className={styles.buttonBack} onClick={onBack}>
+                {backText}
+              </button>
+              <button
+                className={
+                  actionType === 'black'
+                    ? styles.buttonBlack
+                    : styles.buttonPrimary
+                }
+                onClick={onAction}
+                disabled={actionDisabled}
+              >
+                {actionText}
+              </button>
+            </div>
+          ) : (
+            <div className={styles.footerActions}>
+              <button
+                className={styles.buttonSingle}
+                onClick={onAction}
+                disabled={actionDisabled}
+              >
+                {actionText}
+              </button>
+            </div>
+          )}
+        </>
+      ) : (
+        <div className={styles.footerActions}>
+          {onBack ? (
+            <>
+              <button className={styles.buttonBack} onClick={onBack}>
+                {backText}
+              </button>
+              <button
+                className={
+                  actionType === 'black'
+                    ? styles.buttonBlack
+                    : styles.buttonPrimary
+                }
+                onClick={onAction}
+                disabled={actionDisabled}
+              >
+                {actionText}
+              </button>
+            </>
+          ) : (
             <button
-              className={
-                actionType === 'black'
-                  ? styles.buttonBlack
-                  : styles.buttonPrimary
-              }
+              className={styles.buttonSingle}
               onClick={onAction}
               disabled={actionDisabled}
             >
               {actionText}
             </button>
-          </div>
-        </>
-      ) : (
-        <div className={styles.footerActions}>
-          <button className={styles.buttonBack} onClick={onBack}>
-            {backText}
-          </button>
-          <button
-            className={
-              actionType === 'black'
-                ? styles.buttonBlack
-                : styles.buttonPrimary
-            }
-            onClick={onAction}
-            disabled={actionDisabled}
-          >
-            {actionText}
-          </button>
+          )}
         </div>
       )}
     </div>

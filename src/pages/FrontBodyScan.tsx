@@ -134,12 +134,19 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
 
       <Footer
         className={styles.scanFooter}
-        backText="Back"
-        actionText={scanPhase === 'initial' ? 'SCAN' : 'Continue to the Side Scan'}
-        onBack={onClose || (() => navigate(-1))}
-        onAction={scanPhase === 'initial' ? startScan : onContinueToSideScan || (() => {})}
-        actionDisabled={scanPhase === 'countdown' || scanPhase === 'scanning'}
-        actionType="primary"
+        actionText={
+          scanPhase === 'initial'
+            ? 'SCAN'
+            : 'Continue to the Side Scan'
+        }
+        onAction={
+          scanPhase === 'initial'
+            ? startScan
+            : onContinueToSideScan || (() => {})
+        }
+        actionDisabled={
+          scanPhase === 'countdown' || scanPhase === 'scanning'
+        }
       />
     </div>
   )

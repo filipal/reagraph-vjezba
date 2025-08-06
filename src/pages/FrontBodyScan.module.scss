@@ -22,6 +22,7 @@
 }
 
 .scanHeader {
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -31,17 +32,9 @@
   z-index: 2;
 }
 
-.scan-title {
-  flex: 1;
-  text-align: center;
-  font-size: 23px;
-  color: #000;
-  font-family: 'Outfit', sans-serif;
-  font-weight: 400;
-  margin: 0;
-}
-
-.exitButton, .voice-button {
+.exitButton, .voiceButton {
+  color: #fff;
+  svg, img { filter: brightness(0) invert(1); }
   background: none;
   border: none;
   padding: 0;
@@ -89,7 +82,7 @@
   }
 }
 
-.front-guide {
+.frontGuide {
   position: absolute;
   top: 0;
   left: 0;
@@ -99,7 +92,7 @@
   z-index: 1;
 }
 
-.countdown-number {
+.countdownNumber {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -119,7 +112,7 @@
   font-family: 'Outfit', sans-serif;
 }
 
-.scan-done-msg {
+.scanDoneMsg {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -136,7 +129,7 @@
   font-size: 35px;
 }
 
-.scan-done-msg span {
+.scanDoneMsg span {
   display: block;
   width: 298px;
   max-width: 80vw;
@@ -152,7 +145,7 @@
   white-space: pre-line;
 }
 
-.camera-error {
+.cameraError {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -176,7 +169,9 @@
     cursor: pointer;
   }
 }
-
+.headerTitle {
+  color: #fff;
+}
 .voice-instructions {
   position: absolute;
   top: 120px;
@@ -194,23 +189,10 @@
 .scanFooter {
   width: 100vw;
   max-width: 430px;
-  margin: 0 auto 32px auto;
+  margin: 0 auto 45px auto;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 16px;
   z-index: 3;
-}
-
-.scan-button, .continue-button {
-  flex: 1;
-  height: 48px;
-  background: #fff;
-  border: 2px solid #000;
-  color: #000;
-  font-family: 'Outfit', sans-serif;
-  font-weight: 600;
-  margin-top: 0;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s;
 }
