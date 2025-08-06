@@ -20,7 +20,10 @@ export default function BodyScanInfo() {
   return (
     <div className={styles.bodyScanInfoPage}>
       {/* Header */}
-      <Header title="Body Scanning Tips" onExit={() => navigate('/')} />
+      <Header 
+      
+      title="Body Scanning Tips" 
+      onExit={() => navigate('/')} />
 
       <div className={styles.bodyScanContent}>
         <div className={styles.tipsList}>

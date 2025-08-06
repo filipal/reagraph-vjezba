@@ -101,6 +101,11 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
         <img src={WomanFront} alt="Woman front" className={styles.womanFront} />
       )}
       <video ref={videoRef} className={styles.video} autoPlay playsInline />
+      {scanPhase !== 'initial' && (
+        <div className={styles.overlay}>
+          <img src={FrontGuide} alt="Front guide" className={styles.frontGuide} />
+        </div>
+      )}
       <Header
         className={styles.scanHeader}
         variant="light"
@@ -115,11 +120,6 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
 
       {/* Main scan area */}
       <div className={styles.scanArea}>
-        {scanPhase !== 'initial' && (
-          <div className={styles.overlay}>
-            <img src={FrontGuide} alt="Front guide" className={styles.frontGuide} />
-          </div>
-        )}
         {scanPhase === 'countdown' && countdown > 0 && (
           <div className={styles.countdownNumber}>{countdown}</div>
         )}
