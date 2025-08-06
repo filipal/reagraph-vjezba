@@ -8,15 +8,30 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   overflow: hidden;
 }
 
 .scanArea {
+  flex: 1;
+  position: relative;
+  width: 100vw;
+  max-width: 430px;
+  aspect-ratio: 9/16;
+  margin: 0 auto;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  z-index: 2;
+}
+
+.womanFront {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  object-fit: cover; // ili contain, ovisno želiš li da slika popuni ili bude cijela vidljiva
   z-index: 2;
 }
 
@@ -36,12 +51,21 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 24px 24px 0 24px;
   width: 100%;
   box-sizing: border-box;
   z-index: 2;
 }
 
+.scanFooter {
+  width: 100vw;
+  max-width: 430px;
+  margin: 0 auto 45px auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  z-index: 3;
+}
 .exitButton, .voiceButton {
   color: #fff;
   svg, img { filter: brightness(0) invert(1); }
@@ -85,10 +109,10 @@
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   z-index: 1;
 }
-.womanFront {
+.backgroundImage {
   position: absolute;
   top: 0;
   left: 0;
@@ -123,7 +147,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
-  /* max-width: 90vw; */
+  max-width: 90vw;
   height: 92px;
   background: rgba(0,0,0,0.5);
   display: flex;
@@ -189,15 +213,4 @@
   font-size: 1rem;
   z-index: 4;
   max-width: 90vw;
-}
-
-.scanFooter {
-  width: 100vw;
-  max-width: 430px;
-  margin: 0 auto 45px auto;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 16px;
-  z-index: 3;
 }
