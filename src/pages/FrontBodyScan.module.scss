@@ -10,6 +10,29 @@
   overflow: hidden;
 }
 
+.scanArea {
+  flex: 1;
+  position: relative;
+  width: 100vw;
+  max-width: 430px;
+  aspect-ratio: 9/16;
+  margin: 0 auto;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  z-index: 2;
+}
+
+.womanFront {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; // ili contain, ovisno želiš li da slika popuni ili bude cijela vidljiva
+  z-index: 2;
+}
+
 .video {
   position: absolute;
   top: 0;
@@ -46,19 +69,6 @@
   height: 48px;
 }
 
-.scanArea {
-  flex: 1;
-  position: relative;
-  width: 100vw;
-  max-width: 430px;
-  aspect-ratio: 9/16;
-  margin: 0 auto;
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-  z-index: 2;
-}
-
 .overlay {
   position: absolute;
   top: 0;
@@ -73,8 +83,8 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 60%;
-    height: 60%;
+    width: 100%;
+    height: 100%;
     transform: translate(-50%, -50%);
     box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6);
     border-radius: 8px;

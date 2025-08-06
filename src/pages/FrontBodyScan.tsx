@@ -6,6 +6,7 @@ import VoiceInfoOn from '../assets/VoiceInfoOn.svg'
 import VoiceInfoOff from '../assets/VoiceInfoOff.svg'
 import scanInstructions from '../assets/scan-instructions.mp3'
 import FrontGuide from '../assets/FrontGuide.png'
+import WomanFront from '../assets/WomanFront.png'
 import styles from './FrontBodyScan.module.scss'
 
 type ScanPhase = 'initial' | 'scanning' | 'countdown' | 'completed'
@@ -99,6 +100,7 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
       <video ref={videoRef} className={styles.video} autoPlay playsInline />
       <Header
         className={styles.scanHeader}
+        variant="light"
         title="Front Body Scan"
         onExit={onClose || (() => navigate(-1))}
         rightContent={
@@ -110,6 +112,9 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
 
       {/* Main scan area */}
       <div className={styles.scanArea}>
+        {scanPhase === 'initial' && (
+          <img src={WomanFront} alt="Woman front" className={styles.womanFront} />
+        )}
         {scanPhase !== 'initial' && (
           <div className={styles.overlay}>
             <img src={FrontGuide} alt="Front guide" className={styles.frontGuide} />

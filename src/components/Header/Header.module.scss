@@ -1,9 +1,9 @@
-.front-body-scan-page .header-title {
+/* .front-body-scan-page .header-title {
   color: #fff !important;
 }
 .front-body-scan-page .exitButton img {
   filter: brightness(0) invert(1);
-}
+} */
 .appHeader {
   width: min(100vw, var(--page-max-width));
   height: 101px;
@@ -15,6 +15,15 @@
   grid-template-columns: auto 1fr auto; /* [exit] [title] [right] */
   align-items: start;
   box-sizing: border-box;
+}
+
+.light {
+  color: #fff;
+
+  .exitButton img,
+  .infoButton img {
+    filter: brightness(0) invert(1);
+  }
 }
 
 .exitButton,
@@ -59,7 +68,7 @@
 .count {
   margin-right: 12px;
   font-size: 16px;
-  color: #222;
+  color: inherit;
   font-family: 'Outfit', sans-serif;
   font-weight: 500;
 }
@@ -71,7 +80,7 @@
   font-weight: 400;
   font-size: 23px;
   line-height: 1;
-  color: #000;
+  color: inherit;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
