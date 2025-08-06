@@ -23,16 +23,6 @@
   z-index: 2;
 }
 
-.womanFront {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; // ili contain, ovisno želiš li da slika popuni ili bude cijela vidljiva
-  z-index: 2;
-}
-
 .video {
   position: absolute;
   top: 0;
@@ -101,7 +91,15 @@
   object-fit: contain;
   z-index: 1;
 }
-
+.backgroundImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
 .countdownNumber {
   position: absolute;
   top: 50%;
@@ -127,8 +125,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 430px;
-  max-width: 90vw;
+  width: 100%;
+  /* max-width: 90vw; */
   height: 92px;
   background: rgba(0,0,0,0.5);
   display: flex;
