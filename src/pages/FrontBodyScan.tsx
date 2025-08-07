@@ -30,7 +30,9 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
     if (audio) {
       audio.currentTime = 0
       if (initialSoundEnabled.current) {
-        audio.play()
+        audio.play().catch(err => {
+          if (err.name !== 'AbortError') console.error(err)
+        })
       }
     }
     return () => audio?.pause()
@@ -40,7 +42,9 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
   useEffect(() => {
     if (audioRef.current) {
       if (soundEnabled) {
-        audioRef.current.play()
+        audioRef.current.play().catch(err => {
+          if (err.name !== 'AbortError') console.error(err)
+        })
       } else {
         audioRef.current.pause()
       }
