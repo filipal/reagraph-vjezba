@@ -10,6 +10,7 @@ import SideGuide from '../assets/SideGuide.png'
 import WomanFront from '../assets/WomanFront.png'
 import WomanSide from '../assets/WomanSide.png'
 import frontImg from '../assets/front.png'
+import sideImg from '../assets/side.png'
 import styles from './BodyScan.module.scss'
 
 type ScanPhase = 'initial' | 'scanning' | 'countdown' | 'completed'
@@ -194,7 +195,7 @@ export default function BodyScan({ onClose }: { onClose?: () => void }) {
       const tracks = streamRef.current?.getTracks()
       tracks?.forEach(track => track.stop())
       if (videoRef.current) videoRef.current.srcObject = null
-      const placeholder = frontImg
+      const placeholder = orientation === 'front' ? frontImg : sideImg
       if (singleScan) {
         if (orientation === 'front') {
           setCapturedFront(placeholder)
@@ -210,7 +211,7 @@ export default function BodyScan({ onClose }: { onClose?: () => void }) {
       } else {
         navigate('/body-photos-check', {
           state: {
-            frontImage: capturedFront ?? placeholder,
+            frontImage: capturedFront ?? frontImg,
             sideImage: placeholder,
           },
         })

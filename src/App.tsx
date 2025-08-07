@@ -10,6 +10,7 @@ import BodyScan from './pages/BodyScan.tsx'
 import UnrealMeasurements from './pages/UnrealMeasurements.tsx'
 import ScanQRBodyscan from './pages/ScanQRBodyscan.tsx'
 import BodyPhotosCheck from './pages/BodyPhotosCheck.tsx'
+import LoadingScreen from './pages/LoadingScreen.tsx'
 import './App.module.scss'
 
 
@@ -27,6 +28,7 @@ export default function App() {
       <Route path="/unreal-measurements" element={<UnrealMeasurements />} />
       <Route path="/scan-qr-bodyscan" element={<ScanQRBodyscan />} />
       <Route path="/body-photos-check" element={<BodyPhotosCheck />} />
+      <Route path="/loading" element={<LoadingScreen />} />
 
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>

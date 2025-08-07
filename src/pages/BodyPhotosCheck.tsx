@@ -66,7 +66,7 @@ export default function BodyPhotosCheck() {
           <button
             type="button"
             className={styles.blackButton}
-            onClick={() => navigate('/unreal-measurements')}
+            onClick={() => navigate('/loading')}
           >
             Generate Your Avatar
           </button>
