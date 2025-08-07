@@ -13,7 +13,7 @@ import styles from './BodyScan.module.scss'
 
 type ScanPhase = 'initial' | 'scanning' | 'countdown' | 'completed'
 
-export default function BodyScan({ onClose, onContinueToSideScan }: { onClose?: () => void, onContinueToSideScan?: () => void }) {
+export default function BodyScan({ onClose }: { onClose?: () => void }) {
   const navigate = useNavigate()
   const [soundEnabled, setSoundEnabled] = useState(true)
   const [scanPhase, setScanPhase] = useState<ScanPhase>('initial')
@@ -188,7 +188,8 @@ export default function BodyScan({ onClose, onContinueToSideScan }: { onClose?: 
         setScanPhase('initial')
         setCountdown(5)
       } else {
-        onContinueToSideScan?.()
+        // Side scan je završen, navigiraj na BodyPhotosCheck
+        navigate('/body-photos-check')
       }
     }
   }
