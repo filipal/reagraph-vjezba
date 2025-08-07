@@ -6,7 +6,9 @@ import VoiceInfoOn from '../assets/VoiceInfoOn.svg'
 import VoiceInfoOff from '../assets/VoiceInfoOff.svg'
 import scanInstructions from '../assets/scan-instructions.mp3'
 import FrontGuide from '../assets/FrontGuide.png'
+import SideGuide from '../assets/SideGuide.png'
 import WomanFront from '../assets/WomanFront.png'
+import WomanSide from '../assets/WomanSide.png'
 import styles from './FrontBodyScan.module.scss'
 
 type ScanPhase = 'initial' | 'scanning' | 'countdown' | 'completed'
@@ -15,6 +17,7 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
   const navigate = useNavigate()
   const [soundEnabled, setSoundEnabled] = useState(true)
   const [scanPhase, setScanPhase] = useState<ScanPhase>('initial')
+  const [orientation, setOrientation] = useState<'front' | 'side'>('front')
   const [countdown, setCountdown] = useState(5)
   const [cameraError, setCameraError] = useState<string | null>(null)
   const audioRef = useRef<HTMLAudioElement>(null)
@@ -124,6 +127,9 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
 
   const startScan = async () => {
     setCameraError(null)
+    // Stop any existing tracks before starting a new scan
+    const oldTracks = streamRef.current?.getTracks()
+    oldTracks?.forEach(track => track.stop())
     setScanPhase('scanning')
     try {
       const devices = await navigator.mediaDevices.enumerateDevices()
@@ -159,21 +165,53 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
     }
   }, [])
 
+  const placeholderImage = orientation === 'front' ? WomanFront : WomanSide
+  const guideImage = orientation === 'front' ? FrontGuide : SideGuide
+  const title = orientation === 'front' ? 'Front Body Scan' : 'Side Body Scan'
+
+  const actionText =
+    scanPhase === 'initial'
+      ? 'SCAN'
+      : orientation === 'front'
+        ? 'Continue to the Side Scan'
+        : 'Continue'
+
+  const handleFooterAction = () => {
+    if (scanPhase === 'initial') {
+      startScan()
+    } else if (scanPhase === 'completed') {
+      if (orientation === 'front') {
+        setOrientation('side')
+        startScan()
+      } else {
+        onContinueToSideScan?.()
+      }
+    }
+  }
+
   return (
     <div className={styles.frontBodyScanPage}>
       {scanPhase === 'initial' && (
-        <img src={WomanFront} alt="Woman front" className={styles.womanFront} />
+        <img
+          src={placeholderImage}
+          alt={orientation === 'front' ? 'Woman front' : 'Woman side'}
+          className={styles.womanFront}
+        />
       )}
       <video ref={videoRef} className={styles.video} autoPlay playsInline />
       {scanPhase !== 'initial' && (
         <div className={styles.overlay}>
-          <img src={FrontGuide} alt="Front guide" className={styles.frontGuide} />
+          <img
+            src={guideImage}
+            alt={orientation === 'front' ? 'Front guide' : 'Side guide'}
+            className={styles.frontGuide}
+          />
         </div>
       )}
       <Header
         className={styles.scanHeader}
         variant="light"
-        title="Front Body Scan"
+        title={title}
         onExit={onClose || (() => navigate(-1))}
         rightContent={
           <button className={styles.voiceButton} onClick={() => setSoundEnabled(v => !v)} type="button">
@@ -205,16 +243,8 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
       {(scanPhase === 'initial' || scanPhase === 'completed') && (
         <Footer
           className={styles.scanFooter}
-          actionText={
-            scanPhase === 'initial'
-              ? 'SCAN'
-              : 'Continue to the Side Scan'
-          }
-          onAction={
-            scanPhase === 'initial'
-              ? startScan
-              : onContinueToSideScan || (() => {})
-          }
+          actionText={actionText}
+          onAction={handleFooterAction}
           actionDisabled={false}
         />
       )}
