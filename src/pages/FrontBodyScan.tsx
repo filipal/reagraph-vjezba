@@ -20,6 +20,7 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
   const audioRef = useRef<HTMLAudioElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const streamRef = useRef<MediaStream | null>(null)
+  const playPromiseRef = useRef<Promise<void> | null>(null)
   const initialSoundEnabled = useRef(soundEnabled)
 
   // Pokreni audio prilikom mounta komponente samo jednom. Ovaj efekt ne
@@ -27,26 +28,85 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
   // spremljenu u referenci kako bi izbjegao zastarjele vrijednosti.
   useEffect(() => {
     const audio = audioRef.current
-    if (audio) {
+    if (audio && initialSoundEnabled.current) {
       audio.currentTime = 0
-      if (initialSoundEnabled.current) {
-        audio.play().catch(err => {
-          if (err.name !== 'AbortError') console.error(err)
+      const playPromise = audio.play()
+      playPromiseRef.current = playPromise
+      if (playPromise !== undefined) {
+        playPromise.catch(err => {
+          // Audio playback was prevented or interrupted
+          if (err.name !== 'AbortError') {
+            console.error('Initial audio playback failed:', err)
+          }
         })
       }
     }
-    return () => audio?.pause()
+    return () => {
+      const audio = audioRef.current
+      if (audio) {
+        // Bezbjedno zaustavi audio tek kad se završi play promise
+        if (playPromiseRef.current) {
+          playPromiseRef.current.then(() => {
+            audio.pause()
+          }).catch(() => {
+            audio.pause()
+          })
+        } else {
+          audio.pause()
+        }
+      }
+    }
   }, [])
 
   // Pauziraj/pokreni audio kad se promijeni soundEnabled
   useEffect(() => {
-    if (audioRef.current) {
+    const audio = audioRef.current
+    if (audio) {
       if (soundEnabled) {
-        audioRef.current.play().catch(err => {
-          if (err.name !== 'AbortError') console.error(err)
-        })
+        // Čekaj da se završi prethodni play promise prije pokretanja novog
+        if (playPromiseRef.current) {
+          playPromiseRef.current.then(() => {
+            if (audio && soundEnabled) {
+              const playPromise = audio.play()
+              playPromiseRef.current = playPromise
+              if (playPromise !== undefined) {
+                playPromise.catch(err => {
+                  if (err.name !== 'AbortError') {
+                    console.error('Audio playback failed:', err)
+                  }
+                })
+              }
+            }
+          }).catch(() => {
+            // Ignore errors from previous promise
+          })
+        } else {
+          const playPromise = audio.play()
+          playPromiseRef.current = playPromise
+          if (playPromise !== undefined) {
+            playPromise.catch(err => {
+              if (err.name !== 'AbortError') {
+                console.error('Audio playback failed:', err)
+              }
+            })
+          }
+        }
       } else {
-        audioRef.current.pause()
+        // Bezbjedno pauziraj tek kad se završi trenutni play promise
+        if (playPromiseRef.current) {
+          playPromiseRef.current.then(() => {
+            if (audio) {
+              audio.pause()
+            }
+          }).catch(() => {
+            // Play failed, audio is already stopped
+            if (audio) {
+              audio.pause()
+            }
+          })
+        } else {
+          audio.pause()
+        }
       }
     }
   }, [soundEnabled])
