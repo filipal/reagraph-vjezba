@@ -201,22 +201,23 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
       {/* Voice instructions (audio only, neovisno o countdownu) */}
       <audio ref={audioRef} src={scanInstructions} />
 
-      <Footer
-        className={styles.scanFooter}
-        actionText={
-          scanPhase === 'initial'
-            ? 'SCAN'
-            : 'Continue to the Side Scan'
-        }
-        onAction={
-          scanPhase === 'initial'
-            ? startScan
-            : onContinueToSideScan || (() => {})
-        }
-        actionDisabled={
-          scanPhase === 'countdown' || scanPhase === 'scanning'
-        }
-      />
+      {/* Prikaži Footer samo kad nije scanning ili countdown */}
+      {(scanPhase === 'initial' || scanPhase === 'completed') && (
+        <Footer
+          className={styles.scanFooter}
+          actionText={
+            scanPhase === 'initial'
+              ? 'SCAN'
+              : 'Continue to the Side Scan'
+          }
+          onAction={
+            scanPhase === 'initial'
+              ? startScan
+              : onContinueToSideScan || (() => {})
+          }
+          actionDisabled={false}
+        />
+      )}
     </div>
   )
 }
