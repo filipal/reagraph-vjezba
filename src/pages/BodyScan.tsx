@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
 import VoiceInfoOn from '../assets/VoiceInfoOn.svg'
@@ -9,17 +9,25 @@ import FrontGuide from '../assets/FrontGuide.png'
 import SideGuide from '../assets/SideGuide.png'
 import WomanFront from '../assets/WomanFront.png'
 import WomanSide from '../assets/WomanSide.png'
+import frontImg from '../assets/front.png'
 import styles from './BodyScan.module.scss'
 
 type ScanPhase = 'initial' | 'scanning' | 'countdown' | 'completed'
 
 export default function BodyScan({ onClose }: { onClose?: () => void }) {
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const initialOrientation =
+    searchParams.get('orientation') === 'side' ? 'side' : 'front'
+  const [orientation, setOrientation] = useState<'front' | 'side'>(
+    initialOrientation
+  )
+  const [singleScan] = useState(searchParams.get('single') === 'true')
   const [soundEnabled, setSoundEnabled] = useState(true)
   const [scanPhase, setScanPhase] = useState<ScanPhase>('initial')
-  const [orientation, setOrientation] = useState<'front' | 'side'>('front')
   const [countdown, setCountdown] = useState(5)
   const [cameraError, setCameraError] = useState<string | null>(null)
+  const [capturedFront, setCapturedFront] = useState<string | null>(null)
   const audioRef = useRef<HTMLAudioElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const streamRef = useRef<MediaStream | null>(null)
@@ -45,6 +53,7 @@ export default function BodyScan({ onClose }: { onClose?: () => void }) {
       }
     }
     return () => {
+
       const audio = audioRef.current
       if (audio) {
         // Bezbjedno zaustavi audio tek kad se završi play promise
@@ -173,23 +182,38 @@ export default function BodyScan({ onClose }: { onClose?: () => void }) {
     scanPhase === 'initial'
       ? 'SCAN'
       : orientation === 'front'
-        ? 'Continue to the Side Scan'
+        ? singleScan
+          ? 'Continue'
+          : 'Continue to the Side Scan'
         : 'Continue'
 
   const handleFooterAction = () => {
     if (scanPhase === 'initial') {
       startScan()
     } else if (scanPhase === 'completed') {
-      if (orientation === 'front') {
-        const tracks = streamRef.current?.getTracks()
-        tracks?.forEach(track => track.stop())
-        if (videoRef.current) videoRef.current.srcObject = null
+      const tracks = streamRef.current?.getTracks()
+      tracks?.forEach(track => track.stop())
+      if (videoRef.current) videoRef.current.srcObject = null
+      const placeholder = frontImg
+      if (singleScan) {
+        if (orientation === 'front') {
+          setCapturedFront(placeholder)
+          navigate('/body-photos-check', { state: { frontImage: placeholder } })
+        } else {
+          navigate('/body-photos-check', { state: { sideImage: placeholder } })
+        }
+      } else if (orientation === 'front') {
+        setCapturedFront(placeholder)
         setOrientation('side')
         setScanPhase('initial')
         setCountdown(5)
       } else {
-        // Side scan je završen, navigiraj na BodyPhotosCheck
-        navigate('/body-photos-check')
+        navigate('/body-photos-check', {
+          state: {
+            frontImage: capturedFront ?? placeholder,
+            sideImage: placeholder,
+          },
+        })
       }
     }
   }
