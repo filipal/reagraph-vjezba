@@ -195,7 +195,7 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
         <img
           src={placeholderImage}
           alt={orientation === 'front' ? 'Woman front' : 'Woman side'}
-          className={styles.womanFront}
+          className={styles.scanImage}
         />
       )}
       <video ref={videoRef} className={styles.video} autoPlay playsInline />
@@ -204,7 +204,7 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
           <img
             src={guideImage}
             alt={orientation === 'front' ? 'Front guide' : 'Side guide'}
-            className={styles.frontGuide}
+            className={styles.guideImage}
           />
         </div>
       )}
@@ -226,7 +226,9 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
           <div className={styles.countdownNumber}>{countdown}</div>
         )}
         {scanPhase === 'completed' && (
-          <div className={styles.scanDoneMsg}><span>Front Scan Done!</span></div>
+          <div className={styles.scanDoneMsg}>
+            <span>{orientation === 'front' ? 'Front Scan Done!' : 'Side Scan Done!'}</span>
+          </div>
         )}
         {cameraError && (
           <div className={styles.cameraError}>
