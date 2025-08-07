@@ -44,7 +44,7 @@ export default function BodyScanInfo() {
           backText="Back"
           actionText="Start Scanning"
           onBack={() => navigate('/avatar-info')}
-          onAction={() => navigate('/front-body-scan')}
+          onAction={() => navigate('/body-scan')}
           actionType="primary"
         />
       </div>

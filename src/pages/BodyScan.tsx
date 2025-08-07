@@ -9,11 +9,11 @@ import FrontGuide from '../assets/FrontGuide.png'
 import SideGuide from '../assets/SideGuide.png'
 import WomanFront from '../assets/WomanFront.png'
 import WomanSide from '../assets/WomanSide.png'
-import styles from './FrontBodyScan.module.scss'
+import styles from './BodyScan.module.scss'
 
 type ScanPhase = 'initial' | 'scanning' | 'countdown' | 'completed'
 
-export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClose?: () => void, onContinueToSideScan?: () => void }) {
+export default function BodyScan({ onClose, onContinueToSideScan }: { onClose?: () => void, onContinueToSideScan?: () => void }) {
   const navigate = useNavigate()
   const [soundEnabled, setSoundEnabled] = useState(true)
   const [scanPhase, setScanPhase] = useState<ScanPhase>('initial')
@@ -181,8 +181,12 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
       startScan()
     } else if (scanPhase === 'completed') {
       if (orientation === 'front') {
+        const tracks = streamRef.current?.getTracks()
+        tracks?.forEach(track => track.stop())
+        if (videoRef.current) videoRef.current.srcObject = null
         setOrientation('side')
-        startScan()
+        setScanPhase('initial')
+        setCountdown(5)
       } else {
         onContinueToSideScan?.()
       }
@@ -190,7 +194,7 @@ export default function FrontBodyScan({ onClose, onContinueToSideScan }: { onClo
   }
 
   return (
-    <div className={styles.frontBodyScanPage}>
+    <div className={styles.bodyScanPage}>
       {scanPhase === 'initial' && (
         <img
           src={placeholderImage}
