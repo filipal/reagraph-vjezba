@@ -116,6 +116,7 @@ export default function AvatarInfoPage() {
     <div className={styles.avatarInfoPage}>
       <Header
         title="Create your Avatar"
+        variant="dark"
         onExit={() => navigate('/')}
         onInfo={() => navigate('/use-of-data')}
       />

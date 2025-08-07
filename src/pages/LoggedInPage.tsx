@@ -65,6 +65,7 @@ export default function LoggedInPage() {
     <div className={styles.loggedInPage}>
       <Header
         title="My Avatars"
+        variant="dark"
         onExit={() => navigate('/')}
         rightContent={<span className={styles.count}>{avatars.length}/5</span>}
       />

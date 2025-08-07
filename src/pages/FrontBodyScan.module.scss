@@ -11,7 +11,7 @@
   justify-content: flex-start;
   overflow: hidden;
   --header-height: 101px;
-  --footer-height: 200px;
+  --footer-height: 50px;
 }
 
 .scanArea {
@@ -55,7 +55,7 @@
   justify-content: space-between;
   width: 100%;
   box-sizing: border-box;
-  z-index: 2;
+  z-index: 5;
 }
 
 .scanFooter {
@@ -70,7 +70,7 @@
   flex-direction: row;
   align-items: center;
   gap: 16px;
-  z-index: 3;
+  z-index: 5;
 }
 .exitButton, .voiceButton {
   color: #fff;
@@ -81,17 +81,21 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  z-index: 3;
+  z-index: 6;
   width: 48px;
   height: 48px;
 }
 
 .overlay {
   position: absolute;
-  top: var(--header-height);
-  bottom: var(--footer-height);
+  top: 0;
+  bottom: 0;
   left: 0;
   right: 0;
+  width: 100vw;
+  height: 100vh;
+  max-width: 430px;
+  margin: 0 auto;
   z-index: 2;
   pointer-events: none;
 

@@ -92,9 +92,10 @@ export default function QuickMode() {
       {/* Header */}
       <Header
         title="Body Shape & Fitness"
+        variant="dark"
         onExit={() => navigate('/')}
         onInfo={() => navigate('/use-of-data')}
-      />    
+      />
       <div className={styles.quickmodeContent}>
         {/* Body Shape */}
         <div className={styles.section}>
