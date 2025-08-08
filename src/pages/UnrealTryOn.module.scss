@@ -1,0 +1,190 @@
+@use "../styles/unreal-vars" as *;
+
+.tryon {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  width: 100%;
+  height: 100%;
+
+  &__stage {
+    position: relative;
+    background: radial-gradient(120% 100% at 50% 20%, #f3f3f3 0%, #dcdcdc 60%, #c6c6c6 100%);
+    border-left: 1px solid $border;
+    border-right: 1px solid $border;
+
+    img {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 88%;
+      height: 88%;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.25));
+    }
+  }
+
+  &__side-indicators {
+    position: absolute;
+    right: 6px;
+    top: 60px;
+    display: grid;
+    gap: 10px;
+    align-items: center;
+
+    .dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      border: 1px solid $border;
+      display: grid;
+      place-items: center;
+      background: #fff;
+      font-size: 10px;
+    }
+    .arrow {
+      width: 28px;
+      height: 28px;
+      border: 1px solid $border;
+      display: grid;
+      place-items: center;
+      background: #fff;
+      border-radius: 6px;
+    }
+  }
+
+  &__fabbar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 12px;
+
+    .btn-lg {
+      @extend %round-btn;
+    }
+    .btn-sm {
+      @extend %round-btn-sm;
+    }
+  }
+
+  &__product {
+    border-top: 1px solid $border;
+    background: #fff;
+    padding: 10px;
+
+    .meta {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 10px;
+      align-items: center;
+
+      .thumb {
+        width: 64px;
+        height: 64px;
+        border: 1px solid $border;
+        background: #f6f6f6;
+        border-radius: 8px;
+      }
+      .title {
+        font-weight: 700;
+        font-size: 13px;
+      }
+      .brand {
+        font-size: 12px;
+        color: #555;
+      }
+    }
+
+    .price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 8px;
+
+      .price {
+        font-weight: 700;
+      }
+      .sizes,
+      .lengths {
+        display: flex;
+        gap: 8px;
+
+        .box {
+          border: 1px solid $border;
+          padding: 4px 8px;
+          border-radius: 6px;
+          background: #fff;
+        }
+      }
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      margin-top: 8px;
+
+      .opt {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        .dot {
+          width: 16px;
+          height: 16px;
+          border-radius: 999px;
+          border: 1px solid $border;
+          background: #ddd;
+        }
+        .swatches {
+          display: flex;
+          gap: 6px;
+          .s {
+            width: 18px;
+            height: 18px;
+            border-radius: 999px;
+            border: 1px solid $border;
+          }
+        }
+      }
+      .arrows {
+        display: flex;
+        gap: 8px;
+
+        .arrow {
+          width: 32px;
+          height: 28px;
+          border: 1px solid $border;
+          border-radius: 6px;
+          display: grid;
+          place-items: center;
+          background: #fff;
+        }
+      }
+    }
+  }
+
+  &__bottom-tabs {
+    border-top: 1px solid $border;
+    padding: 6px 8px;
+    display: grid;
+    grid-template-columns: 1fr auto auto auto;
+    gap: 8px;
+    align-items: center;
+
+    .center-tabs {
+      display: flex;
+      gap: 8px;
+
+      .tab {
+        border: 1px solid $border;
+        padding: 8px 10px;
+        border-radius: 6px;
+        background: #fff;
+        font-weight: 600;
+      }
+    }
+  }
+}

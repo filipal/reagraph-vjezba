@@ -11,9 +11,9 @@ export default function LoadingScreen() {
       setProgress(prev => {
         if (prev >= 100) {
           clearInterval(interval)
-          // Navigiraj na sljedeću stranicu kad je loading završen
+          // Navigiraj na UnrealMeasurements kad je loading završen
           setTimeout(() => {
-            navigate('/unreal-measurements') // ili neka druga stranica
+            navigate('/unreal-measurements')
           }, 500)
           return 100
         }
