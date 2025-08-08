@@ -1,0 +1,34 @@
+.dataPanel {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 180px;
+}
+
+.dataPanelHeader {
+  width: 100%;
+  height: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(236, 236, 236, 0.5);
+  border-radius: 6px 6px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dataPanelHeader p {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+  color: #000;
+}
+
+.dataPanelContent {
+  width: 100%;
+  height: 468px;
+  margin-top: 1px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(236, 236, 236, 0.5);
+  border-radius: 0 0 6px 6px;
+  overflow-y: auto;
+}

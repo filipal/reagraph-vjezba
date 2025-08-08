@@ -42,41 +42,6 @@
   object-fit: contain;
 }
 
-// Header element - 180x24px s zaobljenim gornjim uglovima
-.dataPanelHeader {
-  position: absolute;
-  top: 10px;    // 10px od ruba stranice
-  left: 10px;   // 10px od ruba stranice
-  width: 180px;
-  height: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  background: rgba(236, 236, 236, 0.5);
-  border-radius: 6px 6px 0 0; // Samo gornji uglovi zaobljeni
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.dataPanelHeader h3 {
-  font-size: 14px;
-  font-weight: bold;
-  margin: 0;
-  color: #000;
-}
-
-// Content element - 180x470px bez gornjih zaobljenih uglova
-.dataPanelContent {
-  position: absolute;
-  top: 37px;    // 24px header + 6px transparentni razmak + 10px od ruba
-  left: 10px;   // 10px od ruba stranice
-  width: 180px;
-  height: 468px; // Smanjeno za 5px zbog povećanja razmaka
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  background: rgba(236, 236, 236, 0.5);
-  border-radius: 0 0 6px 6px; // Samo donji uglovi zaobljeni
-  overflow-y: auto;
-}
-
 .measurementsList {
   padding: 10px 0 0 0; // Prvi red na 10px od gornje margin
 }

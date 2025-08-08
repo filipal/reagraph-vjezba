@@ -18,6 +18,7 @@ import extrasIcon from '../assets/extras.png'
 import saveIcon from '../assets/save.png'
 import lengthIcon from '../assets/length.png'
 import girthIcon from '../assets/girth.png'
+import DataPanel from '../components/DataPanel/DataPanel'
 import styles from './UnrealMeasurements.module.scss'
 
 interface ControlButton {
@@ -112,24 +113,19 @@ export default function UnrealMeasurements() {
           <img src={avatarImage} alt="Avatar" className={styles.avatarImage} />
 
           {selectedNav !== null && selectedNav === 'Body' && (
-            <>
-              <div className={styles.dataPanelHeader}>
-                <h3>Body Measurements (cm)</h3>
+            <DataPanel title="Body Measurements (cm)">
+              <div className={styles.measurementsList}>
+                {measurements.map((measurement, index) => (
+                  <div key={index} className={styles.measurementItem}>
+                    <span className={styles.measurementIcon}>
+                      <img src={measurement.icon} alt="" />
+                    </span>
+                    <span className={styles.measurementName}>{measurement.name}</span>
+                    <span className={styles.measurementValue}>{measurement.value}</span>
+                  </div>
+                ))}
               </div>
-              <div className={styles.dataPanelContent}>
-                <div className={styles.measurementsList}>
-                  {measurements.map((measurement, index) => (
-                    <div key={index} className={styles.measurementItem}>
-                      <span className={styles.measurementIcon}>
-                        <img src={measurement.icon} alt="" />
-                      </span>
-                      <span className={styles.measurementName}>{measurement.name}</span>
-                      <span className={styles.measurementValue}>{measurement.value}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </>
+            </DataPanel>
           )}
 
           <div className={styles.controlGroup}>
