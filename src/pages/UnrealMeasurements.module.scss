@@ -160,6 +160,7 @@
   align-items: center;
   cursor: pointer;
   transition: all 0.2s ease;
+  color: #fff;
 }
 
 .controlIcon {
@@ -168,10 +169,8 @@
   object-fit: contain;
 }
 
-// Za SVG kontrolu boja - trebamo modificirati SVG da koristi currentColor ili CSS varijable
-.controlButton.selected .controlIcon {
-  // Koristimo CSS filter samo za vanjski krug - treba preciznije ciljanje
-  filter: hue-rotate(0deg) saturate(0%) brightness(0.3);
+.controlButton.selected {
+  color: #000;
 }
 
 .rotateleft {
@@ -235,10 +234,12 @@
   height: 5px;
   order: 1; // Stavlja indicator na vrh
   margin-bottom: 5px; // Mali razmak od ikone
+  display: none;
 }
 
 .active .navIndicator {
   background: #000;
+  display: block;
 }
 
 .navIcon {

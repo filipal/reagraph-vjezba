@@ -1,13 +1,13 @@
-import { useState } from 'react'
+import { useState, type ComponentType, type SVGProps } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Header from '../components/Header/Header'
 
 import avatarsButton from '../assets/AvatarsButton.png'
-import rLeft from '../assets/rLeft.svg'
-import rRight from '../assets/rRight.svg'
-import uploadIcon from '../assets/upload.svg'
-import fullScreenIcon from '../assets/FullScreen.svg'
-import downloadIcon from '../assets/download.svg'
+import RLeft from '../assets/rLeft.svg?react'
+import RRight from '../assets/rRight.svg?react'
+import UploadIcon from '../assets/upload.svg?react'
+import FullScreenIcon from '../assets/FullScreen.svg?react'
+import DownloadIcon from '../assets/download.svg?react'
 import unrealFBBodyButton from '../assets/UnrealFBBodyButton.png'
 import avatarMeasure from '../assets/UnrealFullBody.png'
 import bodyIcon from '../assets/body.png'
@@ -23,7 +23,7 @@ import styles from './UnrealMeasurements.module.scss'
 interface ControlButton {
   key: string
   width: number
-  icon: string
+  Icon: ComponentType<SVGProps<SVGSVGElement>>
   marginRight: number
 }
 
@@ -76,11 +76,11 @@ export default function UnrealMeasurements() {
   ]
 
   const controls: ControlButton[] = [
-    { key: 'rotate-left', width: 60, icon: rLeft, marginRight: 50 },
-    { key: 'upload', width: 50, icon: uploadIcon, marginRight: 25 },
-    { key: 'fullscreen', width: 40, icon: fullScreenIcon, marginRight: 25 },
-    { key: 'download', width: 50, icon: downloadIcon, marginRight: 50 },
-    { key: 'rotate-right', width: 60, icon: rRight, marginRight: 0 },
+    { key: 'rotate-left', width: 60, Icon: RLeft, marginRight: 50 },
+    { key: 'upload', width: 50, Icon: UploadIcon, marginRight: 25 },
+    { key: 'fullscreen', width: 40, Icon: FullScreenIcon, marginRight: 25 },
+    { key: 'download', width: 50, Icon: DownloadIcon, marginRight: 50 },
+    { key: 'rotate-right', width: 60, Icon: RRight, marginRight: 0 },
   ]
 
   const navButtons: NavButton[] = [
@@ -111,7 +111,7 @@ export default function UnrealMeasurements() {
         <div className={`${styles.avatarSection} ${selectedNav === 'Body' ? styles.bodySelected : ''}`}>
           <img src={avatarImage} alt="Avatar" className={styles.avatarImage} />
 
-          {selectedNav === 'Body' && (
+          {selectedNav !== null && selectedNav === 'Body' && (
             <>
               <div className={styles.dataPanelHeader}>
                 <h3>Body Measurements (cm)</h3>
@@ -138,16 +138,18 @@ export default function UnrealMeasurements() {
                 key={control.key}
                 className={`${styles.controlButton} ${styles[control.key.replace('-', '')]} ${selectedControl === control.key ? styles.selected : ''}`}
                 style={{ width: control.width, marginRight: control.marginRight }}
-                onClick={() => setSelectedControl(control.key)}
+                onClick={() =>
+                setSelectedControl(prev => (prev === control.key ? null : control.key))
+              }
                 type="button"
               >
-                <img src={control.icon} alt="" className={styles.controlIcon} />
+                <control.Icon className={styles.controlIcon} />
               </button>
             ))}
           </div>
         </div>
 
-        {selectedNav === 'Body' && <div className={styles.accordion}>Accordion placeholder</div>}
+        {selectedNav !== null && <div className={styles.accordion}>Accordion placeholder</div>}
       </div>
 
       <div className={styles.bottomSection}>
@@ -156,7 +158,9 @@ export default function UnrealMeasurements() {
             <button
               key={btn.key}
               className={`${styles.navButton} ${selectedNav === btn.key ? styles.active : ''}`}
-              onClick={() => setSelectedNav(btn.key)}
+              onClick={() =>
+                setSelectedNav(prev => (prev === btn.key ? null : btn.key))
+              }
               type="button"
             >
               <div className={styles.navIndicator} />
