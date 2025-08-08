@@ -42,19 +42,89 @@
   object-fit: contain;
 }
 
-.dataPanel {
+// Header element - 180x24px s zaobljenim gornjim uglovima
+.dataPanelHeader {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 10px;    // 10px od ruba stranice
+  left: 10px;   // 10px od ruba stranice
   width: 180px;
-  height: 495px;
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(4px);
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  height: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(236, 236, 236, 0.5);
+  border-radius: 6px 6px 0 0; // Samo gornji uglovi zaobljeni
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.dataPanelHeader h3 {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+  color: #000;
+}
+
+// Content element - 180x470px bez gornjih zaobljenih uglova
+.dataPanelContent {
+  position: absolute;
+  top: 37px;    // 24px header + 6px transparentni razmak + 10px od ruba
+  left: 10px;   // 10px od ruba stranice
+  width: 180px;
+  height: 468px; // Smanjeno za 5px zbog povećanja razmaka
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(236, 236, 236, 0.5);
+  border-radius: 0 0 6px 6px; // Samo donji uglovi zaobljeni
+  overflow-y: auto;
+}
+
+.measurementsList {
+  padding: 10px 0 0 0; // Prvi red na 10px od gornje margin
+}
+
+.measurementItem {
+  display: flex;
+  align-items: center;
+  height: 9px;
+  margin-bottom: 8px; // Razmak između redova
+  padding: 0 10px 0 10px; // 10px od lijevog ruba
+}
+
+.measurementIcon {
+  width: 20px;
+  height: 10px; // Maksimalna visina
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-right: 10px; // 10px razmak između ikone i teksta
+}
+
+.measurementIcon img {
+  max-width: 20px;
+  max-height: 10px;
+  object-fit: contain;
+}
+
+.measurementName {
+  width: 100px;
+  height: 9px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #000;
+  line-height: 9px;
+  margin-right: 10px; // 10px razmak između teksta i broja
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.measurementValue {
+  width: 30px;
+  height: 9px;
+  font-size: 12.5px;
+  font-weight: 400;
+  color: #000;
+  line-height: 9px;
+  text-align: right;
 }
 
 .accordion {
@@ -88,18 +158,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.ellipse {
-  width: 100%;
-  height: 100%;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .controlIcon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+// Za SVG kontrolu boja - trebamo modificirati SVG da koristi currentColor ili CSS varijable
+.controlButton.selected .controlIcon {
+  // Koristimo CSS filter samo za vanjski krug - treba preciznije ciljanje
+  filter: hue-rotate(0deg) saturate(0%) brightness(0.3);
 }
 
 .rotateleft {
@@ -151,7 +223,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-end; // Poravnava sadržaj po dnu
 }
 
 .navButton:not(:first-child) {
@@ -161,6 +233,8 @@
 .navIndicator {
   width: 100%;
   height: 5px;
+  order: 1; // Stavlja indicator na vrh
+  margin-bottom: 5px; // Mali razmak od ikone
 }
 
 .active .navIndicator {
@@ -171,16 +245,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 2px;  // Dodaje malo razmaka od indicator linije
-  flex: 1;          // Vraćamo flex da popuni prostor između indicator i label
-  max-height: 35px; // Ograničava visinu kontejnera
+  max-height: 35px;
+  order: 2; // Stavlja ikonu u sredinu
+  margin-bottom: 2px; // Mali razmak od labela
 }
 
 .navIcon img {
   max-width: 42px;
   max-height: 31px;
-  width: 100%; 
-  height: 100%;
+  width: auto;
+  height: auto;
 }
 
 .navLabel {
@@ -189,4 +263,5 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  order: 3; // Stavlja label na dno
 }

@@ -3,17 +3,11 @@ import { useNavigate } from 'react-router-dom'
 import Header from '../components/Header/Header'
 
 import avatarsButton from '../assets/AvatarsButton.png'
-import rLeft from '../assets/rLeft.png'
-import rRight from '../assets/rRight.png'
-import uploadIcon from '../assets/upload.png'
-import fullScreenIcon from '../assets/FullScreen.png'
-import downloadIcon from '../assets/download.png'
-import ellipseLs from '../assets/EllipseLs.png'
-import ellipseLb from '../assets/EllipseLb.png'
-import ellipseMs from '../assets/EllipseMs.png'
-import ellipseMb from '../assets/EllipseMb.png'
-import ellipseSs from '../assets/EllipseSs.png'
-import ellipseSb from '../assets/EllipseSb.png'
+import rLeft from '../assets/rLeft.svg'
+import rRight from '../assets/rRight.svg'
+import uploadIcon from '../assets/upload.svg'
+import fullScreenIcon from '../assets/FullScreen.svg'
+import downloadIcon from '../assets/download.svg'
 import unrealFBBodyButton from '../assets/UnrealFBBodyButton.png'
 import avatarMeasure from '../assets/UnrealFullBody.png'
 import bodyIcon from '../assets/body.png'
@@ -22,14 +16,14 @@ import skinIcon from '../assets/skin.png'
 import hairIcon from '../assets/hair.png'
 import extrasIcon from '../assets/extras.png'
 import saveIcon from '../assets/save.png'
+import lengthIcon from '../assets/length.png'
+import girthIcon from '../assets/girth.png'
 import styles from './UnrealMeasurements.module.scss'
 
 interface ControlButton {
   key: string
   width: number
   icon: string
-  ellipseWhite: string
-  ellipseBlack: string
   marginRight: number
 }
 
@@ -37,6 +31,12 @@ interface NavButton {
   key: NavKey
   icon: string
   label: string
+}
+
+interface Measurement {
+  name: string
+  value: number
+  icon: string // Može biti tekst ikona ili slika path
 }
 
 type NavKey = 'Body' | 'Face' | 'Skin' | 'Hair' | 'Extras' | 'Save'
@@ -49,12 +49,38 @@ export default function UnrealMeasurements() {
   const [selectedNav, setSelectedNav] = useState<NavKey | null>(null)
   const [avatarSrc] = useState<string>(avatarMeasure)
 
+  const measurements: Measurement[] = [
+    { name: 'Shoulder', value: 33.3, icon: lengthIcon },
+    { name: 'Chest', value: 97.1, icon: girthIcon },
+    { name: 'Underchest', value: 88.9, icon: girthIcon },
+    { name: 'Waist', value: 79.1, icon: girthIcon },
+    { name: 'High Hip', value: 82, icon: girthIcon },
+    { name: 'Low Hip', value: 91.8, icon: girthIcon },
+    { name: 'Inseam', value: 72.6, icon: lengthIcon },
+    { name: 'High Thigh', value: 53.6, icon: girthIcon },
+    { name: 'Mid Thigh', value: 49.5, icon: girthIcon },
+    { name: 'Knee', value: 35, icon: girthIcon },
+    { name: 'Calf', value: 36.1, icon: girthIcon },
+    { name: 'Ankle', value: 19.9, icon: girthIcon },
+    { name: 'Foot Length', value: 24.4, icon: lengthIcon },
+    { name: 'Foot Breadth', value: 8.9, icon: lengthIcon },
+    { name: 'Bicep', value: 32.1, icon: girthIcon },
+    { name: 'Forearm', value: 26.5, icon: girthIcon },
+    { name: 'Wrist', value: 15.9, icon: girthIcon },
+    { name: 'Shoulder to Wrist', value: 56.7, icon: lengthIcon },
+    { name: 'Hand Length', value: 18.3, icon: lengthIcon },
+    { name: 'Hand Breadth', value: 8.1, icon: lengthIcon },
+    { name: 'Neck', value: 37.3, icon: girthIcon },
+    { name: 'Head', value: 54.5, icon: girthIcon },
+    { name: 'Height', value: 170.5, icon: lengthIcon }
+  ]
+
   const controls: ControlButton[] = [
-    { key: 'rotate-left', width: 60, icon: rLeft, ellipseWhite: ellipseLs, ellipseBlack: ellipseLb, marginRight: 50 },
-    { key: 'upload', width: 50, icon: uploadIcon, ellipseWhite: ellipseMs, ellipseBlack: ellipseMb, marginRight: 25 },
-    { key: 'fullscreen', width: 40, icon: fullScreenIcon, ellipseWhite: ellipseSs, ellipseBlack: ellipseSb, marginRight: 25 },
-    { key: 'download', width: 50, icon: downloadIcon, ellipseWhite: ellipseMs, ellipseBlack: ellipseMb, marginRight: 50 },
-    { key: 'rotate-right', width: 60, icon: rRight, ellipseWhite: ellipseLs, ellipseBlack: ellipseLb, marginRight: 0 },
+    { key: 'rotate-left', width: 60, icon: rLeft, marginRight: 50 },
+    { key: 'upload', width: 50, icon: uploadIcon, marginRight: 25 },
+    { key: 'fullscreen', width: 40, icon: fullScreenIcon, marginRight: 25 },
+    { key: 'download', width: 50, icon: downloadIcon, marginRight: 50 },
+    { key: 'rotate-right', width: 60, icon: rRight, marginRight: 0 },
   ]
 
   const navButtons: NavButton[] = [
@@ -85,22 +111,36 @@ export default function UnrealMeasurements() {
         <div className={`${styles.avatarSection} ${selectedNav === 'Body' ? styles.bodySelected : ''}`}>
           <img src={avatarImage} alt="Avatar" className={styles.avatarImage} />
 
-          {selectedNav === 'Body' && <div className={styles.dataPanel}>Data panel</div>}
+          {selectedNav === 'Body' && (
+            <>
+              <div className={styles.dataPanelHeader}>
+                <h3>Body Measurements (cm)</h3>
+              </div>
+              <div className={styles.dataPanelContent}>
+                <div className={styles.measurementsList}>
+                  {measurements.map((measurement, index) => (
+                    <div key={index} className={styles.measurementItem}>
+                      <span className={styles.measurementIcon}>
+                        <img src={measurement.icon} alt="" />
+                      </span>
+                      <span className={styles.measurementName}>{measurement.name}</span>
+                      <span className={styles.measurementValue}>{measurement.value}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
 
           <div className={styles.controlGroup}>
             {controls.map(control => (
               <button
                 key={control.key}
-                className={`${styles.controlButton} ${styles[control.key.replace('-', '')]}`}
+                className={`${styles.controlButton} ${styles[control.key.replace('-', '')]} ${selectedControl === control.key ? styles.selected : ''}`}
                 style={{ width: control.width, marginRight: control.marginRight }}
                 onClick={() => setSelectedControl(control.key)}
                 type="button"
               >
-                <img
-                  src={selectedControl === control.key ? control.ellipseBlack : control.ellipseWhite}
-                  alt=""
-                  className={styles.ellipse}
-                />
                 <img src={control.icon} alt="" className={styles.controlIcon} />
               </button>
             ))}
@@ -120,7 +160,9 @@ export default function UnrealMeasurements() {
               type="button"
             >
               <div className={styles.navIndicator} />
-              <img src={btn.icon} alt={btn.label} className={styles.navIcon} />
+              <div className={styles.navIcon}>
+                <img src={btn.icon} alt={btn.label} />
+              </div>
               <span className={styles.navLabel}>{btn.label}</span>
             </button>
           ))}
