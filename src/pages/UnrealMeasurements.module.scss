@@ -28,6 +28,12 @@
 
 .bodySelected {
   height: 579px;
+  justify-content: flex-end; // Pomera sadržaj uz desnu marginu
+}
+
+.bodySelected .avatarImage {
+  width: 274px; // Eksplicitna širina za Body mode
+  height: 579px; // Eksplicitna visina za Body mode
 }
 
 .avatarImage {
@@ -54,7 +60,7 @@
 .accordion {
   width: 430px;
   height: 171px;
-  background: rgba(255, 255, 255, 0.5);
+  background: #ececec;
   backdrop-filter: blur(4px);
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
@@ -120,12 +126,20 @@
   width: 60px;
 }
 
+.bottomSection {
+  width: 100vw; // Puna širina ekrana
+  border-top: 1px solid #000; // Border od ruba do ruba
+  display: flex;
+  justify-content: center; // Centrira bottomNav
+  margin-bottom: 20px;
+  padding-top: 0; // Uklanja padding da border bude flush
+}
+
 .bottomNav {
   width: 410px;
   height: 60px;
-  border-top: 1px solid #000;
   display: flex;
-  margin-bottom: 20px;
+  // Uklonjen border-top jer je sada na bottomSection
 }
 
 .navButton {
@@ -154,10 +168,19 @@
 }
 
 .navIcon {
-  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 2px;  // Dodaje malo razmaka od indicator linije
+  flex: 1;          // Vraćamo flex da popuni prostor između indicator i label
+  max-height: 35px; // Ograničava visinu kontejnera
+}
+
+.navIcon img {
+  max-width: 42px;
+  max-height: 31px;
+  width: 100%; 
+  height: 100%;
 }
 
 .navLabel {

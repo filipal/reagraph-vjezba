@@ -15,12 +15,12 @@ import ellipseMb from '../assets/EllipseMb.png'
 import ellipseSs from '../assets/EllipseSs.png'
 import ellipseSb from '../assets/EllipseSb.png'
 import unrealFBBodyButton from '../assets/UnrealFBBodyButton.png'
-import avatarMeasure from '../assets/AvatarMeasure.png'
+import avatarMeasure from '../assets/UnrealFullBody.png'
 import bodyIcon from '../assets/body.png'
 import faceIcon from '../assets/face.png'
-import skinIcon from '../assets/SKIN.png'
-import hairIcon from '../assets/HAIR.png'
-import extrasIcon from '../assets/EXTRAS.png'
+import skinIcon from '../assets/skin.png'
+import hairIcon from '../assets/hair.png'
+import extrasIcon from '../assets/extras.png'
 import saveIcon from '../assets/save.png'
 import styles from './UnrealMeasurements.module.scss'
 
@@ -46,7 +46,7 @@ export default function UnrealMeasurements() {
   const navigate = useNavigate()
 
   const [selectedControl, setSelectedControl] = useState<string | null>(null)
-  const [selectedNav, setSelectedNav] = useState<NavKey>('Body')
+  const [selectedNav, setSelectedNav] = useState<NavKey | null>(null)
   const [avatarSrc] = useState<string>(avatarMeasure)
 
   const controls: ControlButton[] = [
@@ -110,19 +110,21 @@ export default function UnrealMeasurements() {
         {selectedNav === 'Body' && <div className={styles.accordion}>Accordion placeholder</div>}
       </div>
 
-      <div className={styles.bottomNav}>
-        {navButtons.map(btn => (
-          <button
-            key={btn.key}
-            className={`${styles.navButton} ${selectedNav === btn.key ? styles.active : ''}`}
-            onClick={() => setSelectedNav(btn.key)}
-            type="button"
-          >
-            <div className={styles.navIndicator} />
-            <img src={btn.icon} alt={btn.label} className={styles.navIcon} />
-            <span className={styles.navLabel}>{btn.label}</span>
-          </button>
-        ))}
+      <div className={styles.bottomSection}>
+        <div className={styles.bottomNav}>
+          {navButtons.map(btn => (
+            <button
+              key={btn.key}
+              className={`${styles.navButton} ${selectedNav === btn.key ? styles.active : ''}`}
+              onClick={() => setSelectedNav(btn.key)}
+              type="button"
+            >
+              <div className={styles.navIndicator} />
+              <img src={btn.icon} alt={btn.label} className={styles.navIcon} />
+              <span className={styles.navLabel}>{btn.label}</span>
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   )
