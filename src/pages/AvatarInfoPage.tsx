@@ -161,7 +161,6 @@ export default function AvatarInfoPage() {
           <div className={styles.action}>     
             <button className={styles.scanButton} 
               onClick={() => {
-                console.log('window.innerWidth:', window.innerWidth)
                 if (window.innerWidth >= 1440) {
                   navigate('/scan-qr-bodyscan')
                 } else {

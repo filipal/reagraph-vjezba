@@ -1,5 +1,169 @@
 .page {
-  padding: 32px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   color: #000;
+}
+
+.avatarButton {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.centralWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatarSection {
+  width: 430px;
+  height: 750px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bodySelected {
+  height: 579px;
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.dataPanel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 180px;
+  height: 495px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(4px);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.accordion {
+  width: 430px;
+  height: 171px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(4px);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.controlGroup {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 410px;
+  height: 60px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.controlButton {
+  position: relative;
+  border: none;
+  padding: 0;
+  background: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ellipse {
+  width: 100%;
+  height: 100%;
+}
+
+.controlIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.rotateleft {
+  width: 60px;
+  margin-right: 50px;
+}
+
+.upload {
+  width: 50px;
+  margin-right: 25px;
+}
+
+.fullscreen {
+  width: 40px;
+  margin-right: 25px;
+}
+
+.download {
+  width: 50px;
+  margin-right: 50px;
+}
+
+.rotateright {
+  width: 60px;
+}
+
+.bottomNav {
+  width: 410px;
+  height: 60px;
+  border-top: 1px solid #000;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.navButton {
+  width: 60px;
+  height: 60px;
+  padding: 0;
+  border: none;
+  background: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.navButton:not(:first-child) {
+  margin-left: 10px;
+}
+
+.navIndicator {
+  width: 100%;
+  height: 5px;
+}
+
+.active .navIndicator {
+  background: #000;
+}
+
+.navIcon {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navLabel {
+  height: 20px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
