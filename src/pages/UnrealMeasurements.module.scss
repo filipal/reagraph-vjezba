@@ -22,24 +22,23 @@
   height: 750px;
   position: relative;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-/* .bodySelected intentionally has no direct styles; see .bodySelected .avatarImage override below */
+.bodySelected {
+  height: 579px;
+  justify-content: flex-end; // Pomera sadržaj uz desnu marginu
+}
 
 .bodySelected .avatarImage {
   width: 274px; // Eksplicitna širina za Body mode
   height: 579px; // Eksplicitna visina za Body mode
-  flex: 0 0 auto; // sprječava rastezanje po flexu
-  align-self: flex-end; // pomak udesno unutar avatarSection
 }
 
 .avatarImage {
   width: 100%;
-  height: auto;
-  flex-grow: 1;
+  height: 100%;
   object-fit: contain;
 }
 
@@ -94,10 +93,6 @@
 }
 
 .accordion {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 70px; // točno iznad kontrolnih gumba (10px + 60px)
   width: 430px;
   height: 171px;
   background: #ececec;
@@ -107,7 +102,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 4; // ispod kontrola
 }
 
 .controlGroup {
@@ -119,7 +113,6 @@
   height: 60px;
   display: flex;
   align-items: flex-end;
-  z-index: 10; // iznad accordiona
 }
 
 .controlButton {

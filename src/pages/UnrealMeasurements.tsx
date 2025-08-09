@@ -19,7 +19,6 @@ import saveIcon from '../assets/save.png'
 import lengthIcon from '../assets/length.png'
 import girthIcon from '../assets/girth.png'
 import DataPanel from '../components/DataPanel/DataPanel'
-import FaceAccordion from '../components/FaceAccordion/FaceAccordion'
 import styles from './UnrealMeasurements.module.scss'
 
 interface ControlButton {
@@ -113,29 +112,21 @@ export default function UnrealMeasurements() {
         <div className={`${styles.avatarSection} ${selectedNav === 'Body' ? styles.bodySelected : ''}`}>
           <img src={avatarImage} alt="Avatar" className={styles.avatarImage} />
 
-          {selectedNav === 'Body' && (
-            <>
-              <DataPanel title="Body Measurements (cm)">
-                <div className={styles.measurementsList}>
-                  {measurements.map((measurement, index) => (
-                    <div key={index} className={styles.measurementItem}>
-                      <span className={styles.measurementIcon}>
-                        <img src={measurement.icon} alt="" />
-                      </span>
-                      <span className={styles.measurementName}>{measurement.name}</span>
-                      <span className={styles.measurementValue}>{measurement.value}</span>
-                    </div>
-                  ))}
-                </div>
-              </DataPanel>
-              <BodyAccordion />
-            </>
+          {selectedNav !== null && selectedNav === 'Body' && (
+            <DataPanel title="Body Measurements (cm)">
+              <div className={styles.measurementsList}>
+                {measurements.map((measurement, index) => (
+                  <div key={index} className={styles.measurementItem}>
+                    <span className={styles.measurementIcon}>
+                      <img src={measurement.icon} alt="" />
+                    </span>
+                    <span className={styles.measurementName}>{measurement.name}</span>
+                    <span className={styles.measurementValue}>{measurement.value}</span>
+                  </div>
+                ))}
+              </div>
+            </DataPanel>
           )}
-
-    {selectedNav === 'Face' && <FaceAccordion />}
-          {selectedNav === 'Skin' && <SkinAccordion />}
-          {selectedNav === 'Hair' && <HairAccordion />}
-          {selectedNav === 'Extras' && <ExtrasAccordion />}
 
           <div className={styles.controlGroup}>
             {controls.map(control => (
@@ -154,7 +145,7 @@ export default function UnrealMeasurements() {
           </div>
         </div>
 
-  {/* Face accordion is rendered inside avatarSection; no duplicate here */}
+        {selectedNav !== null && <div className={styles.accordion}>Accordion placeholder</div>}
       </div>
 
       <div className={styles.bottomSection}>
@@ -163,10 +154,9 @@ export default function UnrealMeasurements() {
             <button
               key={btn.key}
               className={`${styles.navButton} ${selectedNav === btn.key ? styles.active : ''}`}
-              onClick={() => {
+              onClick={() =>
                 setSelectedNav(prev => (prev === btn.key ? null : btn.key))
-                if (btn.key === 'Save') navigate('/unreal-try-on')
-              }}
+              }
               type="button"
             >
               <div className={styles.navIndicator} />
@@ -180,20 +170,4 @@ export default function UnrealMeasurements() {
       </div>
     </div>
   )
-}
-
-function BodyAccordion() {
-  return <div className={styles.accordion}>Body Accordion</div>
-}
-
-function SkinAccordion() {
-  return <div className={styles.accordion}>Skin Accordion</div>
-}
-
-function HairAccordion() {
-  return <div className={styles.accordion}>Hair Accordion</div>
-}
-
-function ExtrasAccordion() {
-  return <div className={styles.accordion}>Extras Accordion</div>
 }
