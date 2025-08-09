@@ -112,21 +112,30 @@ export default function UnrealMeasurements() {
         <div className={`${styles.avatarSection} ${selectedNav === 'Body' ? styles.bodySelected : ''}`}>
           <img src={avatarImage} alt="Avatar" className={styles.avatarImage} />
 
-          {selectedNav !== null && selectedNav === 'Body' && (
-            <DataPanel title="Body Measurements (cm)">
-              <div className={styles.measurementsList}>
-                {measurements.map((measurement, index) => (
-                  <div key={index} className={styles.measurementItem}>
-                    <span className={styles.measurementIcon}>
-                      <img src={measurement.icon} alt="" />
-                    </span>
-                    <span className={styles.measurementName}>{measurement.name}</span>
-                    <span className={styles.measurementValue}>{measurement.value}</span>
-                  </div>
-                ))}
-              </div>
-            </DataPanel>
+          {selectedNav === 'Body' && (
+            <>
+              <DataPanel title="Body Measurements (cm)">
+                <div className={styles.measurementsList}>
+                  {measurements.map((measurement, index) => (
+                    <div key={index} className={styles.measurementItem}>
+                      <span className={styles.measurementIcon}>
+                        <img src={measurement.icon} alt="" />
+                      </span>
+                      <span className={styles.measurementName}>{measurement.name}</span>
+                      <span className={styles.measurementValue}>{measurement.value}</span>
+                    </div>
+                  ))}
+                </div>
+              </DataPanel>
+              <BodyAccordion />
+            </>
           )}
+
+          {selectedNav === 'Face' && <FaceAccordion />}
+          {selectedNav === 'Skin' && <SkinAccordion />}
+          {selectedNav === 'Hair' && <HairAccordion />}
+          {selectedNav === 'Extras' && <ExtrasAccordion />}
+          {selectedNav === 'Save' && <SaveAccordion />}
 
           <div className={styles.controlGroup}>
             {controls.map(control => (
@@ -144,8 +153,6 @@ export default function UnrealMeasurements() {
             ))}
           </div>
         </div>
-
-        {selectedNav !== null && <div className={styles.accordion}>Accordion placeholder</div>}
       </div>
 
       <div className={styles.bottomSection}>
@@ -170,4 +177,28 @@ export default function UnrealMeasurements() {
       </div>
     </div>
   )
+}
+
+function BodyAccordion() {
+  return <div className={styles.accordion}>Body Accordion</div>
+}
+
+function FaceAccordion() {
+  return <div className={styles.accordion}>Face Accordion</div>
+}
+
+function SkinAccordion() {
+  return <div className={styles.accordion}>Skin Accordion</div>
+}
+
+function HairAccordion() {
+  return <div className={styles.accordion}>Hair Accordion</div>
+}
+
+function ExtrasAccordion() {
+  return <div className={styles.accordion}>Extras Accordion</div>
+}
+
+function SaveAccordion() {
+  return <div className={styles.accordion}>Save Accordion</div>
 }

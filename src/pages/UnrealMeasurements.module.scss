@@ -22,23 +22,24 @@
   height: 750px;
   position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 .bodySelected {
   height: 579px;
-  justify-content: flex-end; // Pomera sadržaj uz desnu marginu
 }
 
 .bodySelected .avatarImage {
   width: 274px; // Eksplicitna širina za Body mode
-  height: 579px; // Eksplicitna visina za Body mode
+  max-height: 100%;
 }
 
 .avatarImage {
   width: 100%;
-  height: 100%;
+  height: auto;
+  flex-grow: 1;
   object-fit: contain;
 }
 
@@ -102,6 +103,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: auto;
+  margin-bottom: 70px;
 }
 
 .controlGroup {
