@@ -136,7 +136,6 @@ export default function UnrealMeasurements() {
           {selectedNav === 'Skin' && <SkinAccordion />}
           {selectedNav === 'Hair' && <HairAccordion />}
           {selectedNav === 'Extras' && <ExtrasAccordion />}
-          {selectedNav === 'Save' && <SaveAccordion />}
 
           <div className={styles.controlGroup}>
             {controls.map(control => (
@@ -164,9 +163,10 @@ export default function UnrealMeasurements() {
             <button
               key={btn.key}
               className={`${styles.navButton} ${selectedNav === btn.key ? styles.active : ''}`}
-              onClick={() =>
+              onClick={() => {
                 setSelectedNav(prev => (prev === btn.key ? null : btn.key))
-              }
+                if (btn.key === 'Save') navigate('/unreal-try-on')
+              }}
               type="button"
             >
               <div className={styles.navIndicator} />
@@ -196,8 +196,4 @@ function HairAccordion() {
 
 function ExtrasAccordion() {
   return <div className={styles.accordion}>Extras Accordion</div>
-}
-
-function SaveAccordion() {
-  return <div className={styles.accordion}>Save Accordion</div>
 }
