@@ -19,6 +19,7 @@ import saveIcon from '../assets/save.png'
 import lengthIcon from '../assets/length.png'
 import girthIcon from '../assets/girth.png'
 import DataPanel from '../components/DataPanel/DataPanel'
+import FaceAccordion from '../components/FaceAccordion/FaceAccordion'
 import styles from './UnrealMeasurements.module.scss'
 
 interface ControlButton {
@@ -131,7 +132,7 @@ export default function UnrealMeasurements() {
             </>
           )}
 
-          {selectedNav === 'Face' && <FaceAccordion />}
+    {selectedNav === 'Face' && <FaceAccordion />}
           {selectedNav === 'Skin' && <SkinAccordion />}
           {selectedNav === 'Hair' && <HairAccordion />}
           {selectedNav === 'Extras' && <ExtrasAccordion />}
@@ -153,6 +154,8 @@ export default function UnrealMeasurements() {
             ))}
           </div>
         </div>
+
+  {/* Face accordion is rendered inside avatarSection; no duplicate here */}
       </div>
 
       <div className={styles.bottomSection}>
@@ -181,10 +184,6 @@ export default function UnrealMeasurements() {
 
 function BodyAccordion() {
   return <div className={styles.accordion}>Body Accordion</div>
-}
-
-function FaceAccordion() {
-  return <div className={styles.accordion}>Face Accordion</div>
 }
 
 function SkinAccordion() {
