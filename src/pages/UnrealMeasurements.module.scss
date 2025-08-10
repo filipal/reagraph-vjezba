@@ -45,6 +45,8 @@
 /* Face mode: show top-cropped/zoomed view at 430x670 */
 .faceSelected {
   height: 670px;
+  --avatar-zoom: 2.4; /* tweakable zoom for Face mode */
+  overflow: hidden; /* clip zoomed image */
 }
 
 .faceSelected .avatarImage {
@@ -52,6 +54,9 @@
   height: 100%;
   object-fit: cover;
   object-position: top center; /* focus on the top area (face) */
+  transform: scale(var(--avatar-zoom, 1)); /* zoom into the top portion */
+  transform-origin: top center;
+  will-change: transform;
 }
 
 /* measurement list styles moved to DataPanel.module.scss */
