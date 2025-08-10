@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import ArrowLeft from '../../assets/arrow left.svg'
 import ArrowRight from '../../assets/arrow right.svg'
 import Skin1 from '../../assets/skin1.svg?react'
@@ -31,6 +31,48 @@ export default function SkinAccordion() {
       setFocusedIndex((focusedIndex + 1) % items.length)
     }
     setBaseIndex((baseIndex + 1) % basePalette.length)
+  }
+
+  // Right-side drag bar state
+  const [pos, setPos] = useState<number>(65) // will be updated to actual bar center on mount
+  const barRef = useRef<HTMLDivElement | null>(null)
+
+  // Center the thumb based on the real rendered width of the bar
+  useEffect(() => {
+    const bar = barRef.current
+    if (!bar) return
+    // initialize
+    const setCenter = () => {
+      const w = bar.offsetWidth
+      setPos(w / 2)
+    }
+    setCenter()
+    // keep centered if the bar resizes
+    const ro = new ResizeObserver(setCenter)
+    ro.observe(bar)
+    return () => ro.disconnect()
+  }, [])
+
+  const onStartDrag = (clientX: number) => {
+    const bar = barRef.current
+    if (!bar) return
+    const rect = bar.getBoundingClientRect()
+    const update = (x: number) => {
+      const rel = x - rect.left
+      const width = rect.width
+      const clamped = Math.max(0, Math.min(width, rel))
+      setPos(clamped)
+    }
+    update(clientX)
+    const onMove = (e: PointerEvent) => {
+      update(e.clientX)
+    }
+    const onUp = () => {
+      window.removeEventListener('pointermove', onMove)
+      window.removeEventListener('pointerup', onUp)
+    }
+    window.addEventListener('pointermove', onMove, { passive: false })
+    window.addEventListener('pointerup', onUp)
   }
 
   return (
@@ -69,10 +111,33 @@ export default function SkinAccordion() {
         </div>
       </div>
 
-      <div className={styles.divider} />
-
       <div className={`${styles.right} ${activeSide === 'right' ? styles.active : ''}`} onClick={() => setActiveSide('right')} role="button" tabIndex={0}>
-        {/* TODO: right content per design */}
+        <div className={styles.rightContent} onClick={(e) => e.stopPropagation()}>
+          {/* Top: 130x25 (bar 130x10 with 25x25 thumb centered vertically) */}
+          <div className={styles.toneBarGroup}>
+            <div
+              className={styles.toneBar}
+              ref={barRef}
+              onPointerDown={(e) => onStartDrag(e.clientX)}
+            >
+              <button
+                type="button"
+                className={styles.thumb}
+                style={{ left: `${pos}px` }}
+                onPointerDown={(e) => { e.stopPropagation(); onStartDrag(e.clientX) }}
+                aria-label="Adjust tone"
+              />
+            </div>
+          </div>
+
+          {/* Gap 2px built via CSS gap */}
+          {/* Bottom: 143x13 with three frame icons aligned left/center/right */}
+          <div className={styles.frames}>
+            <div className={styles.frameB} />
+            <div className={styles.frameG} />
+            <div className={styles.frameW} />
+          </div>
+        </div>
       </div>
     </div>
   )

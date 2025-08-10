@@ -73,6 +73,40 @@
   transform: scale(var(--avatar-zoom, 1));
   transform-origin: center bottom;
 }
+
+/* Hair mode: shrink image area by accordion height (120px), with Face-like top-crop zoom */
+.hairSelected {
+  height: 630px; /* 750 - hair accordion 120 */
+  overflow: hidden; /* clip zoomed image */
+  --avatar-zoom: 2.4; /* same default zoom as Face */
+}
+
+.hairSelected .avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* match Face behavior */
+  object-position: top center; /* focus on the top area */
+  transform: scale(var(--avatar-zoom, 1));
+  transform-origin: top center;
+  will-change: transform;
+}
+
+/* Extras mode: same as Hair/Face zoom but reserving 120px for Extras accordion */
+.extrasSelected {
+  height: 630px; /* 750 - extras accordion 120 */
+  overflow: hidden;
+  --avatar-zoom: 2.4;
+}
+
+.extrasSelected .avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transform: scale(var(--avatar-zoom, 1));
+  transform-origin: top center;
+  will-change: transform;
+}
 /* measurement list styles moved to DataPanel.module.scss */
 
 .accordion {
