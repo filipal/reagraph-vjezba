@@ -186,7 +186,6 @@
   width: 410px;
   height: 60px;
   display: flex;
-  // Uklonjen border-top jer je sada na bottomSection
 }
 
 .navButton {
@@ -199,6 +198,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-end; // Poravnava sadržaj po dnu
+  position: relative; // Allows absolute-positioned top indicator
 }
 
 .navButton:not(:first-child) {
@@ -206,10 +206,11 @@
 }
 
 .navIndicator {
-  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   height: 5px;
-  order: 1; // Stavlja indicator na vrh
-  margin-bottom: 5px; // Mali razmak od ikone
   display: none;
 }
 

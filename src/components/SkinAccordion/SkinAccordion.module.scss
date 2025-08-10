@@ -9,6 +9,21 @@
   overflow: hidden;
 }
 
+/* Expanded mode: right side takes the whole accordion, left is hidden */
+.expandedRight {
+  .left {
+    display: none;
+  }
+  .right {
+    width: 430px;
+  }
+  .rightContent {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 .left {
   width: 240px;
   height: 60px;

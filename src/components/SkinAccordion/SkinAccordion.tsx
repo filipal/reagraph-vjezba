@@ -8,8 +8,8 @@ import { darkenHex, lightenHex } from '../../utils/color'
 import styles from './SkinAccordion.module.scss'
 
 export default function SkinAccordion() {
-  const [activeSide, setActiveSide] = useState<'left' | 'right'>('left')
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null) // null => show two; number => show one
+  const [rightExpanded, setRightExpanded] = useState(false)
 
   const basePalette = ['#f5e0d0', '#eac3a6', '#d7a381', '#b47b57', '#8a573b', '#5d3b2a']
   const [baseIndex, setBaseIndex] = useState(2)
@@ -76,8 +76,8 @@ export default function SkinAccordion() {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={`${styles.left} ${activeSide === 'left' ? styles.active : ''}`} onClick={() => setActiveSide('left')} role="button" tabIndex={0}>
+    <div className={`${styles.container} ${rightExpanded ? styles.expandedRight : ''}`}>
+  <div className={styles.left} role="button" tabIndex={0}>
         <div className={styles.group} onClick={(e) => e.stopPropagation()}>
           <button type="button" className={styles.arrow} onClick={handlePrev}>
             <img src={ArrowLeft} alt="Prev" />
@@ -111,15 +111,16 @@ export default function SkinAccordion() {
         </div>
       </div>
 
-      <div className={`${styles.right} ${activeSide === 'right' ? styles.active : ''}`} onClick={() => setActiveSide('right')} role="button" tabIndex={0}>
-        <div className={styles.rightContent} onClick={(e) => e.stopPropagation()}>
+      <div
+  className={styles.right}
+        role="button"
+        tabIndex={0}
+        onClick={() => setRightExpanded((v) => !v)}
+      >
+        <div className={styles.rightContent}>
           {/* Top: 130x25 (bar 130x10 with 25x25 thumb centered vertically) */}
           <div className={styles.toneBarGroup}>
-            <div
-              className={styles.toneBar}
-              ref={barRef}
-              onPointerDown={(e) => onStartDrag(e.clientX)}
-            >
+            <div className={styles.toneBar} ref={barRef}>
               <button
                 type="button"
                 className={styles.thumb}
