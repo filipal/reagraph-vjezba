@@ -42,6 +42,18 @@
   object-fit: contain;
 }
 
+/* Face mode: show top-cropped/zoomed view at 430x670 */
+.faceSelected {
+  height: 670px;
+}
+
+.faceSelected .avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center; /* focus on the top area (face) */
+}
+
 /* measurement list styles moved to DataPanel.module.scss */
 
 .accordion {

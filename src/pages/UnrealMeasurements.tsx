@@ -111,7 +111,7 @@ export default function UnrealMeasurements() {
       />
 
       <div className={styles.centralWrapper}>
-        <div className={`${styles.avatarSection} ${selectedNav === 'Body' ? styles.bodySelected : ''}`}>
+  <div className={`${styles.avatarSection} ${selectedNav === 'Body' ? styles.bodySelected : ''} ${selectedNav === 'Face' ? styles.faceSelected : ''}`}>
           <img src={avatarImage} alt="Avatar" className={styles.avatarImage} />
 
           {selectedNav === 'Body' && (
