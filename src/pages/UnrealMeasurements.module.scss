@@ -59,6 +59,20 @@
   will-change: transform;
 }
 
+/* Skin mode: shrink image area by accordion height; keep full body framing */
+.skinSelected {
+  height: 690px; /* 750 - skin accordion ~60 */
+  overflow: hidden;
+  --avatar-zoom: 1.0; /* adjust if you want slight zoom while skin is open */
+}
+
+.skinSelected .avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* keep full body */
+  transform: scale(var(--avatar-zoom, 1));
+  transform-origin: center bottom;
+}
 /* measurement list styles moved to DataPanel.module.scss */
 
 .accordion {

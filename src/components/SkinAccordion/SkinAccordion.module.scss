@@ -15,6 +15,9 @@
   justify-content: center;
   align-items: center;
   border-right: 1px solid #000;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .right {
@@ -23,4 +26,66 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.active {
+  outline: 2px solid #000;
+}
+
+.divider {
+  width: 1px;
+  height: 60px;
+  background: #000;
+}
+
+.group {
+  width: 220px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.arrow {
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.iconsThree {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.iconBtn {
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.iconLarge {
+  width: 45px;
+  height: 45px;
+}
+
+.iconSmall {
+  width: 35px;
+  height: 35px;
+}
+
+.iconOne {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

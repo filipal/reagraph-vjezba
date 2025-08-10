@@ -21,6 +21,7 @@ import girthIcon from '../assets/girth.png'
 import DataPanel from '../components/DataPanel/DataPanel'
 import BodyAccordion from '../components/BodyAccordion/BodyAccordion'
 import FaceAccordion from '../components/FaceAccordion/FaceAccordion'
+import SkinAccordion from '../components/SkinAccordion/SkinAccordion'
 import styles from './UnrealMeasurements.module.scss'
 
 interface ControlButton {
@@ -111,7 +112,7 @@ export default function UnrealMeasurements() {
       />
 
       <div className={styles.centralWrapper}>
-  <div className={`${styles.avatarSection} ${selectedNav === 'Body' ? styles.bodySelected : ''} ${selectedNav === 'Face' ? styles.faceSelected : ''}`}>
+  <div className={`${styles.avatarSection} ${selectedNav === 'Body' ? styles.bodySelected : ''} ${selectedNav === 'Face' ? styles.faceSelected : ''} ${selectedNav === 'Skin' ? styles.skinSelected : ''}`}>
           <img src={avatarImage} alt="Avatar" className={styles.avatarImage} />
 
           {selectedNav === 'Body' && (
@@ -146,6 +147,12 @@ export default function UnrealMeasurements() {
         {selectedNav === 'Face' && (
           <div className={styles.accordion}>
             <FaceAccordion />
+          </div>
+        )}
+
+        {selectedNav === 'Skin' && (
+          <div className={styles.accordion}>
+            <SkinAccordion />
           </div>
         )}
       </div>
