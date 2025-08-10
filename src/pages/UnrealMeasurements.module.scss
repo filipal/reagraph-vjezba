@@ -42,63 +42,9 @@
   object-fit: contain;
 }
 
-.measurementsList {
-  padding: 10px 0 0 0; // Prvi red na 10px od gornje margin
-}
-
-.measurementItem {
-  display: flex;
-  align-items: center;
-  height: 9px;
-  margin-bottom: 8px; // Razmak između redova
-  padding: 0 10px 0 10px; // 10px od lijevog ruba
-}
-
-.measurementIcon {
-  width: 20px;
-  height: 10px; // Maksimalna visina
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin-right: 10px; // 10px razmak između ikone i teksta
-}
-
-.measurementIcon img {
-  max-width: 20px;
-  max-height: 10px;
-  object-fit: contain;
-}
-
-.measurementName {
-  width: 100px;
-  height: 9px;
-  font-size: 12.5px;
-  font-weight: 500;
-  color: #000;
-  line-height: 9px;
-  margin-right: 10px; // 10px razmak između teksta i broja
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.measurementValue {
-  width: 30px;
-  height: 9px;
-  font-size: 12.5px;
-  font-weight: 400;
-  color: #000;
-  line-height: 9px;
-  text-align: right;
-}
+/* measurement list styles moved to DataPanel.module.scss */
 
 .accordion {
-  width: 430px;
-  height: 171px;
-  background: #ececec;
-  backdrop-filter: blur(4px);
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;

@@ -19,6 +19,8 @@ import saveIcon from '../assets/save.png'
 import lengthIcon from '../assets/length.png'
 import girthIcon from '../assets/girth.png'
 import DataPanel from '../components/DataPanel/DataPanel'
+import BodyAccordion from '../components/BodyAccordion/BodyAccordion'
+import FaceAccordion from '../components/FaceAccordion/FaceAccordion'
 import styles from './UnrealMeasurements.module.scss'
 
 interface ControlButton {
@@ -112,21 +114,11 @@ export default function UnrealMeasurements() {
         <div className={`${styles.avatarSection} ${selectedNav === 'Body' ? styles.bodySelected : ''}`}>
           <img src={avatarImage} alt="Avatar" className={styles.avatarImage} />
 
-          {selectedNav !== null && selectedNav === 'Body' && (
-            <DataPanel title="Body Measurements (cm)">
-              <div className={styles.measurementsList}>
-                {measurements.map((measurement, index) => (
-                  <div key={index} className={styles.measurementItem}>
-                    <span className={styles.measurementIcon}>
-                      <img src={measurement.icon} alt="" />
-                    </span>
-                    <span className={styles.measurementName}>{measurement.name}</span>
-                    <span className={styles.measurementValue}>{measurement.value}</span>
-                  </div>
-                ))}
-              </div>
-            </DataPanel>
+          {selectedNav === 'Body' && (
+            <DataPanel title="Body Measurements (cm)" measurements={measurements} />
           )}
+
+          {/* Body accordion renders below in centralWrapper to preserve position */}
 
           <div className={styles.controlGroup}>
             {controls.map(control => (
@@ -145,7 +137,17 @@ export default function UnrealMeasurements() {
           </div>
         </div>
 
-        {selectedNav !== null && <div className={styles.accordion}>Accordion placeholder</div>}
+        {selectedNav === 'Body' && (
+          <div className={styles.accordion}>
+            <BodyAccordion />
+          </div>
+        )}
+
+        {selectedNav === 'Face' && (
+          <div className={styles.accordion}>
+            <FaceAccordion />
+          </div>
+        )}
       </div>
 
       <div className={styles.bottomSection}>
