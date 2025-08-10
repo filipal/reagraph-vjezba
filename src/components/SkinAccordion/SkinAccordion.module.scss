@@ -17,12 +17,11 @@
   align-items: center;
   border-right: 1.5px solid #000; /* divider between color (left) and slider (right) */
   background: transparent;
-  border: none;
   cursor: pointer;
 }
 
 .right {
-  width: 190px;
+  width: 180px;
   height: 60px;
   display: flex;
   justify-content: center;
@@ -122,7 +121,7 @@
   background: transparent;
   border: none;
   cursor: grab;
-  background-image: url('../../assets/design from figma/skinbarbtn.svg');
+  background-image: url('../../assets/skinbarbtn.svg');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
