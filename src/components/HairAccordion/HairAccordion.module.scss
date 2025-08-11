@@ -13,7 +13,7 @@
   width: 350px;
   height: 120px;
   display: grid;
-  grid-template-columns: 20px 232px 20px; /* arrow | icons strip | arrow */
+  grid-template-columns: 24px 232px 24px; /* arrow | icons strip | arrow */
   column-gap: 20px; /* 20px behind left arrow and in front of right arrow */
   justify-content: center;
   align-items: center;
@@ -29,8 +29,8 @@
 }
 
 .hArrow {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 32.8px;
   display: flex;
   align-items: center;
   justify-content: center;
