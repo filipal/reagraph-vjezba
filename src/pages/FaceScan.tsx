@@ -5,12 +5,9 @@ import Footer from '../components/Footer/Footer'
 import VoiceInfoOn from '../assets/VoiceInfoOn.svg'
 import VoiceInfoOff from '../assets/VoiceInfoOff.svg'
 import scanInstructions from '../assets/scan-instructions.mp3'
-import FaceGuide from './FaceGuide.png'
-import SideGuide from '../assets/SideGuide.png'
-import FrontFaceScan from './FrontFaceScan.png'
-import SideFaceScan from './SideFaceScan.png'
-import frontImg from '../assets/front.png'
-import sideImg from '../assets/side.png'
+import FaceGuide from '../assets/FaceGuide.png'
+import frontImg from '../assets/FrontFaceScan.png'
+import sideImg from '../assets/SideFaceScan.png'
 import styles from './FaceScan.module.scss'
 
 type ScanPhase = 'initial' | 'scanning' | 'countdown' | 'completed'
@@ -175,8 +172,8 @@ export default function FaceScan({ onClose }: { onClose?: () => void }) {
     }
   }, [])
 
-  const placeholderImage = orientation === 'front' ? FrontFaceScan : SideFaceScan
-  const guideImage = orientation === 'front' ? FaceGuide : SideGuide
+  const placeholderImage = orientation === 'front' ? frontImg : sideImg
+  const guideImage = FaceGuide
   const title = orientation === 'front' ? 'Front Face Scan' : 'Side Face Scan'
 
   const actionText =
