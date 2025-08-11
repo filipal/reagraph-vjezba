@@ -142,7 +142,7 @@ export default function UnrealMeasurements() {
 
         {selectedNav === 'Body' && (
           <div className={styles.accordion}>
-            <BodyAccordion />
+            <BodyAccordion measurements={measurements} />
           </div>
         )}
 

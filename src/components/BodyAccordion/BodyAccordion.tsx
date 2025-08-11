@@ -2,7 +2,9 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import ArrowRight from '../../assets/arrow right.svg'
 import styles from './BodyAccordion.module.scss'
 
-export default function BodyAccordion() {
+type Measurement = { name: string; value: number }
+
+export default function BodyAccordion({ measurements = [] as Measurement[] }: { measurements?: Measurement[] }) {
   // Categories grouped for body editing; values wiring will come later
   const categories = useMemo(
     () => [
@@ -40,23 +42,58 @@ export default function BodyAccordion() {
   const handleUp = () => setCenterIdx((i) => (i - 1 + categories.length) % categories.length)
   const handleDown = () => setCenterIdx((i) => (i + 1) % categories.length)
 
-  // Right panel model: sliders per category (prototype for Chest)
+  // Right panel model: sliders per category, generated from measurements
   type Control = { key: string; label: string; value: number }
-  const controlsByCategory: Record<string, Control[]> = {
-    Chest: [
-      { key: 'shoulderWidth1', label: 'Shoulder Width 1', value: 100 },
-      { key: 'sternumDepth', label: 'Sternum Depth', value: 0 },
-      { key: 'waistWidth', label: 'Waist Width', value: 50 },
-      { key: 'bellyInOut', label: 'Belly Move InOut', value: 0 },
-      { key: 'hipSize', label: 'Hip Size', value: 0 },
-      // extras to demonstrate vertical indicator (hidden until scrolled)
-      { key: 'underchestWidth', label: 'Underchest Width', value: 20 },
-      { key: 'chestHeight', label: 'Chest Height', value: 30 },
-    ],
-  }
+  const namesToValue = useMemo(() => {
+    const map: Record<string, number> = {}
+    for (const m of measurements) map[m.name] = m.value
+    return map
+  }, [measurements])
+
+  const categoryMap: Record<string, string[]> = useMemo(
+    () => ({
+      Head: ['Head'],
+      Neck: ['Neck'],
+  // Chest shows custom controls per spec
+  Chest: ['Shoulder Width 1', 'Sternum Depth', 'Waist Width', 'Belly Move InOut', 'Hip Size'],
+      Underchest: ['Underchest'],
+      Waist: ['Waist'],
+      Hips: ['High Hip', 'Low Hip'],
+      Arms: ['Bicep', 'Forearm', 'Wrist', 'Shoulder to Wrist'],
+      Shoulder: ['Shoulder', 'Shoulder to Wrist'],
+      Forearm: ['Forearm'],
+      Wrist: ['Wrist'],
+      Hands: ['Hand Length', 'Hand Breadth'],
+      Legs: ['High Thigh', 'Mid Thigh', 'Knee', 'Calf', 'Ankle', 'Inseam'],
+      Thigh: ['High Thigh', 'Mid Thigh'],
+      Knee: ['Knee'],
+      Calf: ['Calf'],
+      Ankle: ['Ankle'],
+      Feet: ['Foot Length', 'Foot Breadth'],
+      Height: ['Height'],
+    }),
+    []
+  )
 
   const selected = at(0)
-  const list = controlsByCategory[selected.label] ?? []
+  const selectedNames = categoryMap[selected.label] || []
+  // For custom labels (e.g., Chest category), map to nearest measurement values when possible
+  const chestLabelToMeasurement: Record<string, string | undefined> = {
+    'Shoulder Width 1': 'Shoulder',
+    'Sternum Depth': 'Chest', // approximate from chest girth for now
+    'Waist Width': 'Waist',
+    'Belly Move InOut': undefined, // no direct measurement; start at mid
+    'Hip Size': 'Low Hip',
+  }
+  const toPercent = (val?: number) => (Number.isFinite(val as number) ? Math.max(0, Math.min(100, Math.round(((val as number)) / 2))) : 50)
+  const resolveValue = (label: string) => {
+    if (selected.label === 'Chest') {
+      const mName = chestLabelToMeasurement[label]
+      return toPercent(mName ? namesToValue[mName] : undefined)
+    }
+    return toPercent(namesToValue[label])
+  }
+  const list: Control[] = selectedNames.map((n) => ({ key: n, label: n, value: resolveValue(n) }))
   const VISIBLE = 5
   const [scrollIndex, setScrollIndex] = useState(0)
   const total = list.length
