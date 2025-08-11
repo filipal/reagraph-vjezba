@@ -11,6 +11,9 @@ import UnrealMeasurements from './pages/UnrealMeasurements.tsx'
 import ScanQRBodyscan from './pages/ScanQRBodyscan.tsx'
 import BodyPhotosCheck from './pages/BodyPhotosCheck.tsx'
 import LoadingScreen from './pages/LoadingScreen.tsx'
+import FaceScanInfo from './pages/FaceScanInfo.tsx'
+import FaceScan from './pages/FaceScan.tsx'
+import FacePhotosCheck from './pages/FacePhotosCheck.tsx'
 import './App.module.scss'
 
 
@@ -23,11 +26,14 @@ export default function App() {
       <Route path="/logged-in" element={<LoggedInPage />} />
       <Route path="/use-of-data" element={<UseOfData />} />
       <Route path="/body-scan-info" element={<BodyScanInfo />} />
+      <Route path="/face-scan-info" element={<FaceScanInfo />} />
       <Route path="/quickmode" element={<QuickMode />} />
       <Route path="/body-scan" element={<BodyScan />} />
+      <Route path="/face-scan" element={<FaceScan />} />
       <Route path="/unreal-measurements" element={<UnrealMeasurements />} />
       <Route path="/scan-qr-bodyscan" element={<ScanQRBodyscan />} />
       <Route path="/body-photos-check" element={<BodyPhotosCheck />} />
+      <Route path="/face-photos-check" element={<FacePhotosCheck />} />
       <Route path="/loading" element={<LoadingScreen />} />
 
       <Route path="*" element={<Navigate to="/" />} />
