@@ -1,4 +1,4 @@
-import { useState, type ComponentType, type SVGProps } from 'react'
+import { useState, type ComponentType, type SVGProps, type CSSProperties } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Header from '../components/Header/Header'
 // Using ?react variants for unified styling
@@ -195,6 +195,10 @@ export default function VirtualTryOn() {
               // exit full body (any variant)
               setFullBodyMode(false)
               setFullBodyDetail(false)
+              setTopOpen(false)
+              setBottomOpen(false)
+              setTopExpandedFooter(false)
+              setSelectedControl(null)
               return
             }
             if (!topOpen && !bottomOpen) {
@@ -386,7 +390,7 @@ export default function VirtualTryOn() {
             const size = control.width
             const selectable = control.key === 'top-zoom' || control.key === 'bottom-zoom'
             // Expanded spacing logic (only when accordion open and 5 buttons rendered)
-            let styleMargins: any = { width: size, height: size, marginRight: control.marginRight }
+            let styleMargins: CSSProperties = { width: size, height: size, marginRight: control.marginRight }
             if (accordionOpen) {
               // Apply exact gap spec: left offset 20, gaps 40,25,25,40, right offset 20
               // We'll set marginLeft on first button and marginRight values manually ignoring pre-set marginRight
@@ -410,6 +414,46 @@ export default function VirtualTryOn() {
                   if (fullBodyMode && !fullBodyDetail && control.key === 'rotate-left') {
                     setFullBodyDetail(true)
                     setTopOpen(true)
+                    return
+                  }
+                  if (fullBodyMode && !fullBodyDetail && control.key === 'top-zoom') {
+                    setFullBodyDetail(true)
+                    setTopOpen(true)
+                    setBottomOpen(false)
+                    setSelectedControl('top-zoom')
+                    return
+                  }
+                  if (fullBodyMode && !fullBodyDetail && control.key === 'bottom-zoom') {
+                    setFullBodyDetail(true)
+                    setBottomOpen(true)
+                    setTopOpen(false)
+                    setSelectedControl('bottom-zoom')
+                    return
+                  }
+                  if (fullBodyMode && fullBodyDetail && control.key === 'top-zoom') {
+                    if (topOpen) {
+                      setFullBodyDetail(false)
+                      setTopOpen(false)
+                      setBottomOpen(false)
+                      setSelectedControl(null)
+                    } else {
+                      setTopOpen(true)
+                      setBottomOpen(false)
+                      setSelectedControl('top-zoom')
+                    }
+                    return
+                  }
+                  if (fullBodyMode && fullBodyDetail && control.key === 'bottom-zoom') {
+                    if (bottomOpen) {
+                      setFullBodyDetail(false)
+                      setTopOpen(false)
+                      setBottomOpen(false)
+                      setSelectedControl(null)
+                    } else {
+                      setBottomOpen(true)
+                      setTopOpen(false)
+                      setSelectedControl('bottom-zoom')
+                    }
                     return
                   }
                   if (control.key === 'home') {
