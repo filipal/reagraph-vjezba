@@ -529,6 +529,8 @@ export default function VirtualTryOn() {
                     return
                   }
                   if (control.key === 'home') {
+                    setFullBodyMode(false)
+                    setFullBodyDetail(false)
                     setTopOpen(false)
                     setBottomOpen(false)
                     setTopExpandedFooter(false)
