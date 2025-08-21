@@ -1,6 +1,6 @@
 import cn from 'classnames'
 import exitIcon from '../../assets/exit.svg'
-import infoIcon from '../../assets/InfoButton.svg'
+import infoIcon from '../../assets/info-button.svg'
 import styles from './Header.module.scss'
 
 export interface HeaderProps {

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import ArrowRight from '../../assets/arrow right.svg'
+import ArrowRight from '../../assets/arrow-right.svg'
 import styles from './BodyAccordion.module.scss'
 
 type Measurement = { name: string; value: number }

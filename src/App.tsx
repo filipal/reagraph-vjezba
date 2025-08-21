@@ -8,6 +8,7 @@ import QuickMode from './pages/QuickMode'
 import BodyScanInfo from './pages/BodyScanInfo.tsx'
 import BodyScan from './pages/BodyScan.tsx'
 import UnrealMeasurements from './pages/UnrealMeasurements.tsx'
+import VirtualTryOn from './pages/VirtualTryOn'
 import ScanQRBodyscan from './pages/ScanQRBodyscan.tsx'
 import BodyPhotosCheck from './pages/BodyPhotosCheck.tsx'
 import LoadingScreen from './pages/LoadingScreen.tsx'
@@ -31,6 +32,7 @@ export default function App() {
       <Route path="/body-scan" element={<BodyScan />} />
       <Route path="/face-scan" element={<FaceScan />} />
       <Route path="/unreal-measurements" element={<UnrealMeasurements />} />
+      <Route path="/virtual-try-on" element={<VirtualTryOn />} />
       <Route path="/scan-qr-bodyscan" element={<ScanQRBodyscan />} />
       <Route path="/body-photos-check" element={<BodyPhotosCheck />} />
       <Route path="/face-photos-check" element={<FacePhotosCheck />} />

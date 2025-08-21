@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import ArrowLeft from '../../assets/arrow left.svg'
-import ArrowRight from '../../assets/arrow right.svg'
+import ArrowLeft from '../../assets/arrow-left.svg'
+import ArrowRight from '../../assets/arrow-right.svg'
 import Skin1 from '../../assets/skin1.svg?react'
 import Skin2 from '../../assets/skin2.svg?react'
 import Skin3 from '../../assets/skin3.svg?react'

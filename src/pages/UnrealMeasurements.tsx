@@ -2,14 +2,14 @@ import { useState, type ComponentType, type SVGProps } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Header from '../components/Header/Header'
 
-import avatarsButton from '../assets/AvatarsButton.png'
-import RLeft from '../assets/rLeft.svg?react'
-import RRight from '../assets/rRight.svg?react'
+import avatarsButton from '../assets/avatars-button.png'
+import RLeft from '../assets/r-left.svg?react'
+import RRight from '../assets/r-right.svg?react'
 import UploadIcon from '../assets/upload.svg?react'
-import FullScreenIcon from '../assets/FullScreen.svg?react'
+import FullScreenIcon from '../assets/full-screen.svg?react'
 import DownloadIcon from '../assets/download.svg?react'
-import unrealFBBodyButton from '../assets/UnrealFBBodyButton.png'
-import avatarMeasure from '../assets/UnrealFullBody.png'
+import unrealFBBodyButton from '../assets/unreal-fb-body-button.png'
+import avatarMeasure from '../assets/unreal-full-body.png'
 import bodyIcon from '../assets/body.png'
 import faceIcon from '../assets/face.png'
 import skinIcon from '../assets/skin.png'
@@ -128,12 +128,13 @@ export default function UnrealMeasurements() {
               <button
                 key={control.key}
                 className={`${styles.controlButton} ${styles[control.key.replace('-', '')]} ${selectedControl === control.key ? styles.selected : ''}`}
-                style={{ width: control.width, marginRight: control.marginRight }}
+                style={{ width: control.width, marginRight: control.marginRight, height: control.width }}
                 onClick={() =>
-                setSelectedControl(prev => (prev === control.key ? null : control.key))
-              }
+                  setSelectedControl(prev => (prev === control.key ? null : control.key))
+                }
                 type="button"
               >
+                <div className={styles.outerCircle} />
                 <control.Icon className={styles.controlIcon} />
               </button>
             ))}

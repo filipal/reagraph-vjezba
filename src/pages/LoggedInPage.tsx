@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
-import deleteIcon from '../assets/Delete Avatar.svg'
+import deleteIcon from '../assets/delete-avatar.svg'
 import styles from './LoggedInPage.module.scss'
 
 interface Avatar {
@@ -26,7 +26,10 @@ export default function LoggedInPage() {
   const loadButtonRef = useRef<HTMLButtonElement | null>(null)
 
   const handleSelect = (id: number) => setSelectedAvatarId(id)
-  const handleLoad = () => setLoadedAvatarId(selectedAvatarId)
+  const handleLoad = () => {
+    setLoadedAvatarId(selectedAvatarId)
+    navigate('/virtual-try-on')
+  }
   const handleDelete = (id: number) => setShowDeleteConfirm(id)
 
   const confirmDelete = () => {
@@ -64,7 +67,7 @@ export default function LoggedInPage() {
   return (
     <div className={styles.loggedInPage}>
       <Header
-        title="My Avatars"
+        title="Welcome back!"
         variant="dark"
         onExit={() => navigate('/')}
         rightContent={<span className={styles.count}>{avatars.length}/5</span>}

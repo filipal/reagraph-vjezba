@@ -3,7 +3,7 @@
   width: min(100vw, var(--page-max-width));
   min-height: var(--page-height);
   margin-inline: auto;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'INter', sans-serif;
 
   /* mobilni stack */
   display: flex;
@@ -238,4 +238,11 @@
     flex-direction: column;
     gap: 25px;
   }
+}
+
+.error {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #e5484d; 
+  text-align: center;
 }

@@ -1,16 +1,20 @@
 import { useState } from 'react'
 import cn from 'classnames'
 import { useNavigate } from 'react-router-dom'
-import leftArrow from '../assets/arrow left.svg'
-import rightArrow from '../assets/arrow right.svg'
+import leftArrow from '../assets/arrow-left.svg'
+import rightArrow from '../assets/arrow-right.svg'
 import cameraIcon from '../assets/camera.png'
 import quickIcon from '../assets/quick.png'
 import Header from '../components/Header/Header'
 import styles from './AvatarInfoPage.module.scss'
 
-const ages = ['18-24', '25-30', '31-40', '41-50', '51+']
-const heights = ['150', '160', '170', '180', '190']
-const weights = ['50', '60', '70', '80', '90']
+const ages = ['15-19', ...Array.from({ length: 8 }, (_, i) => {
+  const start = 20 + i * 10
+  const end = start + 9
+  return `${start}-${end}`
+})]
+const heights = Array.from({ length: 51 }, (_, i) => String(150 + i))
+const weights = Array.from({ length: 101 }, (_, i) => String(50 + i))
 
 function usePicker(initial: number, values: string[]) {
   const [index, setIndex] = useState(initial)

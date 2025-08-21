@@ -31,6 +31,19 @@
   justify-content: flex-end; // Pomera sadržaj uz desnu marginu
 }
 
+/* Background strip behind DataPanel when Body (measurements) is selected */
+.bodySelected::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 200px; /* 180px panel width + 10px left + 10px inner spacing */
+  background: #BAB9BA;
+  z-index: 0; /* stays behind DataPanel (which gets z-index:1) */
+  pointer-events: none; /* do not block interactions */
+}
+
 .bodySelected .avatarImage {
   width: 274px; // Eksplicitna širina za Body mode
   height: 579px; // Eksplicitna visina za Body mode
@@ -136,7 +149,7 @@
   align-items: center;
   cursor: pointer;
   transition: all 0.2s ease;
-  color: #fff;
+  color: #000;
 }
 
 .controlIcon {
@@ -145,9 +158,21 @@
   object-fit: contain;
 }
 
-.controlButton.selected {
-  color: #000;
+.controlButton.selected { color: #000; }
+
+.controlIcon { position: relative; z-index: 2; }
+.outerCircle {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid #FFFFFF;
+  background: transparent;
+  box-sizing: border-box;
+  transition: border-color .25s ease;
+  z-index: 1;
+  pointer-events: none;
 }
+.controlButton.selected .outerCircle { border-color: #000; }
 
 .rotateleft {
   width: 60px;

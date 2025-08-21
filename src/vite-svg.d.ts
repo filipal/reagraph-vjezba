@@ -4,6 +4,14 @@ declare module '*.svg?react' {
   export default ReactComponent
 }
 
+// Allow importing raw SVG asset paths (for use in <img src={...} />) without the ?react suffix.
+// Example: import avatarButton from '../assets/avatar-button.svg'
+// Without this block TypeScript reports: Cannot find module '*.svg'.
+declare module '*.svg' {
+  const src: string
+  export default src
+}
+
 declare module '*.png' {
   const src: string
   export default src

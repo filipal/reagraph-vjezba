@@ -1,8 +1,8 @@
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import Header from '../components/Header/Header'
-import frontImg from '../assets/FrontFaceScan.png'
-import sideImg from '../assets/SideFaceScan.png'
+import frontImg from '../assets/front-face-scan.png'
+import sideImg from '../assets/side-face-scan.png'
 import styles from './FacePhotosCheck.module.scss'
 
 export default function FacePhotosCheck() {

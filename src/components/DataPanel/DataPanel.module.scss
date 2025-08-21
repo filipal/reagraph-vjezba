@@ -3,6 +3,7 @@
   top: 10px;
   left: 10px;
   width: 180px;
+  z-index: 1; /* above background strip injected on bodySelected */
 }
 
 .dataPanelHeader {
@@ -35,7 +36,7 @@
 
 /* Measurements list styles */
 .measurementsList {
-  padding: 10px 0 0 0; // Prvi red na 10px od gornje margine
+  padding: 8px 0 0 0; // Prvi red na 8px od gornje margine
 }
 
 .measurementItem {
@@ -43,7 +44,7 @@
   align-items: center;
   height: 9px;
   margin-bottom: 8px; // Razmak između redova
-  padding: 0 10px 0 10px; // 10px od lijevog ruba
+  padding: 0 10px 3px 10px; // 10px od lijevog ruba
 }
 
 .measurementIcon {
