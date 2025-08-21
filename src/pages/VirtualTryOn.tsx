@@ -93,6 +93,15 @@ export default function VirtualTryOn() {
   const fbMain = fullBodyCategories[fullBodyCenterIdx]
   const fbBottom = fullBodyCategories[(fullBodyCenterIdx + 1) % fullBodyCategories.length]
 
+  // Full body detailed categories
+  const fullBodyDetailCategories = ['Outfit', 'Style', 'Fit']
+  const [fullBodyDetailCenterIdx, setFullBodyDetailCenterIdx] = useState(1) // 'Style'
+  const cycleFullBodyDetail = (dir: 1 | -1) =>
+    setFullBodyDetailCenterIdx(i => (i + dir + fullBodyDetailCategories.length) % fullBodyDetailCategories.length)
+  const fbdTop = fullBodyDetailCategories[(fullBodyDetailCenterIdx - 1 + fullBodyDetailCategories.length) % fullBodyDetailCategories.length]
+  const fbdMain = fullBodyDetailCategories[fullBodyDetailCenterIdx]
+  const fbdBottom = fullBodyDetailCategories[(fullBodyDetailCenterIdx + 1) % fullBodyDetailCategories.length]
+
   // Right-side image selectors (jackets & pants) single image display with arrows
   const jacketImages = [HoodieImg, MilitaryJacketImg, Jacket1Img, Jacket2Img, Jacket3Img, Jacket4Img]
   const pantsImages = [BossDyn01Img, Pants1Img, Pants2Img, Pants3Img, Pants4Img, Pants5Img]
@@ -224,7 +233,7 @@ export default function VirtualTryOn() {
         </button>
 
         {/* Full body overlay (simplified) */}
-        {fullBodyMode && (
+        {fullBodyMode && !fullBodyDetail && (
           <>
             {/* Left full body arrows */}
             <div className={`${styles.categoryArrows} ${styles.categoryArrowsFullBody}`}>
@@ -254,6 +263,65 @@ export default function VirtualTryOn() {
             <div className={`${styles.imageDisplay} ${styles.imageDisplayFullBody}`}>
               <img src={pantsImages[pantsIndex]} alt="Full Body Item" />
             </div>
+          </>
+        )}
+        {fullBodyMode && fullBodyDetail && (
+          <>
+            <div className={`${styles.categoryArrows} ${styles.categoryArrowsFirst}`}>
+              <button type="button" className={styles.categoryArrowBtn} onClick={() => cycleFullBodyDetail(-1)}>
+                <img src={ArrowUp} alt="Previous category" />
+              </button>
+              <button type="button" className={styles.categoryArrowBtn} onClick={() => cycleFullBodyDetail(1)}>
+                <img src={ArrowDown} alt="Next category" />
+              </button>
+            </div>
+            <div className={`${styles.categoryTextGroup} ${styles.categoryTextGroupFirst}`}>
+              <div className={styles.categoryTextTop}>{fbdTop}</div>
+              <div className={styles.categoryTextMain}>{fbdMain}</div>
+              <div className={styles.categoryTextBottom}>{fbdBottom}</div>
+            </div>
+            {topOpen && (
+              <div className={`${styles.sizeArrows} ${styles.sizeArrowsFirst}`}>
+                <button type="button" className={styles.categoryArrowBtn} onClick={() => cycleSize(-1)}>
+                  <img src={ArrowUp} alt="Previous size" />
+                </button>
+                <div className={styles.sizeDisplay}>
+                  <div className={styles.sizeSmall}>{sizeAbove}</div>
+                  <div className={styles.sizeMain}>{sizeMain}</div>
+                  <div className={styles.sizeSmall}>{sizeBelow}</div>
+                </div>
+                <button type="button" className={styles.categoryArrowBtn} onClick={() => cycleSize(1)}>
+                  <img src={ArrowDown} alt="Next size" />
+                </button>
+              </div>
+            )}
+            {bottomOpen && (
+              <div className={`${styles.sizeArrows} ${styles.sizeArrowsFirst}`}>
+                <button type="button" className={styles.categoryArrowBtn} onClick={() => cycleBottomSize(-1)}>
+                  <img src={ArrowUp} alt="Previous size" />
+                </button>
+                <div className={styles.sizeDisplayBottom}>
+                  <div className={styles.sizeSmallBottom}>
+                    W{bottomSizeAbove.w}
+                    <br />
+                    L{bottomSizeAbove.l}
+                  </div>
+                  <div className={styles.sizeMainBottom}>
+                    W{bottomSizeMain.w}
+                    <br />
+                    L{bottomSizeMain.l}
+                  </div>
+                  <div className={styles.sizeSmallBottom}>
+                    W{bottomSizeBelow.w}
+                    <br />
+                    L{bottomSizeBelow.l}
+                  </div>
+                </div>
+                <button type="button" className={styles.categoryArrowBtn} onClick={() => cycleBottomSize(1)}>
+                  <img src={ArrowDown} alt="Next size" />
+                </button>
+              </div>
+            )}
           </>
         )}
         {/* Left side selectors (normal modes) */}
