@@ -191,7 +191,7 @@ export default function VirtualTryOn() {
         title={title}
         onExit={() => navigate(-1)}
         rightContent={(
-          <button className={styles.avatarButton} onClick={() => navigate('/logged-in')} type="button">
+          <button className={styles.avatarButton} onClick={() => navigate('/unreal-measurements')} type="button">
             <img src={avatarsButton} alt="Avatars" />
           </button>
         )}
@@ -538,6 +538,24 @@ export default function VirtualTryOn() {
                     return
                   }
                   if (selectable) {
+                    // Normal virtual try-on mode: inner circles should open accordions like footer buttons
+                    if (!fullBodyMode) {
+                      if (control.key === 'top-zoom') {
+                        setTopOpen(true)
+                        setBottomOpen(false)
+                        setTopExpandedFooter(true)
+                        toggleControl(control.key)
+                        return
+                      }
+                      if (control.key === 'bottom-zoom') {
+                        setBottomOpen(true)
+                        setTopOpen(false)
+                        if (topExpandedFooter) setTopExpandedFooter(false)
+                        toggleControl(control.key)
+                        return
+                      }
+                    }
+                    // Fallback (e.g. potential future full body inner circle usage)
                     toggleControl(control.key)
                     if (control.key === 'top-zoom') enterDetail('top')
                     if (control.key === 'bottom-zoom') enterDetail('bottom')
