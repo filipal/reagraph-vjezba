@@ -13,6 +13,8 @@ import RLeft from '../assets/r-left.svg?react'
 import RRight from '../assets/r-right.svg?react'
 import TopZoom from '../assets/tops-detailed-zoom.svg?react'
 import BottomZoom from '../assets/bottoms-detailed-zoom.svg?react'
+import Download from '../assets/download.svg?react'
+import Upload from '../assets/upload.svg?react'
 import HomeButton from '../assets/home-button.svg?react'
 import TopAccordion from '../components/TopAccordion/TopAccordion'
 import BottomAccordion from '../components/BottomAccordion/BottomAccordion'
@@ -140,17 +142,19 @@ export default function VirtualTryOn() {
   // Remaining horizontal space: 410 - 220 - 10 = 180 -> split evenly left/right as 90 + 90.
   // margin-right sequence becomes: 90, 10, 90, 0
   // This centers the group while preserving the visual rhythm from previous design.
+  const leftControlIcon = fullBodyMode && fullBodyDetail ? Download : TopZoom
+  const rightControlIcon = fullBodyMode && fullBodyDetail ? Upload : BottomZoom
   const baseControls: ControlButton[] = [
     { key: 'rotate-left', width: 60, Icon: RLeft, marginRight: 90 },
-    { key: 'top-zoom', width: 50, Icon: TopZoom, marginRight: 10 },
-    { key: 'bottom-zoom', width: 50, Icon: BottomZoom, marginRight: 90 },
+    { key: 'top-zoom', width: 50, Icon: leftControlIcon, marginRight: 10 },
+    { key: 'bottom-zoom', width: 50, Icon: rightControlIcon, marginRight: 90 },
     { key: 'rotate-right', width: 60, Icon: RRight, marginRight: 0 }
   ]
   const expandedControls: ControlButton[] = [
     { key: 'rotate-left', width: 60, Icon: RLeft, marginRight: 0 },
-    { key: 'top-zoom', width: 50, Icon: TopZoom, marginRight: 0 },
+    { key: 'top-zoom', width: 50, Icon: leftControlIcon, marginRight: 0 },
     { key: 'home', width: 40, Icon: HomeButton, marginRight: 0 },
-    { key: 'bottom-zoom', width: 50, Icon: BottomZoom, marginRight: 0 },
+    { key: 'bottom-zoom', width: 50, Icon: rightControlIcon, marginRight: 0 },
     { key: 'rotate-right', width: 60, Icon: RRight, marginRight: 0 }
   ]
   const accordionOpen = topOpen || bottomOpen
@@ -193,7 +197,7 @@ export default function VirtualTryOn() {
         )}
       />
 
-  <div className={`${styles.canvasWrapper} ${accordionOpen ? styles.withAccordion : ''} ${(topOpen && !(fullBodyMode && fullBodyDetail)) ? styles.topZoom : ''} ${bottomOpen ? styles.bottomZoom : ''} ${topExpandedFooter ? styles.footerTopExpanded : ''} ${(fullBodyMode && fullBodyDetail) ? styles.fullBodyDetail : ''}`}>
+  <div className={`${styles.canvasWrapper} ${accordionOpen ? styles.withAccordion : ''} ${(topOpen && !(fullBodyMode && fullBodyDetail)) ? styles.topZoom : ''} ${(bottomOpen && !(fullBodyMode && fullBodyDetail)) ? styles.bottomZoom : ''} ${topExpandedFooter ? styles.footerTopExpanded : ''} ${(fullBodyMode && fullBodyDetail) ? styles.fullBodyDetail : ''}`}>
         <img src={avatarBg} alt="Avatar" className={styles.avatarImage} />
 
         <button
