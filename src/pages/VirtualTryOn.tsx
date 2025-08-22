@@ -491,16 +491,16 @@ export default function VirtualTryOn() {
                   if (fullBodyMode && !fullBodyDetail && control.key === 'rotate-left') {
                     setFullBodyDetail(true)
                     setTopOpen(true)
-                    setTopExpandedFooter(false)
-                    setBottomExpandedFooter(false)          
+                    setTopExpandedFooter(true)
+                    setBottomExpandedFooter(false)       
                     return
                   }
                   if (fullBodyMode && !fullBodyDetail && control.key === 'top-zoom') {
                     setFullBodyDetail(true)
                     setTopOpen(true)
                     setBottomOpen(false)
-                    setTopExpandedFooter(false)
-                    setBottomExpandedFooter(false)                    
+                    setTopExpandedFooter(true)
+                    setBottomExpandedFooter(false)               
                     setSelectedControl('top-zoom')
                     return
                   }
@@ -509,7 +509,7 @@ export default function VirtualTryOn() {
                     setBottomOpen(true)
                     setTopOpen(false)
                     setTopExpandedFooter(false)
-                    setBottomExpandedFooter(false)                    
+                    setBottomExpandedFooter(true)
                     setSelectedControl('bottom-zoom')
                     return
                   }
@@ -519,13 +519,13 @@ export default function VirtualTryOn() {
                       setTopOpen(false)
                       setBottomOpen(false)
                       setTopExpandedFooter(false)
-                      setBottomExpandedFooter(false)                      
+                      setBottomExpandedFooter(false)
                       setSelectedControl(null)
                     } else {
                       setTopOpen(true)
                       setBottomOpen(false)
-                      setTopExpandedFooter(false)
-                      setBottomExpandedFooter(false)                      
+                      setTopExpandedFooter(true)
+                      setBottomExpandedFooter(false)
                       setSelectedControl('top-zoom')
                     }
                     return
@@ -536,13 +536,13 @@ export default function VirtualTryOn() {
                       setTopOpen(false)
                       setBottomOpen(false)
                       setTopExpandedFooter(false)
-                      setBottomExpandedFooter(false)                      
+                      setBottomExpandedFooter(false)
                       setSelectedControl(null)
                     } else {
                       setBottomOpen(true)
                       setTopOpen(false)
                       setTopExpandedFooter(false)
-                      setBottomExpandedFooter(false)                      
+                      setBottomExpandedFooter(true)
                       setSelectedControl('bottom-zoom')
                     }
                     return
@@ -620,14 +620,14 @@ export default function VirtualTryOn() {
         </div>
       )}
 
-      <div className={`${styles.footer} ${topExpandedFooter ? styles.expandedTop : bottomExpandedFooter ? styles.expandedBot : ''} ${fullBodyMode ? styles.footerFullBody : ''}`}>
-        {fullBodyMode && (
+      <div className={`${styles.footer} ${topExpandedFooter ? styles.expandedTop : bottomExpandedFooter ? styles.expandedBot : fullBodyMode ? styles.footerFullBody : ''}`}>
+        {fullBodyMode && !topExpandedFooter && !bottomExpandedFooter && (
           <>
             <div className={styles.footerFullBodyTitle}>FALCON LEATHER AVIATOR JACKET</div>
             <div className={styles.footerFullBodyLabel}>FULL BODY</div>
           </>
         )}
-        {!fullBodyMode && topExpandedFooter && (
+        {topExpandedFooter && (
           <>
             <div className={styles.topExpandedLeft}>
               <div className={styles.topExpandedLeftInner}>
@@ -674,8 +674,8 @@ export default function VirtualTryOn() {
               </div>
             </div>
           </>
-    )}
-        {!fullBodyMode && bottomExpandedFooter && (
+        )}
+        {bottomExpandedFooter && (
           <>
             <div className={styles.topExpandedLeft}>
               <div className={styles.topExpandedLeftInner}>
@@ -722,12 +722,12 @@ export default function VirtualTryOn() {
               </div>
             </div>
           </>
-    )}
-  {!topExpandedFooter && !bottomExpandedFooter && !fullBodyMode && (
-  <div className={styles.footerLeft}>
-          <div className={styles.titleBox}>{bottomOpen ? 'FALCON LEATHER AVIATOR PANTS' : 'FALCON LEATHER AVIATOR JACKET'}</div>
-          <button
-            type="button"
+        )}
+        {!topExpandedFooter && !bottomExpandedFooter && !fullBodyMode && (
+          <div className={styles.footerLeft}>
+            <div className={styles.titleBox}>{bottomOpen ? 'FALCON LEATHER AVIATOR PANTS' : 'FALCON LEATHER AVIATOR JACKET'}</div>
+            <button
+              type="button"
             className={`${styles.footerButton} ${styles.topButton}`}
             onClick={() => {
               setTopOpen(o => !o)
@@ -736,23 +736,23 @@ export default function VirtualTryOn() {
               if (bottomExpandedFooter) setBottomExpandedFooter(false)
             }}
           >TOP</button>
-        </div>
-  )}
-  {!topExpandedFooter && !bottomExpandedFooter && !fullBodyMode && (
-  <div className={styles.footerRight}>
-          <button
-            type="button"
-            className={`${styles.footerButton} ${styles.botButton}`}
-            onClick={() => {
-              setBottomOpen(o => !o)
-              if (topOpen) setTopOpen(false)
-              setBottomExpandedFooter(b => !b)
-              if (topExpandedFooter) setTopExpandedFooter(false)
-            }}
-          >BOT</button>
-          <div className={styles.infoBox}>BOSS DYN 01</div>
-        </div>
-  )}
+          </div>
+        )}
+        {!topExpandedFooter && !bottomExpandedFooter && !fullBodyMode && (
+          <div className={styles.footerRight}>
+            <button
+              type="button"
+              className={`${styles.footerButton} ${styles.botButton}`}
+              onClick={() => {
+                setBottomOpen(o => !o)
+                if (topOpen) setTopOpen(false)
+                setBottomExpandedFooter(b => !b)
+                if (topExpandedFooter) setTopExpandedFooter(false)
+              }}
+            >BOT</button>
+            <div className={styles.infoBox}>BOSS DYN 01</div>
+          </div>
+        )}
       </div>
     </div>
   )

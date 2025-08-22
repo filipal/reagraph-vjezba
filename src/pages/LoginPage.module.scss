@@ -86,9 +86,9 @@
   max-width: 320px;
   display: flex;
   flex-direction: column;
-  /* 733 - (660 + 46) = 27px razmaka od intro teksta do e-maila */
   margin-top: 25px;
-  gap: 15px;          /* ugodan unutarnji razmak između grupa */
+  gap: 15px; /* 15px between first and second, second and third; third gets extra bottom spacing via last class */
+  align-items: center;
 }
 
 /* Email / Password grupa */
@@ -122,6 +122,26 @@
   border: 0;
   font-size: 18px;
 }
+
+/* New social login buttons replacing old inputs */
+.socialButton {
+  width: 320px;
+  height: 50px;
+  background: #000;
+  color: #fff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  font-size: 17px;
+  font-weight: 400;
+  cursor: pointer;
+}
+.socialIcon { width: 32px; height: 32px; object-fit: contain; }
+.socialIconApple { width: 26px; height: 31px; object-fit: contain; }
+.socialLabel { line-height: 1; }
+.socialButtonLast { margin-bottom: 45px; }
 
 /* Mobile: webPanel ne radi ništa posebno – nasljeđuje flex kolonu stranice */
 .webPanel {
@@ -192,6 +212,7 @@
     flex-direction: column;
     margin-top: 27px;
     gap: 15px;
+    align-items: center;
   }
 
   .textInput {
@@ -226,6 +247,8 @@
     border: 0;
     font-size: 18px;
   }
+
+  .socialButton { width: 422px; }
 
   .webPanel {
     position: absolute;
