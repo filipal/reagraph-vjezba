@@ -58,6 +58,7 @@ export default function VirtualTryOn() {
   const [topOpen, setTopOpen] = useState(false)
   const [bottomOpen, setBottomOpen] = useState(false)
   const [topExpandedFooter, setTopExpandedFooter] = useState(false)
+  const [bottomExpandedFooter, setBottomExpandedFooter] = useState(false)
   const [fullBodyMode, setFullBodyMode] = useState(false)
   const [fullBodyDetail, setFullBodyDetail] = useState(false)
   const [topOptionIndex, setTopOptionIndex] = useState(0) // Option 1..5 => indices 0..4
@@ -168,15 +169,17 @@ export default function VirtualTryOn() {
     ? (fullBodyDetail ? 'Full Body - Detailed' : 'Virtual Try-on')
     : topExpandedFooter
       ? 'Top - Detailed'
-      : bottomOpen
+      : bottomExpandedFooter
         ? 'Bottom - Detailed'
-        : view.detail
-          ? view.focus === 'top'
-            ? 'Top - Detailed'
-            : view.focus === 'bottom'
-              ? 'Bottom - Detailed'
-              : 'Full Body - Detailed'
-          : 'Virtual Try-on'
+        : bottomOpen
+          ? 'Bottom - Detailed'
+          : view.detail
+            ? view.focus === 'top'
+              ? 'Top - Detailed'
+              : view.focus === 'bottom'
+                ? 'Bottom - Detailed'
+                : 'Full Body - Detailed'
+            : 'Virtual Try-on'
 
   const enterDetail = (focus: ViewState['focus']) => {
     setView({ focus, detail: true })
@@ -197,7 +200,7 @@ export default function VirtualTryOn() {
         )}
       />
 
-  <div className={`${styles.canvasWrapper} ${accordionOpen ? styles.withAccordion : ''} ${(topOpen && !(fullBodyMode && fullBodyDetail)) ? styles.topZoom : ''} ${(bottomOpen && !(fullBodyMode && fullBodyDetail)) ? styles.bottomZoom : ''} ${topExpandedFooter ? styles.footerTopExpanded : ''} ${(fullBodyMode && fullBodyDetail) ? styles.fullBodyDetail : ''}`}>
+  <div className={`${styles.canvasWrapper} ${accordionOpen ? styles.withAccordion : ''} ${(topOpen && !(fullBodyMode && fullBodyDetail)) ? styles.topZoom : ''} ${(bottomOpen && !(fullBodyMode && fullBodyDetail)) ? styles.bottomZoom : ''} ${topExpandedFooter ? styles.footerTopExpanded : ''} ${bottomExpandedFooter ? styles.footerBotExpanded : ''} ${(fullBodyMode && fullBodyDetail) ? styles.fullBodyDetail : ''}`}>
         <img src={avatarBg} alt="Avatar" className={styles.avatarImage} />
 
         <button
@@ -211,6 +214,7 @@ export default function VirtualTryOn() {
               setTopOpen(false)
               setBottomOpen(false)
               setTopExpandedFooter(false)
+              setBottomExpandedFooter(false)
               setSelectedControl(null)
               return
             }
@@ -221,6 +225,7 @@ export default function VirtualTryOn() {
               setTopOpen(false)
               setBottomOpen(false)
               setTopExpandedFooter(false)
+              setBottomExpandedFooter(false)
             }
           }}
         >
@@ -486,12 +491,16 @@ export default function VirtualTryOn() {
                   if (fullBodyMode && !fullBodyDetail && control.key === 'rotate-left') {
                     setFullBodyDetail(true)
                     setTopOpen(true)
+                    setTopExpandedFooter(false)
+                    setBottomExpandedFooter(false)          
                     return
                   }
                   if (fullBodyMode && !fullBodyDetail && control.key === 'top-zoom') {
                     setFullBodyDetail(true)
                     setTopOpen(true)
                     setBottomOpen(false)
+                    setTopExpandedFooter(false)
+                    setBottomExpandedFooter(false)                    
                     setSelectedControl('top-zoom')
                     return
                   }
@@ -499,6 +508,8 @@ export default function VirtualTryOn() {
                     setFullBodyDetail(true)
                     setBottomOpen(true)
                     setTopOpen(false)
+                    setTopExpandedFooter(false)
+                    setBottomExpandedFooter(false)                    
                     setSelectedControl('bottom-zoom')
                     return
                   }
@@ -507,10 +518,14 @@ export default function VirtualTryOn() {
                       setFullBodyDetail(false)
                       setTopOpen(false)
                       setBottomOpen(false)
+                      setTopExpandedFooter(false)
+                      setBottomExpandedFooter(false)                      
                       setSelectedControl(null)
                     } else {
                       setTopOpen(true)
                       setBottomOpen(false)
+                      setTopExpandedFooter(false)
+                      setBottomExpandedFooter(false)                      
                       setSelectedControl('top-zoom')
                     }
                     return
@@ -520,10 +535,14 @@ export default function VirtualTryOn() {
                       setFullBodyDetail(false)
                       setTopOpen(false)
                       setBottomOpen(false)
+                      setTopExpandedFooter(false)
+                      setBottomExpandedFooter(false)                      
                       setSelectedControl(null)
                     } else {
                       setBottomOpen(true)
                       setTopOpen(false)
+                      setTopExpandedFooter(false)
+                      setBottomExpandedFooter(false)                      
                       setSelectedControl('bottom-zoom')
                     }
                     return
@@ -534,6 +553,7 @@ export default function VirtualTryOn() {
                     setTopOpen(false)
                     setBottomOpen(false)
                     setTopExpandedFooter(false)
+                    setBottomExpandedFooter(false)
                     setSelectedControl(null)
                     return
                   }
@@ -544,13 +564,15 @@ export default function VirtualTryOn() {
                         setTopOpen(true)
                         setBottomOpen(false)
                         setTopExpandedFooter(true)
+                        setBottomExpandedFooter(false)
                         toggleControl(control.key)
                         return
                       }
                       if (control.key === 'bottom-zoom') {
                         setBottomOpen(true)
                         setTopOpen(false)
-                        if (topExpandedFooter) setTopExpandedFooter(false)
+                        setBottomExpandedFooter(true)
+                        setTopExpandedFooter(false)
                         toggleControl(control.key)
                         return
                       }
@@ -598,7 +620,7 @@ export default function VirtualTryOn() {
         </div>
       )}
 
-      <div className={`${styles.footer} ${topExpandedFooter ? styles.expandedTop : ''} ${fullBodyMode ? styles.footerFullBody : ''}`}>
+      <div className={`${styles.footer} ${topExpandedFooter ? styles.expandedTop : bottomExpandedFooter ? styles.expandedBot : ''} ${fullBodyMode ? styles.footerFullBody : ''}`}>
         {fullBodyMode && (
           <>
             <div className={styles.footerFullBodyTitle}>FALCON LEATHER AVIATOR JACKET</div>
@@ -653,7 +675,55 @@ export default function VirtualTryOn() {
             </div>
           </>
     )}
-  {!topExpandedFooter && !fullBodyMode && (
+        {!fullBodyMode && bottomExpandedFooter && (
+          <>
+            <div className={styles.topExpandedLeft}>
+              <div className={styles.topExpandedLeftInner}>
+                <button type="button" className={styles.topExpandedArrowsBtn} onClick={cycleTopPrev}>
+                  <img src={ArrowLeft} alt="Prev" width={22} height={30} />
+                </button>
+                <div className={styles.topExpandedTextBlock}>
+                  <div className={styles.topExpandedMain}>{`Option ${topOptionIndex + 1}`}</div>
+                  <div className={styles.topExpandedSub}>{topOptions[topOptionIndex]}</div>
+                </div>
+                <button type="button" className={styles.topExpandedArrowsBtn} onClick={cycleTopNext}>
+                  <img src={ArrowRight} alt="Next" width={22} height={30} />
+                </button>
+              </div>
+            </div>
+            <div className={styles.topExpandedRight}>
+              <div className={styles.topExpandedColorsInner}>
+                <button
+                  type="button"
+                  className={styles.colorArrowBtn}
+                  onClick={() => setBaseColorIndex(i => (i + basePalette.length - 1) % basePalette.length)}
+                >
+                  <img src={ArrowLeft} alt="Prev Palette" width={22} height={30} />
+                </button>
+                <div className={styles.colorCircles}>
+                  {shades.map((shade, idx) => (
+                    <button
+                      key={shade+idx}
+                      type="button"
+                      className={styles.colorCircleBtnWrapper}
+                      onClick={() => setActiveShadeIndex(idx)}
+                    >
+                      <ColorBtn size={idx === activeShadeIndex ? 45 : 32} color={shade} active={idx === activeShadeIndex} />
+                    </button>
+                  ))}
+                </div>
+                <button
+                  type="button"
+                  className={styles.colorArrowBtn}
+                  onClick={() => setBaseColorIndex(i => (i + 1) % basePalette.length)}
+                >
+                  <img src={ArrowRight} alt="Next Palette" width={22} height={30} />
+                </button>
+              </div>
+            </div>
+          </>
+    )}
+  {!topExpandedFooter && !bottomExpandedFooter && !fullBodyMode && (
   <div className={styles.footerLeft}>
           <div className={styles.titleBox}>{bottomOpen ? 'FALCON LEATHER AVIATOR PANTS' : 'FALCON LEATHER AVIATOR JACKET'}</div>
           <button
@@ -663,11 +733,12 @@ export default function VirtualTryOn() {
               setTopOpen(o => !o)
               if (bottomOpen) setBottomOpen(false)
               setTopExpandedFooter(t => !t)
+              if (bottomExpandedFooter) setBottomExpandedFooter(false)
             }}
           >TOP</button>
         </div>
   )}
-  {!topExpandedFooter && !fullBodyMode && (
+  {!topExpandedFooter && !bottomExpandedFooter && !fullBodyMode && (
   <div className={styles.footerRight}>
           <button
             type="button"
@@ -675,6 +746,7 @@ export default function VirtualTryOn() {
             onClick={() => {
               setBottomOpen(o => !o)
               if (topOpen) setTopOpen(false)
+              setBottomExpandedFooter(b => !b)
               if (topExpandedFooter) setTopExpandedFooter(false)
             }}
           >BOT</button>
