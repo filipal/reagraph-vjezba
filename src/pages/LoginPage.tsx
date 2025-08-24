@@ -1,22 +1,13 @@
-import { AuthProvider, useAuth } from "react-oidc-context";
-import logo from '../assets/fitspace-logo-gradient-nobkg.svg';
-import exitIcon from '../assets/exit.svg';
-import googleLogo from '../assets/google-logo.svg';
-import appleLogo from '../assets/apple-logo.svg';
-import facebookLogo from '../assets/facebook-logo.svg';
-import styles from './LoginPage.module.scss';
+import { useAuth } from "react-oidc-context"
+import logo from '../assets/Fitspace-logo-gradient-nobkg.svg'
+import exitIcon from '../assets/exit.svg'
+import googleLogo from '../assets/google-logo.svg'
+import appleLogo from '../assets/apple-logo.svg'
+import facebookLogo from '../assets/facebook-logo.svg'
+import styles from './LoginPage.module.scss'
 
-// OIDC konfiguracija
-const oidcConfig = {
-  authority: "https://cognito-idp.eu-north-1.amazonaws.com/eu-north-1_0cK7yNVJr",
-  client_id: "35gs2safccnf49vo9d7ubqv65o",
-  redirect_uri: window.location.origin, // automatski radi lokalno i na produkciji
-  response_type: "code",
-  scope: "openid email phone",
-};
-
-function LoginContent() {
-  const auth = useAuth();
+export default function LoginPage() {
+  const auth = useAuth()
   return (
     <div className={styles.loginPage}>
       <button className={styles.backButton} onClick={() => window.location.href = '/'}>
@@ -64,13 +55,5 @@ function LoginContent() {
         </div>
       </div>
     </div>
-  );
+  )
 }
-
-const LoginPage = () => (
-  <AuthProvider {...oidcConfig}>
-    <LoginContent />
-  </AuthProvider>
-);
-
-export default LoginPage;
