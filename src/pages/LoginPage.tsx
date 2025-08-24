@@ -1,4 +1,4 @@
-import { useOidc, OidcProvider } from "react-oidc-context";
+import { AuthProvider, useAuth } from "react-oidc-context";
 import logo from '../assets/fitspace-logo-gradient-nobkg.svg';
 import exitIcon from '../assets/exit.svg';
 import googleLogo from '../assets/google-logo.svg';
@@ -16,7 +16,7 @@ const oidcConfig = {
 };
 
 function LoginContent() {
-  const oidc = useOidc();
+  const auth = useAuth();
   return (
     <div className={styles.loginPage}>
       <button className={styles.backButton} onClick={() => window.location.href = '/'}>
@@ -42,21 +42,25 @@ function LoginContent() {
           </span>
 
           <div className={styles.loginForm}>
-            <button type="button" className={styles.socialButton} onClick={() => oidc.signinRedirect()}>
+            <button type="button" className={styles.socialButton} onClick={() => auth.signinRedirect()}>
               <img src={googleLogo} alt="Google" className={styles.socialIcon} />
               <span className={styles.socialLabel}>Log in with Google</span>
             </button>
-            <button type="button" className={styles.socialButton} onClick={() => oidc.signinRedirect()}>
+            <button type="button" className={styles.socialButton} onClick={() => auth.signinRedirect()}>
               <img src={appleLogo} alt="Apple" className={styles.socialIconApple} />
               <span className={styles.socialLabel}>Log in with Apple</span>
             </button>
-            <button type="button" className={`${styles.socialButton} ${styles.socialButtonLast}`} onClick={() => oidc.signinRedirect()}>
+            <button
+              type="button"
+              className={`${styles.socialButton} ${styles.socialButtonLast}`}
+              onClick={() => auth.signinRedirect()}
+            >
               <img src={facebookLogo} alt="Facebook" className={styles.socialIcon} />
               <span className={styles.socialLabel}>Log in with Facebook</span>
             </button>
           </div>
-          {oidc.isLoading && <p>Učitavanje...</p>}
-          {oidc.error && <p style={{ color: "red" }}>Greška: {oidc.error.message}</p>}
+          {auth.isLoading && <p>Učitavanje...</p>}
+          {auth.error && <p style={{ color: "red" }}>Greška: {auth.error.message}</p>}
         </div>
       </div>
     </div>
@@ -64,9 +68,9 @@ function LoginContent() {
 }
 
 const LoginPage = () => (
-  <OidcProvider {...oidcConfig}>
+  <AuthProvider {...oidcConfig}>
     <LoginContent />
-  </OidcProvider>
+  </AuthProvider>
 );
 
 export default LoginPage;
