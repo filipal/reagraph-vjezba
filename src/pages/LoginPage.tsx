@@ -1,17 +1,25 @@
-import { useNavigate } from 'react-router-dom'
-import logo from '../assets/fitspace-logo-gradient-nobkg.svg'
-import exitIcon from '../assets/exit.svg'
-import googleLogo from '../assets/google-logo.svg'
-import appleLogo from '../assets/apple-logo.svg'
-import facebookLogo from '../assets/facebook-logo.svg'
-import styles from './LoginPage.module.scss'
+import { useOidc, OidcProvider } from "react-oidc-context";
+import logo from '../assets/fitspace-logo-gradient-nobkg.svg';
+import exitIcon from '../assets/exit.svg';
+import googleLogo from '../assets/google-logo.svg';
+import appleLogo from '../assets/apple-logo.svg';
+import facebookLogo from '../assets/facebook-logo.svg';
+import styles from './LoginPage.module.scss';
 
-export default function LoginPage() {
-  const navigate = useNavigate()
+// OIDC konfiguracija
+const oidcConfig = {
+  authority: "https://cognito-idp.eu-north-1.amazonaws.com/eu-north-1_0cK7yNVJr",
+  client_id: "35gs2safccnf49vo9d7ubqv65o",
+  redirect_uri: window.location.origin, // automatski radi lokalno i na produkciji
+  response_type: "code",
+  scope: "openid email phone",
+};
 
+function LoginContent() {
+  const oidc = useOidc();
   return (
     <div className={styles.loginPage}>
-      <button className={styles.backButton} onClick={() => navigate('/')}>
+      <button className={styles.backButton} onClick={() => window.location.href = '/'}>
         <img src={exitIcon} alt="Exit" className={styles.exitIcon} />
       </button>
 
@@ -23,7 +31,7 @@ export default function LoginPage() {
         <button
           type="button"
           className={styles.createButton}
-          onClick={() => navigate('/avatar-info')}
+          onClick={() => window.location.href = '/avatar-info'}
         >
           Create Your Digital Twin
         </button>
@@ -34,21 +42,31 @@ export default function LoginPage() {
           </span>
 
           <div className={styles.loginForm}>
-            <button type="button" className={styles.socialButton} onClick={() => navigate('/logged-in')}>
+            <button type="button" className={styles.socialButton} onClick={() => oidc.signinRedirect()}>
               <img src={googleLogo} alt="Google" className={styles.socialIcon} />
               <span className={styles.socialLabel}>Log in with Google</span>
             </button>
-            <button type="button" className={styles.socialButton} onClick={() => navigate('/logged-in')}>
+            <button type="button" className={styles.socialButton} onClick={() => oidc.signinRedirect()}>
               <img src={appleLogo} alt="Apple" className={styles.socialIconApple} />
               <span className={styles.socialLabel}>Log in with Apple</span>
             </button>
-            <button type="button" className={`${styles.socialButton} ${styles.socialButtonLast}`} onClick={() => navigate('/logged-in')}>
+            <button type="button" className={`${styles.socialButton} ${styles.socialButtonLast}`} onClick={() => oidc.signinRedirect()}>
               <img src={facebookLogo} alt="Facebook" className={styles.socialIcon} />
               <span className={styles.socialLabel}>Log in with Facebook</span>
             </button>
           </div>
+          {oidc.isLoading && <p>Učitavanje...</p>}
+          {oidc.error && <p style={{ color: "red" }}>Greška: {oidc.error.message}</p>}
         </div>
       </div>
     </div>
-  )
+  );
 }
+
+const LoginPage = () => (
+  <OidcProvider {...oidcConfig}>
+    <LoginContent />
+  </OidcProvider>
+);
+
+export default LoginPage;
